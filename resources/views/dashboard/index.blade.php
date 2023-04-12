@@ -137,7 +137,7 @@
                         </li>
                         <li class="menu-item">
                             <a href="javascript:void(0);" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+                                <i class="menu-icon tf-icons x-tabler-logout"></i>
                                 <div data-i18n="Authentications">Logout</div>
                             </a>
                             <ul class="menu-sub">
