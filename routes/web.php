@@ -13,13 +13,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::prefix('dashboard')->group(function () {
     Route::get('/', function () {
         return view('dashboard.index');
+    });
+
+    Route::get('/landing-page', function () {
+        return view('dashboard.landing-pages');
+    });
+
+    Route::get('/branches', function () {
+        return view('dashboard.branches');
+    });
+
+    Route::get('/products', function () {
+        return view('dashboard.products');
+    });
+
+    Route::get('/orders', function () {
+        return view('dashboard.orders');
+    });
+
+    Route::get('/bookings', function () {
+        return view('dashboard.bookings');
     });
 });
 
