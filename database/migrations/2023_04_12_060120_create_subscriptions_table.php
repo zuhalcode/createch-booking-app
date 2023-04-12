@@ -19,9 +19,9 @@ return new class extends Migration
             $table->foreignId('package_id')->constrained();
             $table->string('midtrans_id', 32);
             $table->string('midtrans_token', 255);
-            $table->timestamp('payment_due');
-            $table->timestamp('paid_off');
-            $table->timestamp('end_service');
+            $table->timestamp('payment_due')->nullable();
+            $table->timestamp('paid_off')->nullable();
+            $table->timestamp('end_service')->nullable();
             $table->integer('price');
             $table->timestamps();
         });
