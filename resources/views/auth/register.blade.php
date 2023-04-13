@@ -1,4 +1,4 @@
-<x-dashboard-layout>
+<x-auth-layout>
     <!-- Content -->
 
     <div class="container-xxl">
@@ -65,7 +65,7 @@
                         <h4 class="mb-2">Adventure starts here 🚀</h4>
                         <p class="mb-4">Make your app management easy and fun!</p>
 
-                        <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+                        <form id="formAuthentication" class="mb-3" action={{ url('/auth/login') }} method="GET">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>
                                 <input type="text" class="form-control" id="username" name="username"
@@ -101,7 +101,7 @@
 
                         <p class="text-center">
                             <span>Already have an account?</span>
-                            <a href="auth-login-basic.html">
+                            <a href={{ url('/auth/login') }}>
                                 <span>Sign in instead</span>
                             </a>
                         </p>
@@ -113,4 +113,4 @@
     </div>
 
     <!-- / Content -->
-</x-dashboard-layout>
+</x-auth-layout>

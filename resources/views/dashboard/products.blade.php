@@ -14,13 +14,8 @@
 
                     <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="fw-bold py-3 mb-4">
-                            Add Product
-                        </h4>
-
                         <div class="row">
                             <div class="col-md-12">
-
                                 <div class="card mb-4">
                                     <h5 class="card-header">Product Details</h5>
                                     <!-- Product -->
@@ -55,11 +50,13 @@
                                                     <input class="form-control" placeholder="Product" autocomplete="off"
                                                         type="text" id="product" name="product" autofocus />
                                                 </div>
+
                                                 <div class="mb-3 col-md-6">
                                                     <label for="price" class="form-label">Price</label>
                                                     <input class="form-control" placeholder="Price" autocomplete="off"
                                                         type="text" id="price" name="price" autofocus />
                                                 </div>
+
                                                 <div class="mb-3">
                                                     <label class="form-label" for="basic-default-message">
                                                         Product Description
@@ -68,11 +65,45 @@
                                                         placeholder="Hi, Do you have a moment to talk Joe?"></textarea>
                                                 </div>
 
+                                                <div class="mb-3">
+                                                    <label for="max_user" class="col-md-2 col-form-label">
+                                                        Max User
+                                                    </label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" type="number" name="max_user"
+                                                            id="max_user" placeholder="0" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="slot" class="col-md-2 col-form-label">Time</label>
+                                                    <div class="col-md-10">
+                                                        <input class="form-control" type="time"
+                                                            placeholder="12:30:00" id="slot" name="slot" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3 col-md-6">
+                                                    <label for="product" class="form-label">Addon Name</label>
+                                                    <input class="form-control" placeholder="Addon Name"
+                                                        autocomplete="off" type="text" id="product" name="product"
+                                                        autofocus />
+                                                </div>
+
+                                                <div class="mb-3 col-md-6">
+                                                    <label for="price" class="form-label">Addon Price</label>
+                                                    <input class="form-control" placeholder="Addon Price"
+                                                        autocomplete="off" type="text" id="price" name="price"
+                                                        autofocus />
+                                                </div>
+
                                                 <div class="mt-2">
-                                                    <button type="submit" class="btn btn-primary me-2">Save
-                                                        changes</button>
-                                                    <button type="reset"
-                                                        class="btn btn-outline-secondary">Cancel</button>
+                                                    <button type="submit" class="btn btn-primary me-2">
+                                                        Save changes
+                                                    </button>
+                                                    <button type="reset" class="btn btn-outline-secondary">
+                                                        Cancel
+                                                    </button>
                                                 </div>
                                         </form>
                                     </div>
