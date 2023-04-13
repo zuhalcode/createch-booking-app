@@ -102,13 +102,6 @@
         </li>
 
         <li class="menu-item">
-            <a href="/dashboard/bookings" class="menu-link menu">
-                <i class="menu-icon tf-icons bx bxs-calendar"></i>
-                <div data-i18n="Account Settings">Booking Management</div>
-            </a>
-        </li>
-
-        <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-log-out"></i>
                 <div data-i18n="Authentications">Logout</div>
