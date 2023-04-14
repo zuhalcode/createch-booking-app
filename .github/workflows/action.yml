@@ -1,4 +1,4 @@
-name: Deploy Laravel
+name: Push Laravel
 on:
   push:
     branches: [ "master" ]
