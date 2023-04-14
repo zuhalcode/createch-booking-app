@@ -12,16 +12,16 @@
     <meta name="description" content="oslo" />
     <meta name="keywords" content="oslo" />
     <meta name="author" content="oslo" />
-    <link rel="icon" href="/assets/images/favicon/favicon.png" type="image/x-icon" />
-    <link rel="shortcut icon" href="/assets/images/favicon/favicon.png" type="image/x-icon" />
+    <link rel="icon" href={{ asset('/assets/images/favicon/favicon.png') }} type="image/x-icon" />
+    <link rel="shortcut icon" href={{ asset('/assets/images/favicon/favicon.png') }} type="image/x-icon" />
     <link rel="manifest" href="manifest.json" />
-    <link rel="icon" href="/assets/images/favicon/favicon.png" type="image/x-icon" />
-    <link rel="apple-touch-icon" href="/assets/images/favicon/favicon.png" />
+    <link rel="icon" href={{ asset('/assets/images/favicon/favicon.png') }} type="image/x-icon" />
+    <link rel="apple-touch-icon" href={{ asset('/assets/images/favicon/favicon.png') }} />
     <meta name="theme-color" content="#0f8fac" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Oslo" />
-    <meta name="msapplication-TileImage" content="/assets/images/favicon/favicon.png" />
+    <meta name="msapplication-TileImage" content={{ asset('/assets/images/favicon/favicon.png') }} />
     <meta name="msapplication-TileColor" content="#FFFFFF" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Oslo | Home</title>
@@ -43,16 +43,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Leckerli+One&amp;display=swap" rel="stylesheet" />
 
     <!-- Bootstrap Css -->
-    <link id="rtl-link" rel="stylesheet" type="text/css" href="/assets/css/vendors/bootstrap.css" />
+    <link id="rtl-link" rel="stylesheet" type="text/css" href={{ asset('/assets/css/vendors/bootstrap.css') }} />
 
     <!-- Swiper Slider Css -->
-    <link rel="stylesheet" type="text/css" href="/assets/css/vendors/swiper-bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href={{ asset('/assets/css/vendors/swiper-bundle.min.css') }} />
 
     <!-- Wow Animation css -->
-    <link rel="stylesheet" href="/assets/css/vendors/wow-animate.css" />
+    <link rel="stylesheet" href={{ asset('/assets/css/vendors/wow-animate.css') }} />
 
     <!-- Style Css -->
-    <link id="change-link" rel="stylesheet" type="text/css" href="/assets/css/style.css" />
+    <link id="change-link" rel="stylesheet" type="text/css" href={{ asset('/assets/css/style.css') }} />
 </head>
 <!-- Head End -->
 
@@ -62,30 +62,30 @@
     {{ $slot }}
 
     <!-- Bootstrap Js -->
-    <script src="/assets/js/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src={{ asset('/assets/js/bootstrap/bootstrap.bundle.min.js') }}></script>
 
     <!-- Feather Icon -->
-    <script src="/assets/js/feather/feather.min.js"></script>
+    <script src={{ asset('/assets/js/feather/feather.min.js') }}></script>
 
     <!-- Swiper Slider Js -->
-    <script src="/assets/js/swiper-slider/swiper-bundle.min.js"></script>
-    <script src="/assets/js/swiper-slider/swiper-custom.min.js"></script>
+    <script src={{ asset('/assets/js/swiper-slider/swiper-bundle.min.js') }}></script>
+    <script src={{ asset('/assets/js/swiper-slider/swiper-custom.min.js') }}></script>
 
     <!-- Header Sticky js  -->
-    <script src="/assets/js/sticky-header.js"></script>
+    <script src={{ asset('/assets/js/sticky-header.js') }}></script>
 
     <!-- Active Class js  -->
-    <script src="/assets/js/active-class.js"></script>
+    <script src={{ asset('/assets/js/active-class.js') }}></script>
 
     <!-- Wow Js -->
-    <script src="/assets/js/wow.js"></script>
-    <script src="/assets/js/wow-custom.js"></script>
+    <script src={{ asset('/assets/js/wow.js') }}></script>
+    <script src={{ asset('/assets/js/wow-custom.js') }}></script>
 
     <!-- Script Js -->
-    <script src="/assets/js/script.js"></script>
+    <script src={{ asset('/assets/js/script.js') }}></script>
 
     <!-- Theme Settings Js -->
-    <script src="/assets/js/theme-setting.js"></script>
+    <script src={{ asset('/assets/js/theme-setting.js') }}></script>
 </body>
 <!-- Body End -->
 
