@@ -19,7 +19,7 @@ Route::get('/', fn () => view('welcome'));
 Route::get('/detail', fn () => view('detail'));
 
 Route::prefix('auth')->group(fn() => [
-    Route::get('/login', fn() => view('auth.login')),
+    Route::get('/login', fn() => view('auth.login'))->name('login'),
     Route::post('/login', [AuthController::class, 'login']),
     
     Route::get('/register', fn() => view('auth.register')),
