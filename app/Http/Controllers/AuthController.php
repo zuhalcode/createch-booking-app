@@ -18,7 +18,7 @@ class AuthController extends Controller
         
         if(Auth::attempt($credentials)){
             $req->session()->regenerate();
-            return redirect('/');
+            return redirect('/dashboard');
         }
 
         return back()->with('loginError', 'Login gagal!');

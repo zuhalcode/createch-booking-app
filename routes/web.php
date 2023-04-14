@@ -23,12 +23,14 @@ Route::prefix('auth')->group(fn() => [
     
     Route::get('/register', fn() => view('auth.register')),
     Route::post('/register', [AuthController::class, 'register']),
+
+    Route::post('/logout', [AuthController::class, 'logout']),
 ]);
 
 Route::prefix('dashboard')->group(function () {
     Route::get('/', function () {
         return view('dashboard.index');
-    });
+    })->middleware('auth');
 
     Route::get('/landing-page', function () {
         return view('dashboard.landing-pages');

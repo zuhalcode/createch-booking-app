@@ -1,8 +1,7 @@
-<x-dashboard-layout>
+<x-layouts.dashboard-layout>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
-
             <x-dashboard.sidebar />
 
             <!-- Layout container -->
@@ -12,7 +11,6 @@
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
                     <!-- Content -->
-
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <div class="row">
                             <div class="col-lg-8 mb-4 order-0">
@@ -588,4 +586,4 @@
         <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
-</x-dashboard-layout>
+</x-layouts.dashboard-layout>
