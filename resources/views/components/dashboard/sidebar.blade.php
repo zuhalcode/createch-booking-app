@@ -16,10 +16,10 @@
         @foreach ($menus as $menu)
             @if (isset($menu['submenu']))
                 <li class="menu-item">
-                    <a href={{ url($menu['route']) }} class="menu-link menu-toggle">
+                    <div class="menu-link menu-toggle" style="cursor: pointer">
                         <i class="menu-icon tf-icons bx {{ $menu['icon'] }}"></i>
                         <div data-i18n="Analytics">{{ $menu['name'] }}</div>
-                    </a>
+                    </div>
 
 
                     <ul class="menu-sub">

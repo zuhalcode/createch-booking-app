@@ -1,4 +1,4 @@
-<x-dashboard-layout>
+<x-layouts.dashboard-layout>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
@@ -83,4 +83,4 @@
             <div class="layout-overlay layout-menu-toggle"></div>
         </div>
         <!-- / Layout wrapper -->
-</x-dashboard-layout>
+        </x-dashboard-layout>

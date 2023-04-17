@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('social_medias', function (Blueprint $table) {
             $table->id();
             $table->foreignId('branch_id')->constrained();
-            $table->enum('name', ['Instagram', 'Twitter', 'Facebook', 'YouTube', 'LINE']);
+            $table->enum('name', ['Instagram', 'Twitter', 'Facebook', 'YouTube', 'TikTok']);
             $table->string('username');
             $table->timestamps();
         });

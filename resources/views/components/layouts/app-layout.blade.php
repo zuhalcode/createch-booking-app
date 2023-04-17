@@ -59,7 +59,10 @@
 <!-- Body Start -->
 
 <body class="theme-color4">
+
     {{ $slot }}
+
+    <x-app.footer />
 
     <!-- Bootstrap Js -->
     <script src={{ asset('/assets/js/bootstrap/bootstrap.bundle.min.js') }}></script>
