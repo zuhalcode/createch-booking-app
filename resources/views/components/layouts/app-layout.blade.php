@@ -92,6 +92,9 @@
     <!-- Script Js -->
     <script src={{ asset('/assets/js/script.js') }}></script>
 
+    <!-- Main Js -->
+    <script src={{ asset('/js/script.js') }}></script>
+
     <!-- Theme Settings Js -->
     <script src={{ asset('/assets/js/theme-setting.js') }}></script>
 

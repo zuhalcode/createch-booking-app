@@ -9,8 +9,8 @@
     <div>
         <div class="container-lg">
             <div class="main-footer">
-                <div class="row gy-3 gy-md-4 gy-xl-0">
-                    <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="row gy-3 gy-md-4 gy-xl-0 justify-content-between align-content-center">
+                    <div class="col-xl-3 col-lg-4 col-md-6 ">
                         <div class="content-box">
                             <img class="logo" src="../assets/images/logos/logo-4-w.png" alt="logo-white" />
                             <ul>
@@ -28,43 +28,11 @@
                         </div>
                     </div>
 
-                    <div class="nav-footer col-lg-2 col-md-4 order-md-3 order-lg-2">
-                        <div class="nav content-box d-md-block">
-                            <h5 class="heading-footer line-style">Shop By</h5>
-                            <ul>
-                                <li><a class="nav" href="shop-left-sidebar.html">New In </a></li>
-                                <li><a class="nav" href="shop-left-sidebar.html">Women </a></li>
-                                <li><a class="nav" href="shop-left-sidebar.html">Men </a></li>
-                                <li><a class="nav" href="shop-left-sidebar.html">Shoes</a></li>
-                                <li><a class="nav" href="shop-left-sidebar.html">Bags & Accessories </a></li>
-                                <li><a class="nav" href="shop-left-sidebar.html">Top Brands </a></li>
-                            </ul>
-                        </div>
-                    </div>
-
                     <div class="nav-footer col-xl-2 col-lg-3 col-md-4 order-md-4 order-lg-3">
                         <div class="nav d-md-block content-box">
                             <h5 class="heading-footer line-style">Information</h5>
                             <ul>
                                 <li><a class="nav" href="index.html">Home </a></li>
-                                <li><a class="nav" href="shop-left-sidebar.html">Shop </a></li>
-                                <li><a class="nav" href="about-us.html">About Us</a></li>
-                                <li><a class="nav" href="blog-detail.html">Blog </a></li>
-                                <li><a class="nav" href="contact-us.html">Contact </a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="nav-footer col-xl-2 col-lg-3 col-md-4 order-md-5 order-lg-4">
-                        <div class="nav d-md-block content-box">
-                            <h5 class="heading-footer line-style">Get Help</h5>
-                            <ul>
-                                <li><a class="nav" href="user-dashboard.html">Your Orders </a></li>
-                                <li><a class="nav" href="user-dashboard.html">Your Account </a></li>
-                                <li><a class="nav" href="user-dashboard.html">Track Order</a></li>
-                                <li><a class="nav" href="wishlist.html">Your Wishlist</a></li>
-                                <li><a class="nav" href="search.html">Search</a></li>
-                                <li><a class="nav" href="faqs.html">Faqs</a></li>
                             </ul>
                         </div>
                     </div>

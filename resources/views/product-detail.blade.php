@@ -176,11 +176,28 @@
                                     <div class="title-box4">
                                         <h4 class="heading">Addons <span class="bg-theme-blue"></span></h4>
                                     </div>
-                                    <ul class="size-list d-grid">
-                                        @for ($i = 1; $i < 7; $i++)
-                                            <li class="p-4 bold" style="width: 150px;">12:00 AM</li>
-                                        @endfor
-                                    </ul>
+                                    <div class="filter-content">
+                                        <ul class="filter-check d-grid gap-1"
+                                            style="grid-template-columns: repeat(2, 1fr)">
+                                            @for ($i = 1; $i < 7; $i++)
+                                                <li>
+                                                    <label class="checkboxes style-1">
+                                                        <input type="checkbox" />
+                                                        <span class="checkbox__checkmark"></span>
+                                                        <span class="checkbox__body gap-2"
+                                                            style="justify-content: flex-start; font-weight: 500">
+                                                            Pomade <p>15K</p>
+                                                        </span>
+                                                    </label>
+                                                </li>
+                                            @endfor
+                                            <script>
+                                                function toggleActive(element) {
+                                                    element.classList.toggle('active');
+                                                }
+                                            </script>
+                                        </ul>
+                                    </div>
                                 </div>
                                 {{-- End Addons --}}
 

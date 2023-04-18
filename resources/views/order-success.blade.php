@@ -30,14 +30,7 @@
         <section class="section-b-space order-success">
             <div class="container-lg">
                 <div class="row g-3 g-md-4 cart">
-                    <div class="col-md-7 col-lg-7 col-xl-8">
-                        <div class="cart-wrap">
-                            <div class="items-list">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-5 col-lg-5 col-xl-4">
+                    <div class="col-md-12 col-lg-12 col-xl-12">
                         <div class="summery-box">
                             <div class="row g-3 g-lg-4">
                                 <div class="col-12">

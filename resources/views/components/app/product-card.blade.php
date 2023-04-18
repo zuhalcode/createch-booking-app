@@ -4,7 +4,6 @@
             <a href={{ url($href) }}>
                 <img class="bg-img" src={{ asset($img) }} alt="product" />
             </a>
-            <x-app.option />
         </div>
 
         <a href={{ url($href) }} class="content-box">

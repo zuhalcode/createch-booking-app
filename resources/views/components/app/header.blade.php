@@ -34,14 +34,31 @@
                                         <a class="nav-link" href={{ url('/') }}>Home</a>
                                     </li>
 
-                                    <!-- Product -->
-                                    <li class="nav-item">
-                                        <a class="nav-link" href={{ url('/auth/login') }}>Login</a>
-                                    </li>
+                                    @if (auth()->check())
+                                        <li class="nav-item">
+                                            <a class="nav-link" href={{ url('/dashboard') }}>Dashboard</a>
+                                        </li>
 
-                                    <li class="nav-item">
-                                        <a class="nav-link" href={{ url('/auth/register') }}>Register</a>
-                                    </li>
+                                        <li class="nav-item" style="cursor: pointer">
+                                            <form id="logout-form-nav" action={{ url('/auth/logout') }} method="post">
+                                                @csrf
+                                                <div class="nav-link" onclick="handleLogout('logout-form-nav')">
+                                                    Logout
+                                                </div>
+                                            </form>
+                                        </li>
+                                    @else
+                                        <!-- Auth -->
+                                        <li class="nav-item">
+                                            <a class="nav-link" href={{ url('/auth/login') }}>Login</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link" href={{ url('/auth/register') }}>Register</a>
+                                        </li>
+                                        {{-- End Auth --}}
+                                    @endif
+
                                 </ul>
                             </div>
                         </div>

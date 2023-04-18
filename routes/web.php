@@ -24,38 +24,40 @@ Route::get('/orders', [OrderController::class, 'payment']);
 Route::get('/order-success', fn () => view('order-success'));
 
 Route::prefix('auth')->group(fn() => [
-    Route::get('/login', fn() => view('auth.login'))->name('login'),
+    Route::get('/login', fn() => view('auth.login'))->name('login')->middleware('guest'),
     Route::post('/login', [AuthController::class, 'login']),
     
-    Route::get('/register', fn() => view('auth.register')),
+    Route::get('/register', fn() => view('auth.register'))->middleware('guest'),
     Route::post('/register', [AuthController::class, 'register']),
 
     Route::post('/logout', [AuthController::class, 'logout']),
 ]);
 
-Route::prefix('dashboard')->group(function () {
+Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/', function () {
         return view('dashboard.index');
-    })->middleware('auth');
-
-    Route::get('/landing-page', function () {
-        return view('dashboard.landing-pages');
     });
 
-    Route::get('/branches', function () {
-        return view('dashboard.branches');
-    });
+    Route::middleware('admin')->group(function () {
+        Route::get('/landing-page', function () {
+            return view('dashboard.landing-pages');
+        });
 
-    Route::get('/products', function () {
-        return view('dashboard.products');
-    });
+        Route::get('/branches', function () {
+            return view('dashboard.branches');
+        });
 
-    Route::get('/orders', function () {
-        return view('dashboard.orders');
-    });
+        Route::get('/products', function () {
+            return view('dashboard.products');
+        });
 
-    Route::get('/bookings', function () {
-        return view('dashboard.bookings');
+        Route::get('/orders', function () {
+            return view('dashboard.orders');
+        });
+
+        Route::get('/bookings', function () {
+            return view('dashboard.bookings');
+        });
     });
 });
 
