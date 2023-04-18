@@ -1,7 +1,10 @@
 <?php
 
-use App\Http\Controllers\AuthController;
+use Midtrans\Snap;
+use Midtrans\Config;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn () => view('welcome'));
 Route::get('/products/{id}', fn () => view('product-detail'));
-Route::get('/orders', fn () => view('order-detail'));
+Route::get('/orders', [OrderController::class, 'payment']);
 Route::get('/order-success', fn () => view('order-success'));
 
 Route::prefix('auth')->group(fn() => [

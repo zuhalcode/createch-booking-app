@@ -185,11 +185,11 @@
                                     <div class="content-box">
                                         <div>
                                             <h5>LOGIN <span class="bg-theme-blue"></span></h5>
-                                            <p class="font-md content-color">How do i get access order,wishlist and
-                                                recomendation ?</p>
+                                            <p class="font-md content-color">
+                                                How do i get access order,wishlist and recomendation ?
+                                            </p>
 
-                                            <form action="https://themes.pixelstrap.com/oslo/html/index.html"
-                                                class="custom-form form-pill">
+                                            <div class="custom-form form-pill">
                                                 <div class="input-box">
                                                     <label for="email">Email</label>
                                                     <input class="form-control" type="email" required
@@ -207,16 +207,36 @@
                                                     </div>
                                                 </div>
 
-                                                <a class="forgot-link" href="forgot-password.html">Forgot
-                                                    Password?</a>
-
-                                                <button type="submit" class="btn-solid rounded-pill line-none">Signin
-                                                    <i class="arrow"></i></button>
-                                                <a href="index.html"
-                                                    class="btn-solid rounded-pill line-none btn-outline mt-3 d-flex justify-content-center">
-                                                    Home <i class="arrow"></i>
+                                                <a class="forgot-link" href="forgot-password.html">
+                                                    Forgot Password ?
                                                 </a>
-                                            </form>
+
+                                                <div id="payment-form">
+                                                    <input type="hidden" id="client_token"
+                                                        value="{{ $payment_token }}">
+                                                    <button type="submit" id="pay-button"
+                                                        class="btn-solid rounded-pill line-none">
+                                                        Signin<i class="arrow"></i>
+                                                    </button>
+
+                                                    <!-- Initialize payment process when Pay button is clicked -->
+                                                    <script type="text/javascript">
+                                                        document.getElementById('pay-button').addEventListener('click', function() {
+                                                            snap.pay(document.getElementById('client_token').value, {
+                                                                onSuccess: function(result) {
+                                                                    window.location.href = '/order-success';
+                                                                },
+                                                                onPending: function(result) {
+                                                                    window.location.href = '/order-success';
+                                                                },
+                                                                onError: function(result) {
+                                                                    // Handle the error case
+                                                                }
+                                                            });
+                                                        });
+                                                    </script>
+                                                </div>
+                                            </div>
 
                                             <span class="backto-link font-default content-color text-decoration-none">
                                                 If you are new,
@@ -225,6 +245,7 @@
                                                 </a>
                                             </span>
                                             <span class="line"><span>Or</span></span>
+
                                             <div class="link-group">
                                                 <a href="https://www.google.com/" class="button-link"><img
                                                         src={{ url('/assets/icons/png/google.png') }} alt="google" />
@@ -246,5 +267,4 @@
 
 
 
-    {{-- <x-modals.order-modal /> --}}
 </x-layouts.app-layout>
