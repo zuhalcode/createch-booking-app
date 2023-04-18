@@ -1,5 +1,5 @@
 <!-- Header Start -->
-@if (request()->is('products/*'))
+@if (request()->is('products/*') || request()->is('orders'))
     <header class="header-common ">
     @else
         <header class="header-common header4 header4LogoChange">
@@ -17,12 +17,7 @@
                         </button>
 
                         <a href="index.html" class="logo-link">
-                            @if (request()->is('products/*'))
-                                <img class="logo" src="../assets/images/logos/logo.png" alt="logo" />
-                                {{-- <img class="logo" src={{ asset('/assets/images/logos/logo-4.png') }} alt="logo" /> --}}
-                            @else
-                                <img class="logo" src={{ asset('/assets/images/logos/logo-4.png') }} alt="logo" />
-                            @endif
+                            <img class="logo" src={{ asset('/assets/images/logos/logo-4.png') }} alt="logo" />
                         </a>
 
                         <div class="offcanvas offcanvas-collapse order-lg-2" id="primaryMenu">

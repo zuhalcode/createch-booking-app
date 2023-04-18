@@ -67,6 +67,8 @@
 
     <x-app.footer />
 
+    <x-app.mobile-menu />
+
     <!-- Bootstrap Js -->
     <script src={{ asset('/assets/js/bootstrap/bootstrap.bundle.min.js') }}></script>
 
