@@ -47,15 +47,11 @@
             <form id="logout-form" action={{ url('/auth/logout') }} method="post" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-log-out"></i>
                 @csrf
-                <div id="logout" data-i18n="Authentications" style="width: 100%">Logout</div>
+                <div id="logout-btn" data-i18n="Authentications" style="width: 100%"
+                    onclick="handleLogout('logout-form')">Logout</div>
             </form>
         </li>
         {{-- Logout --}}
-        <script>
-            document.querySelector('#logout').addEventListener('click', function() {
-                document.querySelector('#logout-form').submit();
-            });
-        </script>
     </ul>
 </aside>
 <!-- / Menu -->

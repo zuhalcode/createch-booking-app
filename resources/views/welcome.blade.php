@@ -1,17 +1,5 @@
 <x-layouts.app-layout>
-
-    <!-- Loader Start -->
-    <div class="loader-wrapper">
-        <div class="loader animate">
-            <span>B</span>
-            <span>O</span>
-            <span>O</span>
-            <span>K</span>
-            <span>L</span>
-            <span>Y</span>
-        </div>
-    </div>
-    <!-- Loader End -->
+    <x-ui.loader />
 
     <!-- Overlay -->
     <a href="javascript:void(0)" class="overlay-general overlay-common"></a>
@@ -124,89 +112,23 @@
                 </div>
 
                 <div class="tab-content" id="myTabContent">
-                    <!-- Bedroom Tab Start -->
-                    <div class="tab-pane fade" id="bedroom" role="tabpanel" aria-labelledby="bedroom-tab">
-                        <div class="bedroom-content">
-                            <div
-                                class="row gy-3 gy-sm-4 gy-xxl-5 g-xxl-3 gx-2 gx-sm-3 row-cols-3 row-cols-xl-4 row-cols-xxl-5 ratio_asos">
-
-                                <div class="col wow fadeInUp" data-wow-delay="0.8s">
-                                    <div class="product-card4 option-bottom">
-                                        <div class="img-box">
-                                            <a href="product.html">
-                                                <img class="bg-img" src="../assets/images/furniture/product/jpg/10.jpg"
-                                                    alt="product" />
-                                            </a>
-
-                                            <!-- Option -->
-                                            <ul class="option-wrap">
-                                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                                                    <a href="javascript:void(0)" class="wishlist-btn">
-                                                        <i data-feather="heart"></i>
-                                                    </a>
-                                                </li>
-                                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="Compare">
-                                                    <a href="compare.html"><i data-feather="repeat"></i></a>
-                                                </li>
-                                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
-                                                    <a href="javascript:void(0)" data-bs-toggle="modal"
-                                                        data-bs-target="#viewModal">
-                                                        <i data-feather="eye"></i>
-                                                    </a>
-                                                </li>
-                                                <li data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    title="Add To Cart">
-                                                    <a href="javascript:void(0)" class="addtocart-btn"> <i
-                                                            data-feather="shopping-bag"></i> </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-
-                                        <a href="product.html" class="content-box">
-                                            <h5>White stools</h5>
-
-                                            <div class="price-box">
-                                                <div class="price"><span>$50.00</span> <del>$58.00</del></div>
-                                                <ul class="rating p-0 mb">
-                                                    <li>
-                                                        <i class="fill" data-feather="star"></i>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fill" data-feather="star"></i>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fill" data-feather="star"></i>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fill" data-feather="star"></i>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fill" data-feather="star-half"></i>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Bedroom Tab End -->
 
                     <!-- Desk Tab Start -->
-                    <div class="tab-pane fade show active" id="desk" role="tabpanel"
-                        aria-labelledby="desk-tab">
+                    <div class="tab-pane fade show active" id="desk" role="tabpanel" aria-labelledby="desk-tab">
                         <div class="desk-content">
                             <div
                                 class="row gy-3 gy-sm-4 gy-xxl-5 g-xxl-3 gx-2 gx-sm-3 row-cols-3 row-cols-xl-4 row-cols-xxl-5 ratio_asos">
 
-                                <x-app.product-card img='/assets/images/furniture/product/jpg/7.jpg' price="$50.00">
+                                <x-app.product-card img='/assets/images/furniture/product/jpg/7.jpg' price="$50.00"
+                                    href='/products/1'>
                                     Coffee Table
                                 </x-app.product-card>
 
-                                <x-app.product-card img='/assets/images/furniture/product/jpg/7.jpg' price="$50.00">
+                                <x-app.product-card img='/assets/images/furniture/product/jpg/7.jpg' price="$50.00"
+                                    href='/products/2'>
                                     Coffee Table
                                 </x-app.product-card>
+
                             </div>
                         </div>
                     </div>
@@ -278,8 +200,7 @@
     <!-- Notification End -->
 
     <!-- View Product Modal Start -->
-    <div class="modal view-product fade" id="viewModal" tabindex="-1" aria-labelledby="viewModal"
-        aria-hidden="true">
+    <div class="modal view-product fade" id="viewModal" tabindex="-1" aria-labelledby="viewModal" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
@@ -414,5 +335,4 @@
         <button class="tap-to-top-button"><i data-feather="chevrons-up"></i></button>
     </div>
     <!-- Tap To Top Button End -->
-
 </x-layouts.app-layout>

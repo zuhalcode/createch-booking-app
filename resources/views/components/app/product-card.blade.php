@@ -1,13 +1,13 @@
 <div class="col wow fadeInUp" data-wow-delay="0.4s">
     <div class="product-card4 option-bottom">
         <div class="img-box">
-            <a href="product.html">
-                <img class="bg-img" src={{ $img }} alt="product" />
+            <a href={{ url($href) }}>
+                <img class="bg-img" src={{ asset($img) }} alt="product" />
             </a>
             <x-app.option />
         </div>
 
-        <a href="product.html" class="content-box">
+        <a href={{ url($href) }} class="content-box">
             <h5>{{ $slot }}</h5>
 
             <div class="price-box">

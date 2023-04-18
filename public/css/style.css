@@ -1,0 +1,13 @@
+.size-list::-webkit-scrollbar {
+    display: none;
+}
+
+.size-list {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+@media screen and (min-width: 767px) {
+    .size-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

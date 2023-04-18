@@ -1,3 +1,2 @@
-document.querySelector("#logout").addEventListener("click", function () {
-    document.querySelector("#logout-form").submit();
-});
+// Handling logout for entire page
+const handleLogout = (formId) => document.querySelector(`#${formId}`).submit();

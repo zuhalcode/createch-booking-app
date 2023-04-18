@@ -14,7 +14,7 @@
     <meta name="author" content="oslo" />
     <link rel="icon" href={{ asset('/assets/images/favicon/favicon.png') }} type="image/x-icon" />
     <link rel="shortcut icon" href={{ asset('/assets/images/favicon/favicon.png') }} type="image/x-icon" />
-    <link rel="manifest" href="manifest.json" />
+    {{-- <link rel="manifest" href="manifest.json" /> --}}
     <link rel="icon" href={{ asset('/assets/images/favicon/favicon.png') }} type="image/x-icon" />
     <link rel="apple-touch-icon" href={{ asset('/assets/images/favicon/favicon.png') }} />
     <meta name="theme-color" content="#0f8fac" />
@@ -53,6 +53,9 @@
 
     <!-- Style Css -->
     <link id="change-link" rel="stylesheet" type="text/css" href={{ asset('/assets/css/style.css') }} />
+
+    <!-- Main Css -->
+    <link rel="stylesheet" type="text/css" href={{ asset('/css/style.css') }} />
 </head>
 <!-- Head End -->
 
