@@ -1,5 +1,5 @@
 <!-- Header Start -->
-@if (request()->is('products/*') || request()->is('orders'))
+@if (request()->is('products/*') || request()->is('orders') || request()->is('order-success'))
     <header class="header-common ">
     @else
         <header class="header-common header4 header4LogoChange">
