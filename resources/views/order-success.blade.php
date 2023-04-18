@@ -33,89 +33,6 @@
                     <div class="col-md-7 col-lg-7 col-xl-8">
                         <div class="cart-wrap">
                             <div class="items-list">
-                                <table class="table cart-table">
-                                    <thead>
-                                        <tr>
-                                            <th class="d-none d-sm-table-cell">PRODUCT</th>
-                                            <th class="d-none d-sm-table-cell">PRICE</th>
-                                            <th class="d-none d-lg-table-cell">QUANTITY</th>
-                                            <th class="d-none d-xl-table-cell">TOTAL</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="product-detail">
-                                                    <img class="pr-img"
-                                                        src="../assets/images/fashion/product/front/8.jpg"
-                                                        alt="image" />
-                                                    <div class="details">
-                                                        <h4 class="title-color font-default2">Concrete Jungle Pack</h4>
-                                                        <span class="sold-by">Sold By: <span>Roger Group</span> </span>
-                                                        <span class="size d-flex gap-2">Size : <span>M</span> </span>
-                                                        <span class="size d-inline-flex gap-2 d-lg-none">Quantity :
-                                                            <span>01</span> </span>
-                                                        <span class="size d-flex gap-2 d-sm-none">Price :
-                                                            <span>$120.00</span> </span>
-                                                    </div>
-                                                </div>
-                                            </td>
-
-                                            <td class="price d-none d-sm-table-cell">$120.00</td>
-                                            <td class="price d-none d-lg-table-cell">01</td>
-                                            <td class="total d-none d-xl-table-cell">$120.00</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                <div class="product-detail">
-                                                    <img class="pr-img"
-                                                        src="../assets/images/fashion/product/front/9.jpg"
-                                                        alt="image" />
-                                                    <div class="details">
-                                                        <h4 class="title-color font-default2">Concrete Jungle Pack</h4>
-                                                        <span class="sold-by">Sold By: <span>Fashion trend</span>
-                                                        </span>
-                                                        <span class="size d-flex gap-2">Size : <span>Xl</span> </span>
-                                                        <span class="size d-inline-flex gap-2 d-lg-none">Quantity :
-                                                            <span>01</span> </span>
-                                                        <span class="size d-flex gap-2 d-sm-none">Price :
-                                                            <span>$120.00</span> </span>
-                                                    </div>
-                                                </div>
-                                            </td>
-
-                                            <td class="price d-none d-sm-table-cell">$120.00</td>
-                                            <td class="d-none d-lg-table-cell price">01</td>
-                                            <td class="total d-none d-xl-table-cell">$120.00</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>
-                                                <div class="product-detail">
-                                                    <img class="pr-img"
-                                                        src="../assets/images/fashion/product/front/7.jpg"
-                                                        alt="image" />
-                                                    <div class="details">
-                                                        <h4 class="title-color font-default2">Women’s long sleeve shirt
-                                                        </h4>
-                                                        <span class="sold-by">Sold By: <span>luisa Shop</span> </span>
-                                                        <span class="size d-flex gap-2">Size : <span>Sm</span> </span>
-                                                        <span class="size d-inline-flex gap-2 d-lg-none">Quantity :
-                                                            <span>01</span> </span>
-                                                        <span class="size d-flex gap-2 d-sm-none">Price :
-                                                            <span>$120.00</span> </span>
-                                                    </div>
-                                                </div>
-                                            </td>
-
-                                            <td class="price d-none d-sm-table-cell">$120.00</td>
-                                            <td class="d-none d-lg-table-cell price">01</td>
-                                            <td class="total d-none d-xl-table-cell">$120.00</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
                             </div>
                         </div>
                     </div>
@@ -128,25 +45,20 @@
                                         <div class="cart-wrap grand-total-wrap">
                                             <div>
                                                 <div class="order-summery-box">
-                                                    <h5 class="cart-title">Price Details (3 Items)</h5>
+                                                    <h5 class="cart-title">Detail Harga (3 Items)</h5>
                                                     <ul class="order-summery">
                                                         <li>
-                                                            <span>Bag total</span>
+                                                            <span>item 1</span>
                                                             <span>$220.00</span>
                                                         </li>
 
                                                         <li>
-                                                            <span>Bag savings</span>
-                                                            <span class="theme-color">-$20.00</span>
-                                                        </li>
-
-                                                        <li>
-                                                            <span>Coupon Discount</span>
+                                                            <span>ADD ONS</span>
                                                             <span class="font-danger">$100.00</span>
                                                         </li>
 
                                                         <li>
-                                                            <span>Delivery</span>
+                                                            <span>Biaya Total</span>
                                                             <span>$50.00</span>
                                                         </li>
 
