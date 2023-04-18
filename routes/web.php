@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', fn () => view('welcome'));
-Route::get('/detail', fn () => view('detail'));
+Route::get('/products/{id}', fn () => view('detail'));
+Route::get('/orders', fn () => view('orders'));
 
 Route::prefix('auth')->group(fn() => [
     Route::get('/login', fn() => view('auth.login'))->name('login'),
