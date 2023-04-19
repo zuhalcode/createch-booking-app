@@ -54,24 +54,34 @@
                                                         alt="image" />
                                                     <div class="details">
                                                         <h4 class="title-color font-default2">Concrete Jungle Pack</h4>
+                                                        <span class="size gap-2 d-flex d-sm-none">
+                                                            Price : <span>Rp. 120.000</span>
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td class="price d-none d-sm-table-cell">Rp. 120.000</td>
                                         </tr>
+                                    </tbody>
+                                </table>
 
-                                        <thead>
-                                            <tr>
-                                                <th class="d-none d-sm-table-cell">ADD ON</th>
-                                                <th class="d-none d-sm-table-cell">PRICE</th>
-                                            </tr>
-                                        </thead>
+                                <table class="table cart-table m-md-0 mt-3">
+                                    <thead>
+                                        <tr>
+                                            <th class="d-none d-sm-table-cell">ADDONS</th>
+                                            <th class="d-none d-sm-table-cell">PRICE</th>
+                                        </tr>
+                                    </thead>
+
                                     <tbody>
                                         <tr>
                                             <td>
                                                 <div class="product-detail">
                                                     <div class="details">
-                                                        <h4 class="title-color font-default2">Concrete Jungle Pack</h4>
+                                                        <h4 class="title-color font-default2">Pomade</h4>
+                                                        <span class="size gap-2 d-flex d-sm-none">
+                                                            Price : <span>Rp. 12.000</span>
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </td>
@@ -106,10 +116,18 @@
                                         </ul>
                                         <div class="row g-3 mt-2">
                                             <div class="col-6 col-md-12">
-                                                <div class="btn-solid checkout-btn" style="cursor: pointer"
-                                                    data-bs-toggle="modal" data-bs-target="#addNewAddress">
-                                                    Checkout <i class="arrow"></i>
-                                                </div>
+                                                @if (auth()->check())
+                                                    <div class="btn-solid checkout-btn" id="pay-button"
+                                                        style="cursor: pointer">
+                                                        Checkout <i class="arrow"></i>
+                                                    </div>
+                                                @else
+                                                    <div class="btn-solid checkout-btn" style="cursor: pointer"
+                                                        data-bs-toggle="modal" data-bs-target="#addNewAddress">
+                                                        Checkout <i class="arrow"></i>
+                                                    </div>
+                                                @endif
+
                                             </div>
                                             <div class="col-6 col-md-12">
                                                 <a href={{ url('/') }}
@@ -169,38 +187,24 @@
                                                     Forgot Password ?
                                                 </a>
 
-                                                <div id="payment-form">
+                                                {{-- Midtrans Snap Button --}}
+                                                <div>
                                                     <input type="hidden" id="client_token"
                                                         value="{{ $payment_token }}">
                                                     <button type="submit" id="pay-button"
                                                         class="btn-solid rounded-pill line-none">
                                                         Signin<i class="arrow"></i>
                                                     </button>
-
-                                                    <!-- Initialize payment process when Pay button is clicked -->
-                                                    <script type="text/javascript">
-                                                        document.getElementById('pay-button').addEventListener('click', function() {
-                                                            snap.pay(document.getElementById('client_token').value, {
-                                                                onSuccess: function(result) {
-                                                                    window.location.href = '/order-success';
-                                                                },
-                                                                onPending: function(result) {
-                                                                    window.location.href = '/order-success';
-                                                                },
-                                                                onError: function(result) {
-                                                                    // Handle the error case
-                                                                }
-                                                            });
-                                                        });
-                                                    </script>
                                                 </div>
+                                                {{-- Midtrans Snap Button --}}
                                             </div>
 
                                             <span class="backto-link font-default content-color text-decoration-none">
                                                 If you are new,
-                                                <a class="text-decoration-underline theme-color" href="register.html">
+                                                <p class="text-decoration-underline theme-color"
+                                                    style="cursor: pointer;">
                                                     Create Now
-                                                </a>
+                                                </p>
                                             </span>
                                             <span class="line"><span>Or</span></span>
 

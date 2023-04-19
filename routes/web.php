@@ -19,6 +19,7 @@ use App\Http\Controllers\OrderController;
 
 
 Route::get('/', fn () => view('welcome'));
+Route::get('/tes', fn () => view('tes'));
 Route::get('/products/{id}', fn () => view('product-detail'));
 Route::get('/orders', [OrderController::class, 'payment']);
 Route::get('/order-success', fn () => view('order-success'));
@@ -34,11 +35,13 @@ Route::prefix('auth')->group(fn() => [
 ]);
 
 Route::prefix('dashboard')->middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return view('dashboard.index');
-    });
+    Route::get('/order-detail', fn() => view('dashboard.order-detail'));
 
     Route::middleware('admin')->group(function () {
+        Route::get('/', function () {
+            return view('dashboard.index');
+        });
+
         Route::get('/landing-page', function () {
             return view('dashboard.landing-pages');
         });
@@ -51,7 +54,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
             return view('dashboard.products');
         });
 
-        Route::get('/orders', function () {
+        Route::get('/order-management', function () {
             return view('dashboard.orders');
         });
 

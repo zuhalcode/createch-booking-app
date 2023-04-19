@@ -26,80 +26,75 @@
         </section>
         <!-- Top Section End -->
 
-        <!-- Compare Section Start -->
-        <section class="section-b-space order-success">
-            <div class="container-lg">
-                <div class="row g-3 g-md-4 cart">
-                    <div class="col-md-12 col-lg-12 col-xl-12">
-                        <div class="summery-box">
-                            <div class="row g-3 g-lg-4">
-                                <div class="col-12">
-                                    <div class="summery-wrap">
-                                        <div class="cart-wrap grand-total-wrap">
-                                            <div>
-                                                <div class="order-summery-box">
-                                                    <h5 class="cart-title">Detail Harga (3 Items)</h5>
-                                                    <ul class="order-summery">
-                                                        <li>
-                                                            <span>item 1</span>
-                                                            <span>$220.00</span>
-                                                        </li>
-
-                                                        <li>
-                                                            <span>ADD ONS</span>
-                                                            <span class="font-danger">$100.00</span>
-                                                        </li>
-
-                                                        <li>
-                                                            <span>Biaya Total</span>
-                                                            <span>$50.00</span>
-                                                        </li>
-
-                                                        <li class="pb-0">
-                                                            <span>Total Amount</span>
-                                                            <span>$270.00</span>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="summery2">
-                                        <div class="row g-4">
-                                            <div class="col-12">
-                                                <div class="order-summery-box">
-                                                    <h5 class="cart-title">Shipping Address</h5>
-                                                </div>
-                                                <ul>
-                                                    <li>Greg Harrell</li>
-                                                    <li>568, Suite Ave.</li>
-                                                    <li>Australia, 235153,brooklyn brigs</li>
-                                                    <li>Contact No. 48465465465</li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="col-12">
-                                                <div class="delivery-box">
-                                                    <p class="d-flex flex-column g-0 title-color font-md mb-0">
-                                                        Expected Date Of Delivery:
-                                                        <strong> June 22, 2022</strong>
-                                                    </p>
-                                                    <a href="user-dashboard.html"
-                                                        class="font-danger font-md fw-500">Track Order</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+        <!-- Invoice -->
+        <section class="p-3 mt-2">
+            <div class="row g-3 g-lg-4 summery-wrap">
+                <div class="col-8 mx-auto success-icon rounded-3 d-flex flex-column gap-3 cart-wrap grand-total-wrap">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex gap-3">
+                            <div>
+                                <img style="height: 50px; width: 120px"
+                                    src={{ asset('/assets/images/logos/logo-4.png') }} alt="logo" />
                             </div>
+                            <div class="d-flex flex-column success-contain">
+                                <h1>Dipa In House</h1>
+                                <h5 class="font-light text-start">zuhal@gmail.com</h5>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-column success-contain font-light text-end text-capitalize">
+                            <h5>Ijen Boulevard Street 1001</h5>
+                            <h5>Malang city, 65572</h5>
+                            <h5>East java, Indonesia</h5>
+                        </div>
+                    </div>
+
+                    <div class="d-flex p-3 rounded-3 justify-content-between bg-white mt-2">
+                        <div class="d-flex flex-column gap-2">
+                            <h5>Invoice Number</h5>
+                            <h5>INV-2022-101</h5>
+                            <h5>Issued date: 11 Jan 2022</h5>
+                            <h5>Expires date: 18 Jan 2022</h5>
+                        </div>
+
+                        <div class="d-flex flex-column gap-2">
+                            <h5>Billed to</h5>
+                            <h5>Jasmine Sarah</h5>
+                            <h5>Moonlight Agency LTD</h5>
+                            <h5>New York, USA</h5>
+                        </div>
+                    </div>
+
+                    <div class="mt-2">
+                        <div class="order-summery-box">
+                            <h5 class="cart-title">Detail Harga</h5>
+                            <ul class="order-summery">
+                                <li>
+                                    <span>Barber Light</span>
+                                    <span>Rp. 220.000</span>
+                                </li>
+
+                                <li>
+                                    <span>Pomade</span>
+                                    <span class="font-danger">Rp. 10.000</span>
+                                </li>
+
+                                <li>
+                                    <span>Biaya Total</span>
+                                    <span>Rp. 5.000</span>
+                                </li>
+
+                                <li class="pb-0">
+                                    <span class="font-weight-bold">Total Amount</span>
+                                    <span>Rp. 270.000</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- Compare Section End -->
+        <!-- Invoice End -->
     </main>
     <!-- Main End -->
 </x-layouts.app-layout>

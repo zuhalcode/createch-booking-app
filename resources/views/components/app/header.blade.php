@@ -35,9 +35,16 @@
                                     </li>
 
                                     @if (auth()->check())
-                                        <li class="nav-item">
-                                            <a class="nav-link" href={{ url('/dashboard') }}>Dashboard</a>
-                                        </li>
+                                        @if (auth()->user()->role->name === 'admin')
+                                            <li class="nav-item">
+                                                <a class="nav-link" href={{ url('/dashboard') }}>Dashboard</a>
+                                            </li>
+                                        @else
+                                            <li class="nav-item">
+                                                <a class="nav-link"
+                                                    href={{ url('/dashboard/order-detail') }}>Dashboard</a>
+                                            </li>
+                                        @endif
 
                                         <li class="nav-item" style="cursor: pointer">
                                             <form id="logout-form-nav" action={{ url('/auth/logout') }} method="post">

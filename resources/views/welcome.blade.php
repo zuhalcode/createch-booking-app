@@ -8,6 +8,7 @@
 
     <!-- Main Start -->
     <main class="main">
+        {{-- {{ dd(auth()->user()->role->name) }} --}}
         <!-- Home Section Start -->
         <section class="home-slider4 ratio_47 p-0">
             <div class="banner">
@@ -38,7 +39,7 @@
                             <span class="corner-wrap right-bottom">
                                 <span class="corner"></span>
                             </span>
-                            Shop Now
+                            Book Now
                         </a>
                     </div>
                 </div>
