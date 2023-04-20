@@ -22,7 +22,7 @@ Route::get('/', fn () => view('welcome'));
 Route::get('/tes', fn () => view('tes'));
 Route::get('/products/{id}', fn () => view('product-detail'));
 Route::get('/orders', [OrderController::class, 'payment']);
-Route::get('/order-success', fn () => view('order-success'));
+Route::get('/order-success', [OrderController::class, 'orderSuccessIndex'])->middleware('auth');
 
 Route::prefix('auth')->group(fn() => [
     Route::get('/login', fn() => view('auth.login'))->name('login')->middleware('guest'),

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 // Set your Merchant Server Key
 \Midtrans\Config::$serverKey = 'SB-Mid-server-e-cseZ8LxEVvtAgQCFFBYixX';
@@ -34,5 +34,14 @@ class OrderController extends Controller
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
         return view('order-detail', ['payment_token' => $snapToken]);
+    }
+
+    public function orderSuccessIndex() 
+    {
+        // Generate barcode
+        $barcode = QrCode::size(250)->generate('123456789');
+
+        // Pass barcode to the view
+        return view('order-success', ['barcode' => $barcode]);
     }
 }

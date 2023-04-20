@@ -29,7 +29,7 @@
         <!-- Invoice -->
         <section class="p-3 mt-2">
             <div class="row g-3 g-lg-4 summery-wrap">
-                <div class="col-8 mx-auto success-icon rounded-3 d-flex flex-column gap-3 cart-wrap grand-total-wrap">
+                <div class="col-10 mx-auto success-icon rounded-3 d-flex flex-column gap-3 cart-wrap grand-total-wrap">
                     <div class="d-flex justify-content-between">
                         <div class="d-flex gap-3">
                             <div>
@@ -90,6 +90,10 @@
                                 </li>
                             </ul>
                         </div>
+                    </div>
+
+                    <div class="mt-3 mx-auto">
+                        {{ $barcode }}
                     </div>
                 </div>
             </div>
