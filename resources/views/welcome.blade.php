@@ -8,7 +8,6 @@
 
     <!-- Main Start -->
     <main class="main">
-        {{-- {{ dd(auth()->user()->role->name) }} --}}
         <!-- Home Section Start -->
         <section class="home-slider4 ratio_47 p-0">
             <div class="banner">
@@ -30,8 +29,8 @@
                             creative products
                         </p>
                     </div>
-                    <div class="btn-style4">
-                        <a href="shop-left-sidebar.html" class="btn">
+                    <div class="btn-style4 scroll-anjay">
+                        <div class="btn">
                             <span class="corner-wrap left-top">
                                 <span class="corner"></span>
                             </span>
@@ -40,7 +39,7 @@
                                 <span class="corner"></span>
                             </span>
                             Book Now
-                        </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -65,8 +64,8 @@
                         </p>
 
                         <div class="btn-box">
-                            <div class="btn-style4">
-                                <a href="shop-left-sidebar.html" class="btn">
+                            <div class="btn-style4 scroll-anjay">
+                                <div class="btn">
                                     <span class="corner-wrap left-top">
                                         <span class="corner"></span>
                                     </span>
@@ -74,9 +73,11 @@
                                     <span class="corner-wrap right-bottom">
                                         <span class="corner"></span>
                                     </span>
-                                    Shop Now
-                                </a>
+                                    Book Now
+                                </div>
                             </div>
+
+
                             <div class="contact-info">
                                 <a class="phone-link" href="tel:254562541254">
                                     <img src="https://themes.pixelstrap.com/oslo/assets/icons/svg/phone-book.svg"
@@ -103,7 +104,7 @@
         <!-- About Us End -->
 
         <!-- Collection Section Start -->
-        <section class="collection-section pt-0">
+        <section class="collection-section pt-0" id="products">
             <div class="container-lg">
                 <div class="title-box5 side-by-side">
                     <div>

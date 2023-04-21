@@ -56,6 +56,9 @@
 
     <!-- Main Css -->
     <link rel="stylesheet" type="text/css" href={{ asset('/css/style.css') }} />
+
+
+
 </head>
 <!-- Head End -->
 
@@ -100,6 +103,7 @@
 
     <!-- Include Midtrans Snap JS library -->
     <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-O_8ibf3JNJJ-RB5C"></script>
+
 </body>
 <!-- Body End -->
 
