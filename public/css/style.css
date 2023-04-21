@@ -15,3 +15,20 @@
         grid-template-columns: repeat(3, 1fr);
     }
 }
+
+::-webkit-scrollbar {
+    width: 5px; /* width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* color of the track */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #555; /* color of the thumb */
+    border-radius: 5px; /* roundness of the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #333; /* color of the thumb on hover */
+}

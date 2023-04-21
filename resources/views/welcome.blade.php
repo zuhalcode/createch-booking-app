@@ -29,7 +29,7 @@
                             creative products
                         </p>
                     </div>
-                    <div class="btn-style4 scroll-anjay">
+                    <div class="btn-style4 scroll-btn">
                         <div class="btn">
                             <span class="corner-wrap left-top">
                                 <span class="corner"></span>
@@ -64,7 +64,7 @@
                         </p>
 
                         <div class="btn-box">
-                            <div class="btn-style4 scroll-anjay">
+                            <div class="btn-style4 scroll-btn">
                                 <div class="btn">
                                     <span class="corner-wrap left-top">
                                         <span class="corner"></span>
@@ -121,15 +121,12 @@
                             <div
                                 class="row gy-3 gy-sm-4 gy-xxl-5 g-xxl-3 gx-2 gx-sm-3 row-cols-3 row-cols-xl-4 row-cols-xxl-5 ratio_asos">
 
-                                <x-app.product-card img='/assets/images/furniture/product/jpg/7.jpg' price="$50.00"
-                                    href='/products/1'>
-                                    Coffee Table
-                                </x-app.product-card>
-
-                                <x-app.product-card img='/assets/images/furniture/product/jpg/7.jpg' price="$50.00"
-                                    href='/products/2'>
-                                    Coffee Table
-                                </x-app.product-card>
+                                @for ($i = 0; $i < 10; $i++)
+                                    <x-app.product-card img='/assets/images/furniture/product/jpg/7.jpg' price="$50.00"
+                                        href='/products/1'>
+                                        Coffee Table
+                                    </x-app.product-card>
+                                @endfor
 
                             </div>
                         </div>

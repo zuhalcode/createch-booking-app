@@ -34,6 +34,7 @@
         <section class="section-b-space card-page">
             <div class="container-lg">
                 <div class="row g-3 g-md-4 cart">
+                    {{-- Detail Order in lg --}}
                     <div class="col-md-7 col-lg-8">
                         <div class="cart-wrap">
                             <div class="items-list">
@@ -44,7 +45,6 @@
                                             <th class="d-none d-sm-table-cell">PRICE</th>
                                         </tr>
                                     </thead>
-
                                     <tbody>
                                         <tr>
                                             <td>
@@ -54,14 +54,19 @@
                                                         alt="image" />
                                                     <div class="details">
                                                         <h4 class="title-color font-default2">Concrete Jungle Pack</h4>
+                                                        <span class="size gap-2 d-flex">
+                                                            Date : <span>23 Jan 2023</span>
+                                                        </span>
                                                         <span class="size gap-2 d-flex d-sm-none">
-                                                            Price : <span>Rp. 120.000</span>
+                                                            Time Slot : <span>11:00 PM</span>
                                                         </span>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="price d-none d-sm-table-cell">Rp. 120.000</td>
+
+                                            <td class="price d-none d-sm-table-cell">$120.00</td>
                                         </tr>
+
                                     </tbody>
                                 </table>
 
@@ -92,6 +97,9 @@
                             </div>
                         </div>
                     </div>
+                    {{-- End Detail Order in lg --}}
+
+                    {{-- Price Details --}}
                     <div class="col-md-5 col-lg-4">
                         <div class="summery-wrap">
                             <div class="cart-wrap grand-total-wrap">
@@ -141,6 +149,7 @@
                             </div>
                         </div>
                     </div>
+                    {{-- End Price Details --}}
                 </div>
         </section>
         <!-- Cart Section End -->
@@ -159,7 +168,8 @@
                             <div class="row g-0 ratio_asos">
                                 <div class="order-2 order-lg-1 col-lg-12">
                                     <div class="content-box">
-                                        <div>
+                                        {{-- Login --}}
+                                        <div id="login-modal">
                                             <h5>LOGIN <span class="bg-theme-blue"></span></h5>
                                             <p class="font-md content-color">
                                                 How do i get access order,wishlist and recomendation ?
@@ -202,7 +212,7 @@
                                             <span class="backto-link font-default content-color text-decoration-none">
                                                 If you are new,
                                                 <p class="text-decoration-underline theme-color"
-                                                    style="cursor: pointer;">
+                                                    style="cursor: pointer;" onclick="handleChangeContent()">
                                                     Create Now
                                                 </p>
                                             </span>
@@ -215,15 +225,72 @@
                                                 </a>
                                             </div>
                                         </div>
+                                        {{-- Login --}}
+
+                                        {{-- Register --}}
+                                        <div id="register-modal" style="display: none">
+                                            <h5>CREATE ACCOUNT<span class="bg-theme-blue"></span></h5>
+                                            <p class="font-md content-color">How do i get access order,wishlist and
+                                                recommendation ?</p>
+
+                                            <form action="https://themes.pixelstrap.com/oslo/html/index.html"
+                                                class="custom-form form-pill">
+                                                <div class="input-box">
+                                                    <label for="full-name">Full Name</label>
+                                                    <input class="form-control" type="text" required
+                                                        name="full-name" id="full-name" />
+                                                </div>
+                                                <div class="input-box">
+                                                    <label for="email">Email</label>
+                                                    <input class="form-control" type="email" required
+                                                        name="email" id="email" />
+                                                </div>
+                                                <div class="input-box">
+                                                    <label for="phone">WhatsApp Number</label>
+                                                    <input class="form-control" type="phone" required
+                                                        name="phone" id="phone" />
+                                                </div>
+                                                <div class="input-box">
+                                                    <label for="password">Password</label>
+                                                    <div class="icon-input">
+                                                        <input class="form-control" type="password" required
+                                                            name="password" id="password" />
+                                                        <img class="showHidePassword"
+                                                            src="https://themes.pixelstrap.com/oslo/assets/icons/svg/eye-1.svg"
+                                                            alt="eye" />
+                                                    </div>
+                                                </div>
+
+                                                <button type="submit"
+                                                    class="btn-solid rounded-pill line-none theme-color">
+                                                    SignUp <i class="arrow"></i>
+                                                </button>
+                                            </form>
+
+                                            <span class="backto-link font-default content-color text-decoration-none">
+                                                Already have an Account?
+                                                <span class="text-decoration-underline theme-color"
+                                                    style="cursor: pointer" onclick="handleChangeContent()">
+                                                    Sign In
+                                                </span>
+                                            </span>
+                                            <span class="line"><span>Or</span></span>
+                                            <a href="https://www.google.com/" class="button-link">
+                                                <img src="../assets/icons/png/google.png" alt="google" />
+                                                Sign up
+                                            </a>
+                                        </div>
+                                        {{-- Register --}}
                                     </div>
                                 </div>
                             </div>
-                        </section>
                     </div>
-                    <!-- Main End -->
+                    </section>
                 </div>
+                <!-- Main End -->
             </div>
         </div>
+    </div>
     </div>
     <!-- Address Modal End -->
 

@@ -1,5 +1,5 @@
 // Handling smooth scrolling
-document.querySelectorAll(".scroll-anjay").forEach((e) =>
+document.querySelectorAll(".scroll-btn").forEach((e) =>
     e.addEventListener("click", (e) => {
         e.preventDefault();
         document.querySelector("#products").scrollIntoView({
@@ -7,6 +7,24 @@ document.querySelectorAll(".scroll-anjay").forEach((e) =>
         });
     })
 );
+
+// Handling change modal content
+const handleChangeContent = () => {
+    // Get the login and create account sections
+    const loginSection = document.querySelector("#login-modal");
+    const createAccountSection = document.querySelector("#register-modal");
+
+    // Check if the login section is currently visible
+    if (loginSection.style.display !== "none") {
+        // Hide the login section and show the create account section
+        loginSection.style.display = "none";
+        createAccountSection.style.display = "block";
+    } else {
+        // Hide the create account section and show the login section
+        createAccountSection.style.display = "none";
+        loginSection.style.display = "block";
+    }
+};
 
 // Handling logout for entire page
 const handleLogout = (formId) => document.querySelector(`#${formId}`).submit();
@@ -17,7 +35,6 @@ document.getElementById("pay-button").addEventListener("click", function () {
         onSuccess: function (result) {
             window.location.href = "/order-success";
         },
-
         onPending: function (result) {
             window.location.href = "/order-success";
         },
@@ -26,5 +43,3 @@ document.getElementById("pay-button").addEventListener("click", function () {
         },
     });
 });
-
-alert("ok");
