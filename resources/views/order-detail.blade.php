@@ -231,7 +231,7 @@
                                     {{-- Login --}}
 
                                     {{-- Register --}}
-                                    <div id="register-modal" style="display: none">
+                                    <div id="register-modal" class="d-none">
                                         <h5>CREATE ACCOUNT<span class="bg-theme-blue"></span></h5>
                                         <p class="font-md content-color">How do i get access order,wishlist and
                                             recommendation ?</p>

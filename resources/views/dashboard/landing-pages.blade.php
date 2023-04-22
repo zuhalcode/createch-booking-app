@@ -12,29 +12,7 @@
                 {{-- Content --}}
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <div class="card mb-4">
-                        <h5 class="card-header">Profile Details</h5>
-                        <!-- Account -->
-                        <div class="card-body">
-                            <div class="d-flex align-items-start align-items-sm-center gap-4">
-                                <img src={{ url('/img/avatars/1.png') }} alt="user-avatar" class="d-block rounded"
-                                    height="100" width="100" id="uploadedAvatar" />
-                                <div class="button-wrapper">
-                                    <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
-                                        <span class="d-none d-sm-block">Upload new photo</span>
-                                        <i class="bx bx-upload d-block d-sm-none"></i>
-                                        <input type="file" id="upload" class="account-file-input" hidden
-                                            accept="image/png, image/jpeg" />
-                                    </label>
-                                    <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
-                                        <i class="bx bx-reset d-block d-sm-none"></i>
-                                        <span class="d-none d-sm-block">Reset</span>
-                                    </button>
-
-                                    <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 1MB</p>
-                                </div>
-                            </div>
-                        </div>
-
+                        <h5 class="card-header">Home Page Detail</h5>
                         <hr class="my-0" />
 
                         <div class="card-body">
@@ -58,8 +36,13 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="formFile" class="form-label">Image Input</label>
-                                    <input class="form-control" type="file" id="formFile" />
+                                    <label for="input-bg" class="form-label">Cover Image</label>
+                                    <input class="form-control" type="file" id="input-bg"
+                                        onchange="showImagePreview('input-bg', 'uploaded-bg')" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <img alt="bg-cover" class="d-block rounded w-25 d-none" id="uploaded-bg" />
                                 </div>
 
                                 <div class="mb-3">
@@ -77,12 +60,28 @@
                                     </div>
                                 </div>
 
-                                <div class="mb-3">
+                                <div class="my-3">
                                     <label for="state" class="form-label">
-                                        Social Media
+                                        Instagram
                                     </label>
                                     <input class="form-control" type="text" id="socialmedia" name="socialmedia"
-                                        placeholder="Social Media" autocomplete="off" />
+                                        placeholder="Instagram" autocomplete="off" />
+                                </div>
+
+                                <div class="my-3">
+                                    <label for="state" class="form-label">
+                                        Twitter
+                                    </label>
+                                    <input class="form-control" type="text" id="socialmedia" name="socialmedia"
+                                        placeholder="Twitter" autocomplete="off" />
+                                </div>
+
+                                <div class="my-3">
+                                    <label for="state" class="form-label">
+                                        Facebook
+                                    </label>
+                                    <input class="form-control" type="text" id="socialmedia" name="socialmedia"
+                                        placeholder="Facebook" autocomplete="off" />
                                 </div>
 
                                 <div class="mt-2">
