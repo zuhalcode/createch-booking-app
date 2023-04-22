@@ -23,6 +23,8 @@ Route::get('/tes', fn () => view('tes'));
 Route::get('/products/{id}', fn () => view('product-detail'));
 Route::get('/orders', [OrderController::class, 'payment']);
 Route::get('/order-success', [OrderController::class, 'orderSuccessIndex'])->middleware('auth');
+Route::post('/login-modal', [AuthController::class, 'loginModal']);
+Route::post('/register-modal', [AuthController::class, 'registerModal']);
 
 Route::prefix('auth')->group(fn() => [
     Route::get('/login', fn() => view('auth.login'))->name('login')->middleware('guest'),

@@ -9,6 +9,35 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    public function loginModal(Request $req) {
+        $credentials = $req->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+        
+        if(Auth::attempt($credentials)){
+            $req->session()->regenerate();
+            return back();
+        }
+
+        return back()->with('loginError', 'Login gagal!');
+    }
+
+    public function registerModal(Request $req) {
+        $validatedData = $req->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        $validatedData['password'] = Hash::make($validatedData['password']);
+        $user = User::create($validatedData);
+
+        Auth::login($user);
+
+        return back()->with('success', 'Login Berhasil!, silahkan selesaikan order anda');
+    }
+
     public function login(Request $req)
     {
         $credentials = $req->validate([
