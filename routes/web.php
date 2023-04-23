@@ -4,6 +4,7 @@ use Midtrans\Snap;
 use Midtrans\Config;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\OrderController;
 
 /*
@@ -18,7 +19,7 @@ use App\Http\Controllers\OrderController;
 */
 
 
-Route::get('/', fn () => view('welcome'));
+Route::get('/', [HomepageController::class, 'index']);
 Route::get('/tes', fn () => view('tes'));
 Route::get('/products/{id}', fn () => view('product-detail'));
 Route::get('/orders', [OrderController::class, 'payment']);
@@ -44,11 +45,15 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
             return view('dashboard.index');
         });
 
-        Route::get('/landing-page', function () {
-            return view('dashboard.landing-pages');
-        });
+        Route::get('/landing-page', [HomepageController::class, 'showLandingPageForm']);
+        Route::get('/landing-page-cover', [HomepageController::class, 'showCover']);
+        Route::put('/landing-page', [HomepageController::class, 'createCover']);
 
         Route::get('/branches', function () {
+            return view('dashboard.branches');
+        });
+
+        Route::get('/company', function () {
             return view('dashboard.branches');
         });
 

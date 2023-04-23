@@ -11,7 +11,9 @@
         <!-- Home Section Start -->
         <section class="home-slider4 ratio_47 p-0">
             <div class="banner">
-                <img class="img-fluid bg-img" src="../assets/images/furniture/banner/banner.jpg" alt="banner" />
+                <img class="img-fluid bg-img"
+                    src="{{ asset($cover->image ? '/storage/' . $cover->image : '/assets/images/furniture/banner/banner.jpg') }}"
+                    alt="banner" />
 
                 <div class="content-box">
                     <div class="content">
@@ -23,10 +25,12 @@
                             <span class="corner"></span>
                         </span>
 
-                        <h1>Eco Friendly Furniture With <span> High-end Quality </span></h1>
+                        <h1>
+                            {{ $cover->first_heading_text ?? 'Eco Friendly Furniture With' }}
+                            <span>{{ $cover->second_heading_text ?? 'High-end Quality' }}</span>
+                        </h1>
                         <p>
-                            The best interior designer created echo-friendly furniture for your dream home, visit all
-                            creative products
+                            {{ $cover->short_desc ?? 'The best interior designer created echo-friendly furniture for your dream home, all creative products' }}
                         </p>
                     </div>
                     <div class="btn-style4 scroll-btn">

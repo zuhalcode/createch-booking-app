@@ -18,6 +18,7 @@ class Sidebar extends Component
             ['name' => 'Dashboard', 'route' => '/dashboard', 'icon' => 'bxs-dashboard', 'auth' => 'admin'],
             ['name' => 'Homepage Management', 'route' => '', 'icon' => 'bx-home-circle', 'auth' => 'admin',
                 'submenu' => [
+                    ['name' => 'Company Management', 'route' => '/dashboard/company'],
                     ['name' => 'Landing Page Management', 'route' => '/dashboard/landing-page'],
                     ['name' => 'Branch Management', 'route' => '/dashboard/branches']
                 ]

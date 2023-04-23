@@ -16,16 +16,19 @@
                         <hr class="my-0" />
 
                         <div class="card-body">
-                            <form id="formAccountSettings" method="POST" onsubmit="return false">
+                            <form id="formAccountSettings" action={{ url('/dashboard/landing-page') }} method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
                                 <div class="mb-3">
                                     <label for="heading" class="form-label">Heading 1</label>
-                                    <input class="form-control" type="text" name="first_heading" id="heading"
+                                    <input class="form-control" type="text" name="first_heading_text" id="heading"
                                         placeholder="Heading 1" autocomplete="off" />
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="heading" class="form-label">Heading 2</label>
-                                    <input class="form-control" type="text" name="second_heading" id="heading"
+                                    <input class="form-control" type="text" name="second_heading_text" id="heading"
                                         placeholder="Heading 2" autocomplete="off" />
                                 </div>
 
@@ -37,7 +40,7 @@
 
                                 <div class="mb-3">
                                     <label for="input-bg" class="form-label">Cover Image</label>
-                                    <input class="form-control" type="file" id="input-bg"
+                                    <input class="form-control" type="file" id="input-bg" name='image'
                                         onchange="showImagePreview('input-bg', 'uploaded-bg')" />
                                 </div>
 
@@ -90,6 +93,7 @@
                                     </button>
                                     <button type="reset" class="btn btn-outline-secondary">Cancel</button>
                                 </div>
+                            </form>
                         </div>
 
 
