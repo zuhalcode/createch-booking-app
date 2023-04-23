@@ -83,14 +83,14 @@
 
                                                 {{-- AddOns --}}
                                                 <div id="addons-container" class="row">
-                                                    <div class="mb-3 col-md-6">
+                                                    <div class="mb-2 col-md-6">
                                                         <label for="product" class="form-label">Name</label>
                                                         <input class="form-control" placeholder="Addon Name"
                                                             autocomplete="off" type="text" id="product"
                                                             name="product" autofocus />
                                                     </div>
 
-                                                    <div class="mb-3 col-md-6">
+                                                    <div class="mb-2 col-md-6">
                                                         <label for="price" class="form-label">Price</label>
                                                         <input class="form-control" placeholder="Addon Price"
                                                             autocomplete="off" type="text" id="price"

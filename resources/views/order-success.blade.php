@@ -27,7 +27,7 @@
         <!-- Top Section End -->
 
         <!-- Invoice -->
-        <section class="p-3 mt-2">
+        <section class="p-3 mt-2" id="invoice">
             <div class="row g-3 g-lg-4 summery-wrap">
                 <div class="col-10 mx-auto success-icon rounded-3 d-flex flex-column gap-3 cart-wrap grand-total-wrap">
                     <div class="d-flex justify-content-between">
@@ -49,9 +49,10 @@
                         </div>
                     </div>
 
-                    <div class="d-flex p-3 rounded-3 justify-content-between bg-white mt-2">
+                    <div class="d-flex p-3 rounded-3 justify-content-between text-white mt-2"
+                        style="background-color: #c69057">
                         <div class="d-flex flex-column gap-2">
-                            <h5>Invoice Number</h5>
+                            <h5><b>Invoice Number</b></h5>
                             <h5>INV-2022-101</h5>
                             <h5>Issued date: 11 Jan 2022</h5>
                             <h5>Expires date: 18 Jan 2022</h5>

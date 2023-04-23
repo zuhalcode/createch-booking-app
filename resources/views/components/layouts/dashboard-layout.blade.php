@@ -60,6 +60,7 @@
     <!-- Main JS -->
     <script src="{{ asset('/js/main.js') }}"></script>
     <script src="{{ asset('/js/script.js') }}"></script>
+    <script src="{{ asset('/js/jqscript.js') }}"></script>
 
     <!-- Page JS -->
     <script src="{{ asset('/js/dashboards-analytics.js') }}"></script>

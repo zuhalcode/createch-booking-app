@@ -6,10 +6,6 @@
     grid-template-columns: repeat(2, 1fr);
 }
 
-.invoice {
-    color: red;
-}
-
 @media screen and (min-width: 767px) {
     .size-list {
         grid-template-columns: repeat(3, 1fr);

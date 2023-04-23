@@ -23,7 +23,7 @@ class Sidebar extends Component
                 ]
             ],
             ['name' => 'Product Management', 'route' => '/dashboard/products', 'icon' => 'bx-layout', 'auth' => 'admin'],
-            ['name' => 'Order Management', 'route' => '/dashboard/orders-management', 'icon' => 'bx-dock-top', 'auth' => 'admin'],
+            ['name' => 'Order Management', 'route' => '/dashboard/order-management', 'icon' => 'bx-dock-top', 'auth' => 'admin'],
             ['name' => 'Order Detail', 'route' => '/dashboard/order-detail', 'icon' => 'bx-dock-top',],
             ['name' => 'Home', 'route' => '/', 'icon' => 'bxs-dashboard'],
 
