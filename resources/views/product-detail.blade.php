@@ -4,7 +4,7 @@
     <!-- Overlay -->
     <a href="javascript:void(0)" class="overlay-general"></a>
 
-    <x-app.header />
+    <x-app.header :logo="$company->logo" />
 
     <!-- Main Start -->
     <main class="main">
@@ -23,7 +23,7 @@
                             <li>
                                 <a href="javascript:void(0)"><i data-feather="chevron-right"></i></a>
                             </li>
-                            <li class="current"><a href={{ url('/products') }}>Product</a></li>
+                            <li class="current"><a href={{ url('/products/1') }}>Product</a></li>
                         </ol>
                     </div>
                 </div>
@@ -202,7 +202,7 @@
                                 {{-- End Addons --}}
 
                                 <div class="btn-group">
-                                    <a href={{ url('/orders') }} class="btn-solid btn-sm addtocart-btn">
+                                    <a href={{ url('/products/1/order') }} class="btn-solid btn-sm addtocart-btn">
                                         Book Now
                                     </a>
                                 </div>

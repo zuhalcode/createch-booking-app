@@ -18,5 +18,9 @@
          </div>
          <!-- /Search -->
      </div>
+
+     <div class="">
+         <p class="">Hello Iam {{ auth()->user()->name }}, {{ auth()->user()->role->name }}</p>
+     </div>
  </nav>
  <!-- / Navbar -->

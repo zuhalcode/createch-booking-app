@@ -2,14 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Models\Cover;
 use Illuminate\Http\Request;
 
 class HomepageController extends Controller
 {
     public function index() {
+        $company = Company::where('user_id', 1)->first();
         $cover = Cover::where('company_id', 1)->first();
-        return view('welcome', ['cover' => $cover ]);
+        return view('welcome', [
+            'company' => $company,
+            'cover' => $cover 
+        ]);
     }
 
     public function showLandingPageForm() {

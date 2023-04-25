@@ -17,8 +17,6 @@
                             <h5 class="card-header">Branch Management</h5>
                             <hr class="my-0" />
 
-
-
                             <div class="card-body">
                                 <div class="mb-3">
                                     <label for="input-bg" class="form-label">Logo Image</label>
@@ -29,19 +27,20 @@
                                 <div class="mb-3">
                                     <img alt="bg-cover" class="d-block rounded w-25 d-none" id="uploaded-logo" />
                                 </div>
-                                <form id="formAccountSettings" method="POST" onsubmit="return false">
+
+                                <form method="POST">
                                     <div class="mb-3 col-md-6">
-                                        <label for="firstName" class="form-label">Nama Perusahaan</label>
-                                        <input class="form-control" placeholder="Nama Perusahaan" type="text"
+                                        <label for="firstName" class="form-label">Branch Name</label>
+                                        <input class="form-control" placeholder="Branch Name" type="text"
                                             id="firstName" name="firstName" autofocus autocomplete="off" />
                                     </div>
 
                                     <div class="mb-3 col-md-6">
-                                        <label class="form-label" for="phoneNumber">Phone Number</label>
+                                        <label class="form-label" for="phone">Phone Number</label>
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text">INA (+62)</span>
-                                            <input type="text" id="phoneNumber" name="phoneNumber"
-                                                class="form-control" placeholder="8XXX XXXX XXX" />
+                                            <input type="text" id="phone" name="phone" class="form-control"
+                                                placeholder="8XXX XXXX XXX" />
                                         </div>
                                     </div>
 
@@ -52,8 +51,9 @@
                                     </div>
 
                                     <div class="mt-2">
-                                        <button type="submit" class="btn btn-primary me-2">Save
-                                            changes</button>
+                                        <button type="submit" class="btn btn-primary me-2">
+                                            Savechanges
+                                        </button>
                                         <button type="reset" class="btn btn-outline-secondary">Cancel</button>
                                     </div>
                                 </form>

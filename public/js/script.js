@@ -1,3 +1,6 @@
+// Handling logout for entire page
+const handleLogout = (formId) => document.querySelector(`#${formId}`).submit();
+
 // Handling smooth scrolling
 document.querySelectorAll(".scroll-btn").forEach((e) =>
     e.addEventListener("click", (e) => {
@@ -56,9 +59,6 @@ plusIcon.addEventListener("mouseout", function () {
     plusIcon.classList.remove("bx-plus-circle");
     plusIcon.classList.add("bxs-plus-circle");
 });
-
-// Handling logout for entire page
-const handleLogout = (formId) => document.querySelector(`#${formId}`).submit();
 
 // Handle Midtrans
 document.getElementById("pay-button").addEventListener("click", function () {

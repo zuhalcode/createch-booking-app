@@ -16,8 +16,8 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
 
-                        <a href="index.html" class="logo-link">
-                            <img class="logo" src={{ asset('/assets/images/logos/logo-4.png') }} alt="logo" />
+                        <a href={{ url('/') }} class="logo-link">
+                            <img class="logo" src={{ asset($logo) }} alt="logo" />
                         </a>
 
                         <div class="offcanvas offcanvas-collapse order-lg-2" id="primaryMenu">
@@ -35,7 +35,7 @@
                                     </li>
 
                                     @if (auth()->check())
-                                        @if (auth()->user()->role->name === 'admin')
+                                        @if (auth()->user()->role->name === 'admin' || auth()->user()->role->name === 'super-admin')
                                             <li class="nav-item">
                                                 <a class="nav-link" href={{ url('/dashboard') }}>Dashboard</a>
                                             </li>

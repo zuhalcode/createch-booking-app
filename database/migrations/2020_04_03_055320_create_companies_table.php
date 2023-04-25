@@ -16,13 +16,13 @@ return new class extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('city_id')->constrained();
-            $table->text('about_us');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('phone');
-            $table->string('address');
-            $table->string('logo');
+            $table->foreignId('city_id')->constrained()->nullable();
+            $table->text('about_us')->nullable();
+            $table->string('name')->nullable()->default('bookly');
+            $table->string('email')->unique()->nullable()->default('bookly@gmail.com');
+            $table->string('phone')->nullable()->default('085123456789');
+            $table->string('address')->nullable()->default('surabaya');
+            $table->string('logo')->nullable()->default('/assets/images/logos/logo-4.png');
             $table->timestamps();
         });
     }

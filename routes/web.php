@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,40 +22,54 @@ use App\Http\Controllers\OrderController;
 
 Route::get('/', [HomepageController::class, 'index']);
 Route::get('/tes', fn () => view('tes'));
-Route::get('/products/{id}', fn () => view('product-detail'));
-Route::get('/orders', [OrderController::class, 'payment']);
-Route::get('/order-success', [OrderController::class, 'orderSuccessIndex'])->middleware('auth');
-Route::post('/login-modal', [AuthController::class, 'loginModal']);
-Route::post('/register-modal', [AuthController::class, 'registerModal']);
 
-Route::prefix('auth')->group(fn() => [
-    Route::get('/login', fn() => view('auth.login'))->name('login')->middleware('guest'),
-    Route::post('/login', [AuthController::class, 'login']),
-    
-    Route::get('/register', fn() => view('auth.register'))->middleware('guest'),
-    Route::post('/register', [AuthController::class, 'register']),
-
-    Route::post('/logout', [AuthController::class, 'logout']),
+Route::controller(ProductController::class)->group(fn() => [
+    Route::get('/products/{id}', 'indexById'),
 ]);
 
+Route::controller(OrderController::class)->group(fn() => [
+    Route::get('/products/{id}/order', 'orderIndex'),
+    Route::get('/order-success', 'orderSuccessIndex')->middleware('auth'),
+    Route::get('/order', 'payment')
+]);
+
+// Handling for Authentication
+Route::controller(AuthController::class)->group(fn() => [
+    Route::prefix('auth')->group(fn() => [
+        Route::get('/login', fn() => view('auth.login'))->name('login')->middleware('guest'),
+        Route::post('/login', 'login'),
+        
+        Route::get('/register', fn() => view('auth.register'))->middleware('guest'),
+        Route::post('/register', 'register'),
+    
+        Route::post('/logout', 'logout'),
+    ]),
+
+    // Handling for authentication form in modal
+    Route::post('/login-modal', 'loginModal'),
+    Route::post('/register-modal', 'registerModal'),
+]);
+
+// Handling for Dashboard
 Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/order-detail', fn() => view('dashboard.order-detail'));
 
-    Route::middleware('admin')->group(function () {
+    Route::group([], function () {
         Route::get('/', function () {
             return view('dashboard.index');
         });
 
-        Route::get('/landing-page', [HomepageController::class, 'showLandingPageForm']);
-        Route::get('/landing-page-cover', [HomepageController::class, 'showCover']);
-        Route::put('/landing-page', [HomepageController::class, 'createCover']);
+        Route::controller(HomepageController::class)->group(fn() => [
+            Route::get('/landing-page', 'showLandingPageForm'),
+            Route::put('/landing-page', 'createCover')
+        ]);
 
         Route::get('/branches', function () {
             return view('dashboard.branches');
         });
 
         Route::get('/company', function () {
-            return view('dashboard.branches');
+            return view('dashboard.company');
         });
 
         Route::get('/products', function () {
@@ -68,6 +83,8 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
         Route::get('/bookings', function () {
             return view('dashboard.bookings');
         });
-    });
+    })->middleware(['admin', 'super-admin']);
+
+    Route::middleware('super-admin')->group(function () {});
 });
 

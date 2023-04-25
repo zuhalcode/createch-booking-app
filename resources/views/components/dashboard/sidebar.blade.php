@@ -14,8 +14,8 @@
 
     <ul class="menu-inner py-1">
         @foreach ($menus as $menu)
-            @if (isset($menu['auth']))
-                @can('admin')
+            @if ($menu['role'] === 'admin')
+                @canany(['admin', 'super-admin'])
                     @if (isset($menu['submenu']))
                         <li class="menu-item">
                             <div class="menu-link menu-toggle" style="cursor: pointer">
@@ -41,6 +41,15 @@
                         </li>
                     @endif
                 @endcan
+            @elseif($menu['role'] === 'super-admin')
+                @can('super-admin')
+                    <li class="menu-item">
+                        <a href={{ url($menu['route']) }} class="menu-link menu">
+                            <i class="menu-icon tf-icons bx {{ $menu['icon'] }}"></i>
+                            <div>{{ $menu['name'] }}</div>
+                        </a>
+                    </li>
+                @endcan
             @else
                 <li class="menu-item">
                     <a href={{ url($menu['route']) }} class="menu-link menu">
@@ -52,12 +61,11 @@
         @endforeach
 
         {{-- Logout --}}
-        <li class="menu-item" style="cursor: pointer;">
-            <form id="logout-form" action={{ url('/auth/logout') }} method="post" class="menu-link">
+        <li class="menu-item" style="cursor: pointer;" onclick="handleLogout('logout-sidebar')">
+            <form id="logout-sidebar" action={{ url('/auth/logout') }} method="post" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-log-out"></i>
                 @csrf
-                <div id="logout-btn" data-i18n="Authentications" style="width: 100%"
-                    onclick="handleLogout('logout-form')">Logout</div>
+                <div>Logout</div>
             </form>
         </li>
         {{-- Logout --}}

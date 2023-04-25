@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 // Set your Merchant Server Key
@@ -15,6 +16,12 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class OrderController extends Controller
 {
+    public function orderIndex()
+    {
+        $company = Company::where('user_id', 1)->first();
+        return view('order-detail', ['company' => $company]);
+    }
+    
     public function payment() 
     {
         // Set transaction data

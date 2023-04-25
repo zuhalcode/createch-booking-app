@@ -4,16 +4,14 @@
     <!-- Overlay -->
     <a href="javascript:void(0)" class="overlay-general overlay-common"></a>
 
-    <x-app.header />
+    <x-app.header :logo="$company->logo" />
 
     <!-- Main Start -->
     <main class="main">
         <!-- Home Section Start -->
         <section class="home-slider4 ratio_47 p-0">
             <div class="banner">
-                <img class="img-fluid bg-img"
-                    src="{{ asset($cover->image ? '/storage/' . $cover->image : '/assets/images/furniture/banner/banner.jpg') }}"
-                    alt="banner" />
+                <img class="img-fluid bg-img" src="{{ asset($cover->image) }}" alt="banner" />
 
                 <div class="content-box">
                     <div class="content">
@@ -26,11 +24,11 @@
                         </span>
 
                         <h1>
-                            {{ $cover->first_heading_text ?? 'Eco Friendly Furniture With' }}
-                            <span>{{ $cover->second_heading_text ?? 'High-end Quality' }}</span>
+                            {{ $cover->first_heading_text }}
+                            <span>{{ $cover->second_heading_text }}</span>
                         </h1>
                         <p>
-                            {{ $cover->short_desc ?? 'The best interior designer created echo-friendly furniture for your dream home, all creative products' }}
+                            {{ ucfirst($cover->short_desc) }}
                         </p>
                     </div>
                     <div class="btn-style4 scroll-btn">
@@ -62,9 +60,7 @@
                         </h5>
                         <h6 class="collection-title"><span class="line"></span> Bookly</h6>
                         <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, rem dolor! Aspernatur
-                            numquam nam magnam ex neque corporis dolorem reprehenderit ipsum quisquam illo repellat
-                            cupiditate necessitatibus doloremque, exercitationem dolores dignissimos?
+                            {{ $company->about_us }}
                         </p>
 
                         <div class="btn-box">
@@ -86,7 +82,7 @@
                                 <a class="phone-link" href="tel:254562541254">
                                     <img src="https://themes.pixelstrap.com/oslo/assets/icons/svg/phone-book.svg"
                                         alt="phone-book" />
-                                    (406) 555-0120
+                                    {{ $company->phone }}
                                 </a>
 
                                 <ul class="social-list">

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('first_heading_text');
             $table->text('second_heading_text');
             $table->text('short_desc');
-            $table->string('image');
+            $table->string('image')->default('/assets/images/furniture/banner/banner.jpg');
             $table->timestamps();
             $table->softDeletes();
         });

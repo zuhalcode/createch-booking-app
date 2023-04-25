@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Branch;
 use App\Models\Company;
 use App\Models\Province;
+use Database\Factories\CityFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
