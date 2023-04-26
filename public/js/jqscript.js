@@ -27,3 +27,43 @@ $(document).ready(function () {
         $(this).val(cleanedValue);
     });
 });
+
+// Handling Onchange Image Preview
+const showImagePreview = (inputId, targetId) => {
+    const fileInput = $(`#${inputId}`);
+    const targetElement = $(`#${targetId}`);
+    const file = fileInput[0].files[0];
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            targetElement.attr("src", e.target.result);
+            targetElement.removeClass("d-none");
+        };
+        reader.readAsDataURL(file);
+    }
+};
+
+// Handling show modal edit company
+const showModalEditCompany = (id) => {
+    const token = $('meta[name="csrf-token"]').attr("content");
+    $.ajax({
+        url: `/dashboard/companies/${id}`,
+        method: "POST",
+        headers: { "X-CSRF-Token": token },
+        success: function (res) {
+            const company = res.company;
+            $('#modalEditCompany input[name="name"]').val(company.name);
+            $('#modalEditCompany input[name="email"]').val(company.email);
+            $('#modalEditCompany input[name="phone"]').val(company.phone);
+
+            $("#formEditCompany").attr(
+                "action",
+                `/dashboard/companies/${id}/edit`
+            );
+        },
+        error: (err) => console.log(err),
+    });
+
+    $("#modalEditCompany").modal("show");
+};

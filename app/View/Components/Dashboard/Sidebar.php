@@ -18,13 +18,13 @@ class Sidebar extends Component
             [
                 'name' => 'Dashboard',
                 'route' => '/dashboard', 
-                'icon' => 'bxs-dashboard', 
+                'icon' => 'bx-line-chart', 
                 'role' => 'admin'
             ],
             [
                 'name' => 'Companies Management', 
-                'route' => '/companies', 'icon' => 
-                'bxs-dashboard', 
+                'route' => '/dashboard/companies', 
+                'icon' => 'bx-building', 
                 'role' => 'super-admin'
             ],
             ['name' => 'Homepage Management', 'route' => '', 'icon' => 'bx-home-circle', 'role' => 'admin',
@@ -37,13 +37,13 @@ class Sidebar extends Component
             [
                 'name' => 'Product Management', 
                 'route' => '/dashboard/products', 
-                'icon' => 'bx-layout', 
+                'icon' => 'bx-store-alt', 
                 'role' => 'admin'
             ],
             [
                 'name' => 'Order Management', 
                 'route' => '/dashboard/order-management', 
-                'icon' => 'bx-dock-top', 
+                'icon' => 'bxs-receipt', 
                 'role' => 'admin'
             ],
             [

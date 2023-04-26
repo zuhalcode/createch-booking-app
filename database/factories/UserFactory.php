@@ -21,13 +21,24 @@ class UserFactory extends Factory
     public function definition()
     {
         $users = [
-            ['name' => 'zuhal', 'email' => 'zuhal@gmail.com', 'role_id' => 3],
+            ['name' => 'zuhal', 'email' => 'zuhal@gmail.com', 'role_id' => 1],
             ['name' => 'jasmine', 'email' => 'jasmine@gmail.com', 'role_id' => 2],
-            ['name' => 'maira', 'email' => 'maira@gmail.com', 'role_id' => 1]
+            ['name' => 'maira', 'email' => 'maira@gmail.com', 'role_id' => 3],
         ];
-
-        $userData = $this->faker->unique()->randomElement($users);
-
+    
+        static $index = 0;
+    
+        // select an element from the $users array based on the current value of $index
+        $userData = $users[$index % count($users)];
+    
+        // increment the $index variable to select the next element on the next call
+        $index++;
+    
+        // reset $index to 0 once it reaches the end of the $users array
+        if ($index >= count($users)) {
+            $index = 0;
+        }
+    
         return [
             'name' => $userData['name'],
             'email' => $userData['email'],

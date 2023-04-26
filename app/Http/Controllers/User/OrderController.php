@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
+
 
 use App\Models\Company;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 // Set your Merchant Server Key
@@ -14,12 +17,30 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 // Set 3DS transaction for credit card to true
 \Midtrans\Config::$is3ds = true;
 
+
 class OrderController extends Controller
 {
     public function orderIndex()
     {
+        // Set transaction data
+        $orderId = rand(1000000, 9999999);
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => $orderId,
+                'gross_amount' => 200000,
+            ),
+            'customer_details' => array(
+                'first_name' => 'semangat',
+                'last_name' => 'huwaaa',
+                'email' => 'email@gmail.com',
+                'phone' => '0237812412',
+            ),
+        );
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
         $company = Company::where('user_id', 1)->first();
-        return view('order-detail', ['company' => $company]);
+
+        return view('order-detail', ['company' => $company, 'payment_token' => $snapToken]);
     }
     
     public function payment() 
@@ -40,7 +61,7 @@ class OrderController extends Controller
         );
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
-        return view('order-detail', ['payment_token' => $snapToken]);
+        return view('order-detail', []);
     }
 
     public function orderSuccessIndex() 

@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
         Company::factory()->create([
             'user_id' => 1, 
             'city_id' => 1,
+            'email' => 'bookly@gmail.com',
             'about_us' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. At iure blanditiis vitae explicabo recusandae sed, cum suscipit modi maiores adipisci perferendis fugit, hic tempora autem vero amet! Eaque quos officia nam ab animi veritatis fugiat impedit, tempore corporis totam, deserunt odit accusantium minima illo architecto neque aliquam perferendis dolore quo?'
         ]);
         Cover::factory()->create([

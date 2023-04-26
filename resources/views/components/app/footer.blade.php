@@ -91,28 +91,8 @@
 
             <div class="sub-footer">
                 <div class="row gy-3">
-                    <div class="col-md-6">
-                        <ul>
-                            <li>
-                                <a href="javascript:void(0)"> <img src="../assets/icons/png/1.png"
-                                        class="img-fluid blur-up lazyload" alt="payment icon" /></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"> <img src="../assets/icons/png/2.png"
-                                        class="img-fluid blur-up lazyload" alt="payment icon" /></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"> <img src="../assets/icons/png/3.png"
-                                        class="img-fluid blur-up lazyload" alt="payment icon" /></a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)"> <img src="../assets/icons/png/4.png"
-                                        class="img-fluid blur-up lazyload" alt="payment icon" /></a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-6">
-                        <p class="mb-0">© 2022, OSLO Template. Made with heart by Pixelstrap</p>
+                    <div class="col-md-12">
+                        <p class="mb-0">© 2022, Bookly. All Rights Reserved</p>
                     </div>
                 </div>
             </div>

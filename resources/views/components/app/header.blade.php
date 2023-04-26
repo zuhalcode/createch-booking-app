@@ -35,7 +35,7 @@
                                     </li>
 
                                     @if (auth()->check())
-                                        @if (auth()->user()->role->name === 'admin' || auth()->user()->role->name === 'super-admin')
+                                        @if (auth()->user()->role->id === 1 || auth()->user()->role->id === 2)
                                             <li class="nav-item">
                                                 <a class="nav-link" href={{ url('/dashboard') }}>Dashboard</a>
                                             </li>

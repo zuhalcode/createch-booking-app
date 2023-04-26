@@ -20,8 +20,9 @@ class RoleFactory extends Factory
 
     public function definition()
     {
-        $roles = ['customer', 'admin', 'super-admin'];
+        static $index = 0;
+        $roles = ['super-admin', 'admin', 'customer'];
 
-        return ['name' => $this->faker->unique()->randomElement($roles)];
+        return ['name' => $roles[$index++]];
     }
 }

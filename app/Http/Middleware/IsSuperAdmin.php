@@ -16,9 +16,9 @@ class IsSuperAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->role->id === 3) {
+        if(auth()->user()->role->id === 1) {
             return $next($request);
         }
-        abort(403, 'Unauthorized action.');
+        abort(403);
     }
 }
