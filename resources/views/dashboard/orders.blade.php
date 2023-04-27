@@ -2,7 +2,6 @@
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
-
             <x-dashboard.sidebar />
 
             <!-- Layout container -->
@@ -13,7 +12,6 @@
                 <div class="content-wrapper">
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <!-- Contextual Classes -->
-
                         <div class="card">
                             <h5 class="card-header">Riwayat Order</h5>
                             <div class="table-responsive text-nowrap">
@@ -72,15 +70,15 @@
                             </div>
                         </div>
                         <!--/ Contextual Classes -->
-
                     </div>
-                    {{-- End Content --}}
                 </div>
-                <!-- / Layout page -->
+                {{-- End Content --}}
             </div>
+            <!-- / Layout page -->
 
             <!-- Overlay -->
             <div class="layout-overlay layout-menu-toggle"></div>
         </div>
         <!-- / Layout wrapper -->
-        </x-dashboard-layout>
+    </div>
+</x-layouts.dashboard-layout>

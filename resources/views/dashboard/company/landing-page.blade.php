@@ -20,23 +20,6 @@
                                 enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
-                                <div class="mb-3">
-                                    <label for="heading" class="form-label">Heading 1</label>
-                                    <input class="form-control" type="text" name="first_heading_text" id="heading"
-                                        placeholder="Heading 1" autocomplete="off" />
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="heading" class="form-label">Heading 2</label>
-                                    <input class="form-control" type="text" name="second_heading_text" id="heading"
-                                        placeholder="Heading 2" autocomplete="off" />
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="about" class="form-label">Short Desc</label>
-                                    <textarea class="form-control" type="text" name="short_desc" id="about" placeholder="Short Desc"
-                                        autocomplete="off"></textarea>
-                                </div>
 
                                 <div class="mb-3">
                                     <label for="input-bg" class="form-label">Cover Image</label>
@@ -45,12 +28,34 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <img alt="bg-cover" class="d-block rounded w-25 d-none" id="uploaded-bg" />
+                                    <img alt="bg-cover" src={{ $cover->image }} class="d-block rounded w-25 d-none"
+                                        id="uploaded-bg" />
                                 </div>
+
+                                <div class="mb-3">
+                                    <label for="heading" class="form-label">Heading 1</label>
+                                    <input class="form-control" type="text" name="first_heading_text"
+                                        placeholder="Heading 1" autocomplete="off"
+                                        value={{ $cover->first_heading_text }} />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="heading" class="form-label">Heading 2</label>
+                                    <input class="form-control" type="text" name="second_heading_text"
+                                        placeholder="Heading 2" autocomplete="off"
+                                        value={{ $cover->second_heading_text }} />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="about" class="form-label">Short Desc</label>
+                                    <textarea class="form-control" type="text" name="short_desc" placeholder="Short Desc" autocomplete="off">{{ $cover->short_desc }}</textarea>
+                                </div>
+
+
 
                                 <div class="mt-2">
                                     <button type="submit" class="btn btn-primary me-2">
-                                        Save changes
+                                        Update Changes
                                     </button>
                                     <button type="reset" class="btn btn-outline-secondary">Cancel</button>
                                 </div>

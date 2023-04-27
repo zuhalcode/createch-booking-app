@@ -132,7 +132,7 @@
                                         <div class="row g-3 mt-2">
                                             <div class="col-6 col-md-12">
                                                 @if (auth()->check())
-                                                    <div class="btn-solid checkout-btn" id="pay-button"
+                                                    <div class="btn-solid checkout-btn" onclick="handlePayButton()"
                                                         style="cursor: pointer">
                                                         <input type="hidden" id="midtrans_client_token"
                                                             value="{{ $payment_token }}">

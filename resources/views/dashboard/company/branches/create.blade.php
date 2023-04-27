@@ -18,24 +18,14 @@
                             <hr class="my-0" />
 
                             <div class="card-body">
-                                <div class="mb-3">
-                                    <label for="input-bg" class="form-label">Logo Image</label>
-                                    <input class="form-control" type="file" id="input-logo"
-                                        onchange="showImagePreview('input-logo', 'uploaded-logo')" />
-                                </div>
-
-                                <div class="mb-3">
-                                    <img alt="bg-cover" class="d-block rounded w-25 d-none" id="uploaded-logo" />
-                                </div>
-
                                 <form method="POST">
-                                    <div class="mb-3 col-md-6">
+                                    <div class="mb-3">
                                         <label for="firstName" class="form-label">Branch Name</label>
                                         <input class="form-control" placeholder="Branch Name" type="text"
                                             id="firstName" name="firstName" autofocus autocomplete="off" />
                                     </div>
 
-                                    <div class="mb-3 col-md-6">
+                                    <div class="mb-3 ">
                                         <label class="form-label" for="phone">Phone Number</label>
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text">INA (+62)</span>
@@ -44,15 +34,33 @@
                                         </div>
                                     </div>
 
-                                    <div class="mb-3 col-md-6">
-                                        <label for="state" class="form-label">alamat</label>
+                                    <div class="mb-3 ">
+                                        <label for="state" class="form-label">Address</label>
                                         <input class="form-control" type="text" id="state" name="state"
                                             placeholder="Surabaya" autocomplete="off" />
                                     </div>
 
+                                    <div class="my-3">
+                                        <label for="state" class="form-label">Instagram</label>
+                                        <input class="form-control" type="text" name="socmed[instagram]"
+                                            placeholder="Instagram" autocomplete="off" />
+                                    </div>
+
+                                    <div class="my-3">
+                                        <label for="state" class="form-label">TikTok</label>
+                                        <input class="form-control" type="text" name="socmed[tiktok]"
+                                            placeholder="Tiktok" autocomplete="off" />
+                                    </div>
+
+                                    <div class="my-3">
+                                        <label for="state" class="form-label">Facebook</label>
+                                        <input class="form-control" type="text" name="socmed[facebook]"
+                                            placeholder="Facebook" autocomplete="off" />
+                                    </div>
+
                                     <div class="mt-2">
                                         <button type="submit" class="btn btn-primary me-2">
-                                            Savechanges
+                                            Create Branch
                                         </button>
                                         <button type="reset" class="btn btn-outline-secondary">Cancel</button>
                                     </div>

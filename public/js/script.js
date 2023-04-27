@@ -11,7 +11,7 @@
 })();
 
 // Handle Midtrans
-document.getElementById("pay-button").addEventListener("click", function () {
+const handlePayButton = (btnId) => {
     snap.pay(document.getElementById("midtrans_client_token").value, {
         onSuccess: function (result) {
             window.location.href = "/order-success";
@@ -23,7 +23,7 @@ document.getElementById("pay-button").addEventListener("click", function () {
             // Handle the error case
         },
     });
-});
+};
 
 // Handling logout for entire page
 const handleLogout = (formId) => document.querySelector(`#${formId}`).submit();
@@ -47,16 +47,18 @@ const handleChangeContent = () => {
 };
 
 // Handling change plus icon of social media
-const plusIcon = document.getElementById("plus-addon");
+const handleOnHover = (id) => {
+    const plusIcon = document.getElementById(id);
 
-plusIcon.addEventListener("mouseover", function () {
-    // Change the icon to bx-plus-circle when hovered
-    plusIcon.classList.remove("bxs-plus-circle");
-    plusIcon.classList.add("bx-plus-circle");
-});
+    plusIcon.addEventListener("mouseover", function () {
+        // Change the icon to bx-plus-circle when hovered
+        plusIcon.classList.remove("bxs-plus-circle");
+        plusIcon.classList.add("bx-plus-circle");
+    });
 
-plusIcon.addEventListener("mouseout", function () {
-    // Change the icon back to bxs-plus-circle when mouse leaves
-    plusIcon.classList.remove("bx-plus-circle");
-    plusIcon.classList.add("bxs-plus-circle");
-});
+    plusIcon.addEventListener("mouseout", function () {
+        // Change the icon back to bxs-plus-circle when mouse leaves
+        plusIcon.classList.remove("bx-plus-circle");
+        plusIcon.classList.add("bxs-plus-circle");
+    });
+};

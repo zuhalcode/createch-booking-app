@@ -1,4 +1,10 @@
 <x-layouts.dashboard-layout>
+    @if (session('success'))
+        <x-ui.toast type="bg-success">
+            {{ session('success') }}
+        </x-ui.toast>
+    @endif
+
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
@@ -47,7 +53,8 @@
                                                     <i class="bx bx-edit-alt me-1" id="editCompanyIcon"
                                                         onclick="showModalEditCompany('{{ $company->id }}')"
                                                         style="cursor: pointer"></i>
-                                                    <i class="bx bx-trash me-1" style="cursor: pointer"></i>
+                                                    <i class="bx bx-trash me-1" style="cursor: pointer"
+                                                        data-bs-toggle="modal" data-bs-target="#modalCompanyDelete"></i>
                                                 </td>
                                             </tr>
                                             @php $count++ @endphp
@@ -57,6 +64,7 @@
                             </div>
                         </div>
                         <!--/ Contextual Classes -->
+
                     </div>
                     {{-- End Content --}}
                 </div>
@@ -128,4 +136,34 @@
                 </form>
             </div>
         </div>
-        </x-dashboard-layout>
+
+        <!-- Modal Delete -->
+        <div class="modal fade" id="modalCompanyDelete" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">
+                            Are you sure you want to delete this company?
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        This action cannot be undone.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <form action="{{ url('/dashboard/companies', $company->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</x-layouts.dashboard-layout>

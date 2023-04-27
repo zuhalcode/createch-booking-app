@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,13 @@ class CompanyFactory extends Factory
      */
     public function definition()
     {
+        static $index = 0;
+        $userIds = [1, 2, 3];
         return [
-            //
+            'user_id' => $userIds[$index++],
+            'city_id' => 1,
+            'email' => $this->faker->unique()->safeEmail,
+            'about_us' => $this->faker->paragraph(3)
         ];
     }
 }

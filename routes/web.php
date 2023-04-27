@@ -2,9 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\User\OrderController as UserOrderController;
+use App\Http\Controllers\SlotController;
+use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\User\ProductController;
 use App\Http\Controllers\User\HomepageController;
+use App\Http\Controllers\User\OrderController as UserOrderController;
+use App\Http\Controllers\Admin\CompanyController as AdminCompanyController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\HomepageController as AdminHomepageController;
 use App\Http\Controllers\SuperAdmin\CompanyController as SuperAdminCompanyController;
 
@@ -62,22 +66,23 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
             return view('dashboard.index');
         });
 
-        Route::controller(AdminHomepageController::class)->group(fn() => [
-            Route::get('/landing-page', 'indexLandingPageForm'),
+        Route::controller(AdminCompanyController::class)->group(fn() => [
+            Route::get('/landing-page', 'editLandingPage'),
             Route::put('/landing-page', 'createCover')
         ]);
 
-        Route::get('/branches', function () {
-            return view('dashboard.branches');
-        });
+        Route::resource('/branches', BranchController::class);
+        Route::resource('/products', AdminProductController::class);
 
-        Route::get('/company', function () {
-            return view('dashboard.company');
-        });
+        Route::controller(AdminCompanyController::class)->group(fn() => [
+            Route::get('/company', 'indexCompany'),
+            Route::put('/company/{id}/edit', 'editCompany'),
+        ]);
 
-        Route::get('/products', function () {
-            return view('dashboard.products');
-        });
+        Route::controller(SlotController::class)->group(fn() => [
+            Route::get('/slots', 'indexSlotManagement'),
+            Route::post('/slots/create', 'createSlot'),
+        ]);
 
         Route::get('/order-management', function () {
             return view('dashboard.orders');
@@ -95,6 +100,7 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
             Route::post('/companies', 'createCompany'),
             Route::post('/companies/{id}', 'getCompanyById'),
             Route::post('/companies/{id}/edit', 'editCompanyById'),
+            Route::delete('/companies/{id}', 'destroy'),
         ]);
     });
 });

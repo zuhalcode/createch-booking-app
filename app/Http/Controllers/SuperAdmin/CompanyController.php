@@ -11,7 +11,7 @@ class CompanyController extends Controller
     public function indexCompany()
     {
         $companies = Company::all();
-        return view('dashboard.companies',[
+        return view('dashboard.super-admin.companies',[
             'companies' => $companies
         ]);
     }
@@ -22,7 +22,7 @@ class CompanyController extends Controller
             'name' => 'required|max:255',
         ]);
 
-        $validatedData['user_id'] = 1;
+        $validatedData['user_id'] = auth()->user()->id;
         $validatedData['city_id'] = 1;
         $validatedData['email'] = $req['name'].'@gmail.com';
 
@@ -49,5 +49,12 @@ class CompanyController extends Controller
         $company->update($validatedData);
 
         return back()->with('success', 'Perusahaan telah diupdate');
+    }
+
+    public function destroy($id)
+    {
+        $company = Company::findOrFail($id);
+        $company->delete();
+        return back()->with('success', 'Company deleted successfully.');
     }
 }

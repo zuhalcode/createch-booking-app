@@ -27,18 +27,21 @@ class Sidebar extends Component
                 'icon' => 'bx-building', 
                 'role' => 'super-admin'
             ],
-            ['name' => 'Homepage Management', 'route' => '', 'icon' => 'bx-home-circle', 'role' => 'admin',
+            
+            ['name' => 'Company Management', 'route' => '', 'icon' => 'bx-home-circle', 'role' => 'admin',
                 'submenu' => [
-                    ['name' => 'Company Management', 'route' => '/dashboard/company'],
+                    ['name' => 'Company Detail', 'route' => '/dashboard/company'],
                     ['name' => 'Landing Page Management', 'route' => '/dashboard/landing-page'],
-                    ['name' => 'Branch Management', 'route' => '/dashboard/branches']
+                    ['name' => 'List Branch', 'route' => '/dashboard/branches'],
+                    ['name' => 'Create Branch', 'route' => '/dashboard/branches/create'],
                 ]
             ],
-            [
-                'name' => 'Product Management', 
-                'route' => '/dashboard/products', 
-                'icon' => 'bx-store-alt', 
-                'role' => 'admin'
+            ['name' => 'Product Management', 'route' => '', 'icon' => 'bx-store-alt', 'role' => 'admin',
+                'submenu' => [
+                    ['name' => 'List Product', 'route' => '/dashboard/products'],
+                    ['name' => 'Create Product', 'route' => '/dashboard/products/create'],
+                    ['name' => 'Slot Management', 'route' => '/dashboard/slots'],
+                ]
             ],
             [
                 'name' => 'Order Management', 

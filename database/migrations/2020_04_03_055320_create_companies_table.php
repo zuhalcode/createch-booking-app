@@ -11,6 +11,7 @@ return new class extends Migration
      *
      * @return void
      */
+
     public function up()
     {
         Schema::create('companies', function (Blueprint $table) {
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->string('phone')->nullable()->default('085123456789');
             $table->string('address')->nullable()->default('surabaya');
             $table->string('logo')->nullable()->default('/assets/images/logos/logo-4.png');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Cover;
+use App\Models\Company;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class HomepageController extends Controller
+class CompanyController extends Controller
 {
-    public function indexLandingPageForm() {
-        return view('dashboard.landing-pages');
+    public function editLandingPage() {
+        $cover = Cover::where('id', auth()->user()->company->id)->first();
+        return view('dashboard.company.landing-page', ['cover' => $cover]);
     }
 
     public function createCover(Request $req)
@@ -29,7 +31,29 @@ class HomepageController extends Controller
         $cover->first_heading_text = $validatedData['first_heading_text'];
         $cover->second_heading_text = $validatedData['second_heading_text'];
         $cover->short_desc = $validatedData['short_desc'];
-        $cover->image = $image;
+        $cover->image = "/storage/$image";
         $cover->save();
     }
+
+    public function indexCompany()
+    {
+        $company = Company::where('id', auth()->user()->company->id)->first();
+        return view('dashboard.company.index', ['company' => $company]);
+    }
+
+    public function editCompany(Request $req)
+    {
+        $validatedData = $req->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'socmed.*' => 'required'
+        ]);
+
+        dd($validatedData);
+    }
+
+    
+
+    
 }

@@ -4,16 +4,37 @@ $(document).ready(function () {
         // create new input fields HTML
         const inputFieldsHTML = `
                 <div class="mb-2 col-md-6">
-                    <input class="form-control" placeholder="Addon Name" autocomplete="off" type="text" name="product" autofocus />
+                    <input class="form-control" placeholder="Addon Name" autocomplete="off" type="text" name="product[]" autofocus required/>
                 </div>
     
                 <div class="mb-2 col-md-6">
-                    <input class="form-control" placeholder="Addon Price" autocomplete="off" type="text" name="price" autofocus />
+                    <input class="form-control" placeholder="Addon Price" autocomplete="off" type="text" name="price[]" autofocus required/>
                 </div>
             `;
 
         // append new input fields to container
         $("#addons-container").append(inputFieldsHTML);
+    });
+
+    $("#plus-slot").on("click", function () {
+        // create new input fields HTML
+        const inputFieldsSlot = `
+            <div class="col-md-12">
+                <input class="form-control" type="time"
+                    placeholder="12:30:00" id="slot" name="time[]" required/>
+            </div>
+        `;
+
+        const inputFieldsMaxUser = `
+            <div class="col-md-12">
+                <input class="form-control" type="number" name="max_user[]"
+                    id="max_user" placeholder="0" required/>
+            </div>
+        `;
+
+        // append new input fields to container
+        $("#slot-container").append(inputFieldsSlot);
+        $("#max-user-container").append(inputFieldsMaxUser);
     });
 
     // Handling Input only Number

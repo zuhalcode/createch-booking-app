@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('company_id')->constrained();
             $table->foreignId('product_id')->constrained();
             $table->time('time');
-            $table->integer('max_user');
+            $table->integer('max_user')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });
