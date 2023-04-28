@@ -23,7 +23,9 @@
                             <li>
                                 <a href="javascript:void(0)"><i data-feather="chevron-right"></i></a>
                             </li>
-                            <li class="current"><a href={{ url('/products/1') }}>Product</a></li>
+                            <li class="current">
+                                <a href={{ url("/products/$product->id") }}>Product</a>
+                            </li>
                         </ol>
                     </div>
                 </div>
@@ -43,28 +45,23 @@
                                         <div class="swiper thumbnail-img-box thumbnailSlider2">
                                             <div class="swiper-wrapper">
                                                 <div class="swiper-slide">
-                                                    <img src="../assets/images/fashion/product/front/7.jpg"
-                                                        alt="img" />
+                                                    <img src={{ asset($product->image) }} alt="img" />
                                                 </div>
 
                                                 <div class="swiper-slide">
-                                                    <img src="../assets/images/fashion/product/front/7-1.jpg"
-                                                        alt="img" />
+                                                    <img src={{ asset($product->image) }} alt="img" />
                                                 </div>
 
                                                 <div class="swiper-slide">
-                                                    <img src="../assets/images/fashion/product/front/7-2.jpg"
-                                                        alt="img" />
+                                                    <img src={{ asset($product->image) }} alt="img" />
                                                 </div>
 
                                                 <div class="swiper-slide">
-                                                    <img src="../assets/images/fashion/product/front/7-3.jpg"
-                                                        alt="img" />
+                                                    <img src={{ asset($product->image) }} alt="img" />
                                                 </div>
 
                                                 <div class="swiper-slide">
-                                                    <img src="../assets/images/fashion/product/front/7-1.jpg"
-                                                        alt="img" />
+                                                    <img src={{ asset($product->image) }} alt="img" />
                                                 </div>
                                             </div>
                                         </div>
@@ -108,16 +105,13 @@
                     <div class="col-md-5">
                         <div class="product-detail-box">
                             <div class="product-option">
-                                <h2>Womens long sleeve shirt</h2>
+                                <h2>{{ $product->name }}</h2>
                                 <div class="option price">
-                                    <span>Rp. 20.000</span>
+                                    <span>Rp. {{ number_format($product->price, 0, ',', '.') }}</span>
                                 </div>
                                 <div class="option">
                                     <p class="content-color">
-                                        100% Cotton Indigo shirt with western yoke. Apt for casual outings, this shirt
-                                        will keep you comfortable and stylish all day long.Indigo shirt with western
-                                        yoke. Apt for casual
-                                        outings
+                                        {{ $product->description }}
                                     </p>
                                 </div>
 
@@ -172,33 +166,30 @@
                                 {{-- End Slot Waktu --}}
 
                                 {{-- Addons --}}
-                                <div class="option size">
-                                    <div class="title-box4">
-                                        <h4 class="heading">Addons <span class="bg-theme-blue"></span></h4>
+                                @if (!$addons->isEmpty())
+                                    <div class="option size">
+                                        <div class="title-box4">
+                                            <h4 class="heading">Addons <span class="bg-theme-blue"></span></h4>
+                                        </div>
+                                        <div class="filter-content">
+                                            <ul class="filter-check d-grid gap-1"
+                                                style="grid-template-columns: repeat(2, 1fr)">
+                                                @foreach ($addons as $addon)
+                                                    <li>
+                                                        <label class="checkboxes style-1">
+                                                            <input type="checkbox" />
+                                                            <span class="checkbox__checkmark"></span>
+                                                            <span class="checkbox__body gap-2"
+                                                                style="justify-content: flex-start; font-weight: 500">
+                                                                {{ $addon->name }} <p>{{ $addon->price }}K</p>
+                                                            </span>
+                                                        </label>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <div class="filter-content">
-                                        <ul class="filter-check d-grid gap-1"
-                                            style="grid-template-columns: repeat(2, 1fr)">
-                                            @for ($i = 1; $i < 7; $i++)
-                                                <li>
-                                                    <label class="checkboxes style-1">
-                                                        <input type="checkbox" />
-                                                        <span class="checkbox__checkmark"></span>
-                                                        <span class="checkbox__body gap-2"
-                                                            style="justify-content: flex-start; font-weight: 500">
-                                                            Pomade <p>15K</p>
-                                                        </span>
-                                                    </label>
-                                                </li>
-                                            @endfor
-                                            <script>
-                                                function toggleActive(element) {
-                                                    element.classList.toggle('active');
-                                                }
-                                            </script>
-                                        </ul>
-                                    </div>
-                                </div>
+                                @endif
                                 {{-- End Addons --}}
 
                                 <div class="btn-group">

@@ -6,7 +6,6 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\AddOn;
-use App\Models\Company;
 
 class ProductController extends Controller
 {
@@ -39,46 +38,44 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $req)
-{
-    $companyId = auth()->user()->company->id;
-    $validatedData = $req->validate([
-        'name' => 'required|max:255',
-        'price' => 'required',
-        'addon.*' => 'required',
-        'addon-price.*' => 'required|min:0',
-        'description' => 'required',
-        'image' => 'required|mimes:jpg,png,jpeg|image',
-    ]);
+    {
+        $companyId = auth()->user()->company->id;
+        $validatedData = $req->validate([
+            'name' => 'required|max:255',
+            'price' => 'required',
+            'addon.*' => 'required',
+            'addon-price.*' => 'required|min:0',
+            'description' => 'required',
+            'image' => 'required|mimes:jpg,png,jpeg|image',
+        ]);
 
-    $product = new Product;
+        $product = new Product;
 
-    if($req->hasFile('image')) {
-        $image = $req->file('image');
-        $filename = 'product-' . $companyId . '-' . time() . '.' . $image->getClientOriginalExtension();
-        $image->storeAs('products', $filename);
-        $product->image = "/storage/products/$filename";
+        // Save the Product image
+        if($req->hasFile('image')) {
+            $image = $req->file('image');
+            $filename = 'product-' . $companyId . '-' . time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('products', $filename);
+            $product->image = "/storage/products/$filename";
+        }
+
+        $product->company_id = $companyId;
+        $product->name = $validatedData['name'];
+        $product->price = $validatedData['price'];
+        $product->description = $validatedData['description'];
+        $product->save();
+
+        foreach ($validatedData['addon'] as $index => $addon) {
+            $addonData = [
+                'product_id' => $product->id,
+                'name' => $addon,
+                'price' => $validatedData['addon-price'][$index]
+            ];
+            AddOn::create($addonData);
+        }
+
+        return back()->with('success', 'Product added successfully.');
     }
-
-    $product->company_id = $companyId;
-    $product->name = $validatedData['name'];
-    $product->price = $validatedData['price'];
-    $product->description = $validatedData['description'];
-    $product->save();
-
-    // Get the ID of the newly created product
-    $productId = $product->id;
-
-    foreach ($validatedData['addon'] as $index => $addon) {
-        $addonData = [
-            'product_id' => $productId,
-            'name' => $addon,
-            'price' => $validatedData['addon-price'][$index]
-        ];
-        AddOn::create($addonData);
-    }
-
-    return back()->with('success', 'Product added successfully.');
-}
 
 
     /**

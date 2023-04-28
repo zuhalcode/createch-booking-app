@@ -7,11 +7,12 @@
         </div>
 
         <a href={{ url($href) }} class="content-box">
-            <h5>{{ $slot }}</h5>
+            <h5 class="text-capitalize">{{ $slot }}</h5>
 
             <div class="price-box">
-                <div class="price"><span>{{ $price }}</span></div>
+                <div class="price"><span>Rp. {{ number_format($price, 0, ',', '.') }}</span></div>
             </div>
+
         </a>
     </div>
 </div>

@@ -87,12 +87,19 @@
 
                                 <ul class="social-list">
                                     <li>
-                                        <a href="https://www.facebook.com/"> <i class="fill"
-                                                data-feather="facebook"></i></a>
+                                        <a href="https://www.instagram.com/accounts/login/">
+                                            <i data-feather="instagram"></i>
+                                        </a>
                                     </li>
                                     <li>
-                                        <a href="https://www.instagram.com/accounts/login/"><i
-                                                data-feather="instagram"></i></a>
+                                        <a href="https://www.instagram.com/accounts/login/">
+                                            <i data-feather="tiktok"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.instagram.com/accounts/login/">
+                                            <i data-feather="twitter"></i>
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
@@ -121,12 +128,12 @@
                             <div
                                 class="row gy-3 gy-sm-4 gy-xxl-5 g-xxl-3 gx-2 gx-sm-3 row-cols-3 row-cols-xl-4 row-cols-xxl-5 ratio_asos">
 
-                                @for ($i = 0; $i < 10; $i++)
-                                    <x-app.product-card img='/assets/images/furniture/product/jpg/7.jpg' price="$50.00"
-                                        href='/products/1'>
-                                        Coffee Table
+                                @foreach ($products as $product)
+                                    <x-app.product-card :img="asset($product->image)" :price="$product->price" :href="'/products/' . $product->id">
+                                        {{ $product->name }}
                                     </x-app.product-card>
-                                @endfor
+                                @endforeach
+
 
                             </div>
                         </div>
