@@ -1,4 +1,8 @@
 <x-layouts.dashboard-layout>
+    @if (session('success'))
+        <x-ui.toast type="bg-success">{{ session('success') }}</x-ui.toast>
+    @endif
+
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
@@ -20,7 +24,8 @@
                                     <h5 class="card-header">Create Product</h5>
                                     <hr class="my-0" />
                                     <form id="formAccountSettings" method="POST"
-                                        action={{ url('/dashboard/products/create') }} class="card-body">
+                                        action={{ url('/dashboard/products') }} class="card-body"
+                                        enctype="multipart/form-data">
                                         @csrf
 
                                         <div class="mb-3">
@@ -39,7 +44,7 @@
                                             <div class="mb-3 col-md-6">
                                                 <label for="product" class="form-label">Product Name</label>
                                                 <input class="form-control" placeholder="Product" autocomplete="off"
-                                                    type="text" id="product" name="product" autofocus />
+                                                    type="text" id="product" name="name" autofocus />
                                             </div>
 
                                             <div class="mb-3 col-md-6">
@@ -79,9 +84,8 @@
 
                                                 <div class="mb-2 col-md-6">
                                                     <label for="price" class="form-label">Price</label>
-                                                    <input class="form-control" placeholder="Addon Price"
-                                                        autocomplete="off" type="text" id="price" name="price[]"
-                                                        autofocus />
+                                                    <input class="form-control" placeholder="Price" autocomplete="off"
+                                                        type="text" id="price" name="addon-price[]" autofocus />
                                                 </div>
                                             </div>
                                             {{-- AddOns --}}

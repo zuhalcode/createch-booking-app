@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\AddOn;
+use App\Models\Company;
 
 class ProductController extends Controller
 {
@@ -37,27 +39,47 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $req)
-    {
-        $validatedData = $req->validate([
-            'product' => 'required|max:255',
-            'addon.*' => 'required',
-            'price.*' => 'required|numeric|min:0',
-            'slot.*' => 'required|string',
-            'description' => 'required',
-        ]);
+{
+    $companyId = auth()->user()->company->id;
+    $validatedData = $req->validate([
+        'name' => 'required|max:255',
+        'price' => 'required',
+        'addon.*' => 'required',
+        'addon-price.*' => 'required|min:0',
+        'description' => 'required',
+        'image' => 'required|mimes:jpg,png,jpeg|image',
+    ]);
 
-        if($req->hasFile('image')) {
-            $image = $req->file('image')->store('product-images');
-        }
+    $product = new Product;
 
-        $product = Product::create([
-            'company_id' => auth()->user()->company->id,
-            'name' => $validatedData['name'],
-            'description' => $validatedData['description'],
-        ]);
-
-        dd($validatedData);
+    if($req->hasFile('image')) {
+        $image = $req->file('image');
+        $filename = 'product-' . $companyId . '-' . time() . '.' . $image->getClientOriginalExtension();
+        $image->storeAs('products', $filename);
+        $product->image = "/storage/products/$filename";
     }
+
+    $product->company_id = $companyId;
+    $product->name = $validatedData['name'];
+    $product->price = $validatedData['price'];
+    $product->description = $validatedData['description'];
+    $product->save();
+
+    // Get the ID of the newly created product
+    $productId = $product->id;
+
+    foreach ($validatedData['addon'] as $index => $addon) {
+        $addonData = [
+            'product_id' => $productId,
+            'name' => $addon,
+            'price' => $validatedData['addon-price'][$index]
+        ];
+        AddOn::create($addonData);
+    }
+
+    return back()->with('success', 'Product added successfully.');
+}
+
 
     /**
      * Display the specified resource.

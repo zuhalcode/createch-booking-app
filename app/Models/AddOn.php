@@ -11,6 +11,7 @@ class AddOn extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    protected $table = 'addons';
 
     public function orders()
     {

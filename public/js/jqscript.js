@@ -4,11 +4,12 @@ $(document).ready(function () {
         // create new input fields HTML
         const inputFieldsHTML = `
                 <div class="mb-2 col-md-6">
-                    <input class="form-control" placeholder="Addon Name" autocomplete="off" type="text" name="product[]" autofocus required/>
+                    <input class="form-control" placeholder="Addon Name" autocomplete="off" type="text" 
+                    name="addon[]" autofocus required/>
                 </div>
     
                 <div class="mb-2 col-md-6">
-                    <input class="form-control" placeholder="Addon Price" autocomplete="off" type="text" name="price[]" autofocus required/>
+                    <input class="form-control" placeholder="Addon Price" autocomplete="off" type="text" name="addon-price[]" autofocus required/>
                 </div>
             `;
 
@@ -38,15 +39,18 @@ $(document).ready(function () {
     });
 
     // Handling Input only Number
-    $('input[name="price"]').on("input", function () {
-        // remove any non-numeric characters from input
-        const cleanedValue = $(this)
-            .val()
-            .replace(/[^0-9\.]/g, "");
+    $('input[name="price"], input[name="addon-price[]"]').on(
+        "input",
+        function () {
+            // remove any non-numeric characters from input
+            const cleanedValue = $(this)
+                .val()
+                .replace(/[^0-9\.]/g, "");
 
-        // update input value with cleaned value
-        $(this).val(cleanedValue);
-    });
+            // update input value with cleaned value
+            $(this).val(cleanedValue);
+        }
+    );
 });
 
 // Handling Onchange Image Preview

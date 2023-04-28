@@ -6,9 +6,6 @@ use App\Models\Cover;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
-
 
 class CompanyController extends Controller
 {
