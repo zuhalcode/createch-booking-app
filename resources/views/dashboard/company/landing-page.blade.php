@@ -1,4 +1,7 @@
 <x-layouts.dashboard-layout>
+    @if (session('success'))
+        <x-ui.toast type='bg-success'>{{ session('success') }}</x-ui.toast>
+    @endif
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
@@ -12,7 +15,7 @@
                 {{-- Content --}}
                 <div class="container-xxl flex-grow-1 container-p-y">
                     <div class="card mb-4">
-                        <h5 class="card-header">Home Page Detail</h5>
+                        <h5 class="card-header">Landing Page Detail</h5>
                         <hr class="my-0" />
 
                         <div class="card-body">
@@ -50,8 +53,6 @@
                                     <label for="about" class="form-label">Short Desc</label>
                                     <textarea class="form-control" type="text" name="short_desc" placeholder="Short Desc" autocomplete="off">{{ $cover->short_desc }}</textarea>
                                 </div>
-
-
 
                                 <div class="mt-2">
                                     <button type="submit" class="btn btn-primary me-2">

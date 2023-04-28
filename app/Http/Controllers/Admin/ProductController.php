@@ -39,7 +39,7 @@ class ProductController extends Controller
     public function store(Request $req)
     {
         $validatedData = $req->validate([
-            'product.*' => 'required|max:255',
+            'product' => 'required|max:255',
             'addon.*' => 'required',
             'price.*' => 'required|numeric|min:0',
             'slot.*' => 'required|string',

@@ -16,9 +16,10 @@ class CoverFactory extends Factory
      */
     public function definition()
     {
+        static $index = 0;
         $companyIds = [1,2,3];
         return [
-            'company_id' => $this->faker->randomElement($companyIds), 
+            'company_id' => $companyIds[$index++], 
             'first_heading_text' => $this->faker->words(4, true),
             'second_heading_text' => $this->faker->words(3, true),
             'short_desc' => $this->faker->words(14, true),

@@ -15,6 +15,7 @@ class HomepageController extends Controller
         } else {
             $company = Company::findOrFail(1);
         }
+        
         $cover = Cover::where('company_id', $company->id)->first();
         return view('welcome', [
             'company' => $company,

@@ -1,4 +1,7 @@
 <x-layouts.dashboard-layout>
+    @if (session('success'))
+        <x-ui.toast type="bg-success">{{ session('success') }}</x-ui.toast>
+    @endif
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
@@ -16,8 +19,8 @@
                         <hr class="my-0" />
 
                         <div class="card-body">
-                            <form id="formAccountSettings" action={{ url("/dashboard/company/$company->id/edit") }}
-                                method="POST">
+                            <form id="formAccountSettings" action={{ url("/dashboard/company/$company->id") }}
+                                method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
 
@@ -57,6 +60,22 @@
                                             placeholder="85123456123" required value={{ $company->phone }} />
                                     </div>
                                     @error('phone')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="about" class="form-label">Address</label>
+                                    <textarea class="form-control" type="text" name="address" placeholder="Address" autocomplete="off">{{ $company->address }}</textarea>
+                                    @error('address')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="about" class="form-label">About Us</label>
+                                    <textarea class="form-control" type="text" name="about_us" placeholder="About Us" autocomplete="off">{{ $company->about_us }}</textarea>
+                                    @error('about_us')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>

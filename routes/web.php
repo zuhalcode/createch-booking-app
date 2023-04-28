@@ -68,16 +68,13 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
 
         Route::controller(AdminCompanyController::class)->group(fn() => [
             Route::get('/landing-page', 'editLandingPage'),
-            Route::put('/landing-page', 'createCover')
+            Route::put('/landing-page', 'updateLandingPage'),
+            Route::get('/company', 'editCompany'),
+            Route::put('/company/{id}', 'updateCompany'),
         ]);
 
         Route::resource('/branches', BranchController::class);
         Route::resource('/products', AdminProductController::class);
-
-        Route::controller(AdminCompanyController::class)->group(fn() => [
-            Route::get('/company', 'indexCompany'),
-            Route::put('/company/{id}/edit', 'editCompany'),
-        ]);
 
         Route::controller(SlotController::class)->group(fn() => [
             Route::get('/slots', 'indexSlotManagement'),
