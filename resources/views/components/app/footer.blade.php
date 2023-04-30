@@ -32,7 +32,7 @@
                         <div class="nav d-md-block content-box">
                             <h5 class="heading-footer line-style">Information</h5>
                             <ul>
-                                <li><a class="nav" href="index.html">Home </a></li>
+                                <li><a class="nav" href={{ url('/') }}>Home </a></li>
                             </ul>
                         </div>
                     </div>

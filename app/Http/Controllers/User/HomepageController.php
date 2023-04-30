@@ -11,12 +11,11 @@ use App\Models\Product;
 class HomepageController extends Controller
 {
     public function index() {
-        $companyId = auth()->user()->company->id;
 
-        if(auth()->check()) $company = Company::where('id', $companyId)->first();
+        if(auth()->check()) $company = Company::where('id', auth()->user()->company->id)->first();
         else $company = Company::findOrFail(1);
 
-        $products = Product::where('company_id', $companyId)->get();
+        $products = Product::where('company_id', $company->id)->get();
         $cover = Cover::where('company_id', $company->id)->first();
         return view('welcome', [
             'company' => $company,

@@ -1,60 +1,76 @@
-<x-layouts.auth-layout>
-    <!-- Content -->
-    <div class="container-xxl">
-        <div class="authentication-wrapper authentication-basic container-p-y">
-            <div class="authentication-inner">
-                <!-- Register -->
-                <div class="card">
-                    <div class="card-body">
-                        <x-ui.logo />
-
-                        @if (session('success'))
-                            <x-ui.alert type='success'>{{ session('success') }}</x-ui.alert>
-                        @endif
-
-                        <h4 class="mb-2">Welcome to Sneat! 👋</h4>
-                        <p class="mb-4">Please sign-in to your account and start the adventure</p>
-
-                        <form id="formAuthentication" class="mb-3" action={{ url('/auth/login') }} method="POST">
-                            @csrf
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="text" class="form-control" id="email" name="email"
-                                    placeholder="Enter your email or username" autofocus />
-                            </div>
-                            <div class="mb-3 form-password-toggle">
-                                <div class="d-flex justify-content-between">
-                                    <label class="form-label" for="password">Password</label>
-                                </div>
-                                <div class="input-group input-group-merge">
-                                    <input type="password" id="password" class="form-control" name="password"
-                                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                        aria-describedby="password" />
-                                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="remember-me" />
-                                    <label class="form-check-label" for="remember-me">Remember Me</label>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
-                            </div>
-                        </form>
-
-                        <p class="text-center">
-                            <span>New on our platform?</span>
-                            <a href={{ url('/auth/register') }}>
-                                <span>Create an account</span>
-                            </a>
-                        </p>
-                    </div>
-                </div>
-                <!-- /Register -->
-            </div>
+<x-layouts.app-layout>
+    <!-- Loader Start -->
+    <div class="loader-wrapper">
+        <div class="loader animate">
+            <span>O</span>
+            <span>S</span>
+            <span>L</span>
+            <span>O</span>
         </div>
     </div>
-    <!-- /Content -->
-</x-layouts.auth-layout>
+    <!-- Loader End -->
+
+    <!-- Main Start -->
+    <div class="main">
+        <section class="page-body p-0">
+            <div class="row g-0 ratio_asos">
+                <div class="order-2 order-lg-1 col-lg-5">
+                    <div class="content-box">
+                        <div>
+                            <h5>LOGIN <span class="bg-theme-blue"></span></h5>
+                            <p class="font-md content-color">How do i get access order,wishlist and recomendation ?</p>
+
+                            <form form id="formAuthentication" action={{ url('/auth/login') }} method="POST"
+                                class="custom-form form-pill">
+                                @csrf
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="text" class="form-control" id="email" name="email"
+                                        placeholder="Enter your email or username" autofocus />
+                                </div>
+
+                                <div class="input-box">
+                                    <label for="password">Password</label>
+                                    <div class="icon-input">
+                                        <input class="form-control" type="password" required name="password"
+                                            id="password" />
+                                        <img class="showHidePassword"
+                                            src="https://themes.pixelstrap.com/oslo/assets/icons/svg/eye-1.svg"
+                                            alt="eye" />
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn-solid rounded-pill line-none">
+                                    Signin <i class="arrow"></i>
+                                </button>
+                                <a href={{ url('/') }}
+                                    class="btn-solid rounded-pill line-none btn-outline mt-3 d-flex justify-content-center">
+                                    Home <i class="arrow"></i>
+                                </a>
+                            </form>
+
+                            <span class="backto-link font-default content-color text-decoration-none">
+                                If you are new,
+                                <a class="text-decoration-underline theme-color" href={{ url('/auth/register') }}>
+                                    Create Now
+                                </a>
+                            </span>
+                            <span class="line"><span>Or </span> </span>
+                            <div class="link-group">
+                                <a href="https://www.google.com/" class="button-link"><img
+                                        src="../assets/icons/png/google.png" alt="google" /> Sign in </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="order-1 order-lg-2 col-lg-7">
+                    <div class="img-box">
+                        <img class="bg-img" src="../assets/images/inner-page/banner-p2.jpg" alt="banner" />
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- Main End -->
+</x-layouts.app-layout>
