@@ -5,7 +5,9 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Role;
+use App\Models\Slot;
 use App\Models\User;
+use App\Models\AddOn;
 use App\Models\Cover;
 use App\Models\Company;
 use App\Models\Holiday;
@@ -31,6 +33,8 @@ class DatabaseSeeder extends Seeder
         Holiday::factory()->count(30)->create(['company_id' => 1]);
         Cover::factory()->count(3)->create();
         Product::factory()->count(10)->create();
+        Slot::factory()->count(3)->create(['company_id' => 1, 'product_id' => 1]);
+        AddOn::factory()->count(3)->create(['product_id' => 1]);
 
         // Jasmine
 
