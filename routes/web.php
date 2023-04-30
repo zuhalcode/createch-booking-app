@@ -9,7 +9,6 @@ use App\Http\Controllers\User\HomepageController;
 use App\Http\Controllers\User\OrderController as UserOrderController;
 use App\Http\Controllers\Admin\CompanyController as AdminCompanyController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
-use App\Http\Controllers\Admin\HomepageController as AdminHomepageController;
 use App\Http\Controllers\SuperAdmin\CompanyController as SuperAdminCompanyController;
 
 /*
@@ -22,7 +21,6 @@ use App\Http\Controllers\SuperAdmin\CompanyController as SuperAdminCompanyContro
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 
 Route::get('/', [HomepageController::class, 'index']);
 Route::get('/tes', fn () => view('tes'));

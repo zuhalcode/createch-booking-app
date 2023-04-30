@@ -7,9 +7,9 @@
                 {{ Str::of($product->description)->words(12, '...') }}
             </p>
             <div class="d-flex gap-2">
-                <p class="btn btn-outline-primary">
+                <a href={{ url("/dashboard/products/$product->id/edit") }} class="btn btn-outline-primary">
                     Edit
-                </p>
+                </a>
                 <p class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modalConfirmDelete">
                     Delete
                 </p>

@@ -25,11 +25,11 @@ class SlotController extends Controller
             'max_user.*' => 'required|numeric|min:1',
         ]); 
 
-        $company_id = auth()->user()->company->id;
+        $companyId = auth()->user()->company->id;
 
         foreach ($validatedData['time'] as $index => $time) {
             $slotData = [
-                'company_id' => $company_id,
+                'company_id' => $companyId,
                 'product_id' => $validatedData['product_id'],
                 'time' => $time,
                 'max_user' => $validatedData['max_user'][$index]

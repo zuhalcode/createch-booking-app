@@ -72,8 +72,7 @@
                                     <div class="swiper mainslider2">
                                         <div class="swiper-wrapper">
                                             <div class="swiper-slide">
-                                                <img class="bg-img" src="../assets/images/fashion/product/front/7.jpg"
-                                                    alt="img" />
+                                                <img src={{ asset($product->image) }} alt="img" />
                                             </div>
 
                                             <div class="swiper-slide">
@@ -106,9 +105,11 @@
                         <div class="product-detail-box">
                             <div class="product-option">
                                 <h2>{{ $product->name }}</h2>
+
                                 <div class="option price">
                                     <span>Rp. {{ number_format($product->price, 0, ',', '.') }}</span>
                                 </div>
+
                                 <div class="option">
                                     <p class="content-color">
                                         {{ $product->description }}
@@ -133,34 +134,14 @@
                                 {{-- Slot Waktu --}}
                                 <div class="option size">
                                     <div class="title-box4">
-                                        <h4 class="heading">Morning Slot <span class="bg-theme-blue"></span></h4>
+                                        <h4 class="heading">Time Slot <span class="bg-theme-blue"></span></h4>
                                     </div>
                                     <ul class="size-list d-grid">
-                                        @for ($i = 1; $i < 7; $i++)
-                                            <li class="p-4 bold" style="width: 150px;">12:00 AM</li>
-                                        @endfor
-                                    </ul>
-                                </div>
-
-                                <div class="option size">
-                                    <div class="title-box4">
-                                        <h4 class="heading">Afternoon Slot <span class="bg-theme-blue"></span></h4>
-                                    </div>
-                                    <ul class="size-list d-grid">
-                                        @for ($i = 1; $i < 7; $i++)
-                                            <li class="p-4 bold" style="width: 150px;">12:00 AM</li>
-                                        @endfor
-                                    </ul>
-                                </div>
-
-                                <div class="option size">
-                                    <div class="title-box4">
-                                        <h4 class="heading">Evening Slot <span class="bg-theme-blue"></span></h4>
-                                    </div>
-                                    <ul class="size-list d-grid">
-                                        @for ($i = 1; $i < 7; $i++)
-                                            <li class="p-4 bold" style="width: 150px;">12:00 AM</li>
-                                        @endfor
+                                        @foreach ($slots as $slot)
+                                            <li class="p-4 bold" style="width: 150px;">
+                                                {{ date('h:i A', strtotime($slot->time)) }}
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                                 {{-- End Slot Waktu --}}
@@ -181,7 +162,10 @@
                                                             <span class="checkbox__checkmark"></span>
                                                             <span class="checkbox__body gap-2"
                                                                 style="justify-content: flex-start; font-weight: 500">
-                                                                {{ $addon->name }} <p>{{ $addon->price }}K</p>
+                                                                {{ ucfirst($addon->name) }}
+                                                                <p>
+                                                                    {{ number_format($addon->price / 1000, 0) . 'K' }}
+                                                                </p>
                                                             </span>
                                                         </label>
                                                     </li>

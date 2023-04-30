@@ -97,7 +97,10 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        return view('dashboard.products.edit', [
+            'product' => $product
+        ]);
     }
 
     /**
@@ -107,9 +110,52 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $req, $id)
     {
-        //
+        $companyId = auth()->user()->company->id;
+        $validatedData = $req->validate([
+            'name' => 'required|max:255',
+            'price' => 'required',
+            'addon.*' => 'nullable',
+            'addon-price.*' => 'nullable|min:0',
+            'description' => 'required',
+            'image' => 'nullable|mimes:jpg,png,jpeg|image',
+        ]);
+
+        $product = Product::find($id);
+
+        // Save the Product image
+        if($req->hasFile('image')) {
+            $image = $req->file('image');
+            $filename = 'product-' . $companyId . '-' . time() . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('products', $filename);
+            $product->image = "/storage/products/$filename";
+        }
+
+        $product->company_id = $companyId;
+        $product->name = $validatedData['name'];
+        $product->price = $validatedData['price'];
+        $product->description = $validatedData['description'];
+        $product->update();
+
+        // Check if input array is not null
+        $addons = array_filter($validatedData['addon'], function ($value) {
+            return !is_null($value);
+        });
+
+        if(!empty($addons)) {
+            dd('jalan bree');
+            foreach ($validatedData['addon'] as $index => $addon) {
+                $addonData = [
+                    'product_id' => $product->id,
+                    'name' => $addon,
+                    'price' => $validatedData['addon-price'][$index]
+                ];
+                AddOn::create($addonData);
+            }
+        }
+
+        return redirect('/dashboard/products')->with('success', 'Product updated successfully.');
     }
 
     /**
