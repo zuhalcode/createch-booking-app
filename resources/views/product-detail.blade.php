@@ -122,11 +122,13 @@
                                         <h4 class="heading">Slot Tanggal <span class="bg-theme-blue"></span></h4>
                                     </div>
                                     <ul class="size-list" style="white-space: nowrap; overflow-x: auto;">
-                                        @for ($i = 1; $i < 7; $i++)
-                                            <li class="p-4 bold d-flex flex-column rounded-1">
-                                                {{ $i }} <span>May</span>
+                                        @foreach ($dates as $date)
+                                            <li
+                                                class="p-4 bold d-flex flex-column rounded-1
+                                                {{ in_array($date->format('Y-m-d'), $holidayDates) ? 'bg-danger' : '' }}">
+                                                {{ $date->format('j') }} <span>{{ $date->format('M') }}</span>
                                             </li>
-                                        @endfor
+                                        @endforeach
                                     </ul>
                                 </div>
                                 {{-- End Slot Tanggal --}}

@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Models\User;
 use App\Models\Cover;
 use App\Models\Company;
+use App\Models\Holiday;
 use App\Models\Product;
 use App\Models\Province;
 use Illuminate\Database\Seeder;
@@ -27,6 +28,7 @@ class DatabaseSeeder extends Seeder
         Province::factory()->count(34)->create();
         JawaCityFactory::new()->count(67)->create();
         Company::factory()->count(3)->create();
+        Holiday::factory()->count(30)->create(['company_id' => 1]);
         Cover::factory()->count(3)->create();
         Product::factory()->count(10)->create();
 

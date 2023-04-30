@@ -20,48 +20,28 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class OrderController extends Controller
 {
-    public function orderIndex()
+    public function orderIndex(Request $req)
     {
+        dd($req->all());
         // Set transaction data
         $orderId = rand(1000000, 9999999);
-        $params = array(
-            'transaction_details' => array(
+        $params = [
+            'transaction_details' => [
                 'order_id' => $orderId,
                 'gross_amount' => 200000,
-            ),
-            'customer_details' => array(
+            ],
+            'customer_details' => [
                 'first_name' => 'semangat',
                 'last_name' => 'huwaaa',
                 'email' => 'email@gmail.com',
                 'phone' => '0237812412',
-            ),
-        );
+            ]
+        ];
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
         $company = Company::where('user_id', 1)->first();
 
         return view('order-detail', ['company' => $company, 'payment_token' => $snapToken]);
-    }
-    
-    public function payment() 
-    {
-        // Set transaction data
-        $orderId = rand(1000000, 9999999);
-        $params = array(
-            'transaction_details' => array(
-                'order_id' => $orderId,
-                'gross_amount' => 200000,
-            ),
-            'customer_details' => array(
-                'first_name' => 'semangat',
-                'last_name' => 'huwaaa',
-                'email' => 'email@gmail.com',
-                'phone' => '0237812412',
-            ),
-        );
-
-        $snapToken = \Midtrans\Snap::getSnapToken($params);
-        return view('order-detail', []);
     }
 
     public function orderSuccessIndex() 
