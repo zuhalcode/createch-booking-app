@@ -17,6 +17,7 @@ $(document).ready(function () {
         $("#addons-container").append(inputFieldsHTML);
     });
 
+    // Handling Add new slot
     $("#plus-slot").on("click", function () {
         // create new input fields HTML
         const inputFieldsSlot = `
@@ -51,6 +52,53 @@ $(document).ready(function () {
             $(this).val(cleanedValue);
         }
     );
+
+    // Handling add "selected" class onclick
+    // $(".date-slot").on("click", (e) => {
+    //     e.currentTarget.removeClass("selected");
+    //     $(e.currentTarget).addClass("selected");
+    //     const selectedDate = $(e.currentTarget).data("date");
+    //     $("#selected-date").val(selectedDate);
+    // });
+
+    $("#product-detail-order-form").submit((e) => {
+        e.preventDefault();
+
+        // Get the selected date and slot from the UI
+        const selectedDate = $(".date-slot.active").attr("data-date");
+        const selectedSlot = $(".time-slot.active").attr("data-slot");
+        const selectedAddons = [];
+
+        // Loop through each checked addon checkbox and add it to the selectedAddons array
+        $(".addon-slot input[type='checkbox']:checked").each(function () {
+            selectedAddons.push($(this).attr("data-addon"));
+        });
+
+        // Create a hidden input for each selected addon
+        selectedAddons.forEach(function (addon) {
+            $("<input />")
+                .attr("type", "hidden")
+                .attr("name", "addons[]")
+                .attr("value", addon)
+                .appendTo("#product-detail-order-form");
+        });
+
+        // Set the date and slot as hidden form inputs
+        $("<input />")
+            .attr("type", "hidden")
+            .attr("name", "date")
+            .attr("value", selectedDate)
+            .appendTo("#product-detail-order-form");
+
+        $("<input />")
+            .attr("type", "hidden")
+            .attr("name", "slot_id")
+            .attr("value", selectedSlot)
+            .appendTo("#product-detail-order-form");
+
+        // Submit the form
+        $("#product-detail-order-form").unbind("submit").submit();
+    });
 });
 
 // Handling Onchange Image Preview

@@ -31,6 +31,6 @@ class Order extends Model
 
     public function addons()
     {
-        return $this->belongsToMany(AddOn::class, 'addon_order')->withPivot('price');
+        return $this->belongsToMany(AddOn::class, 'addon_order', 'order_id', 'addon_id')->withPivot('price');
     }
 }

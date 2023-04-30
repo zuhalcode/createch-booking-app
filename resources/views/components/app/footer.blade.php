@@ -12,7 +12,7 @@
                 <div class="row gy-3 gy-md-4 gy-xl-0 justify-content-between align-content-center">
                     <div class="col-xl-3 col-lg-4 col-md-6 ">
                         <div class="content-box">
-                            <img class="logo" src="../assets/images/logos/logo-4-w.png" alt="logo-white" />
+                            <img class="logo" src={{ asset('/assets/images/logos/logo-4-w.png') }} alt="logo-white" />
                             <ul>
                                 <li><i data-feather="map-pin"></i> <span> 1418 Riverwood Drive, Suite 3245
                                         Cottonwood, CA 96052, United States </span></li>

@@ -21,7 +21,7 @@ class ProductController extends Controller
     if(!$product) return abort(404);
 
     $addons = AddOn::where('product_id', $product->id)->get();
-    $slots = Slot::where('product_id', $product->id)->get();
+    $slots = Slot::where('product_id', $product->id)->orderBy('time')->get();
 
     // Get the holidays for the current month
     $currentDate = Carbon::now();

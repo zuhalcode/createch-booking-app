@@ -31,7 +31,8 @@ Route::controller(ProductController::class)->group(fn() => [
 
 Route::controller(UserOrderController::class)->group(fn() => [
     Route::get('/products/{id}/order', 'orderIndex'),
-    Route::get('/order', 'payment'),
+    // Route::get('/order', 'payment'),
+    Route::post('/orders', 'createOrder'),
     Route::get('/order-success', 'orderSuccessIndex')->middleware('auth'),
 ]);
 

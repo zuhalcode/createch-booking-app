@@ -103,7 +103,8 @@
 
                     <div class="col-md-5">
                         <div class="product-detail-box">
-                            <div class="product-option">
+                            <form class="product-option" id="product-detail-order-form" method="POST" action="/orders">
+                                @csrf
                                 <h2>{{ $product->name }}</h2>
 
                                 <div class="option price">
@@ -116,6 +117,9 @@
                                     </p>
                                 </div>
 
+                                {{-- Hidden input --}}
+                                <input type="hidden" name="product_id" value={{ $product->id }}>
+
                                 {{-- Slot Tanggal --}}
                                 <div class="option size" style="">
                                     <div class="title-box4">
@@ -123,9 +127,9 @@
                                     </div>
                                     <ul class="size-list" style="white-space: nowrap; overflow-x: auto;">
                                         @foreach ($dates as $date)
-                                            <li
-                                                class="p-4 bold d-flex flex-column rounded-1
-                                                {{ in_array($date->format('Y-m-d'), $holidayDates) ? 'bg-danger' : '' }}">
+                                            <li class="p-4 bold d-flex flex-column rounded-1 date-slot
+                                                {{ in_array($date->format('Y-m-d'), $holidayDates) ? 'bg-danger text-white' : '' }}"
+                                                data-date={{ $date->format('d-m-Y') }}>
                                                 {{ $date->format('j') }} <span>{{ $date->format('M') }}</span>
                                             </li>
                                         @endforeach
@@ -140,7 +144,8 @@
                                     </div>
                                     <ul class="size-list d-grid">
                                         @foreach ($slots as $slot)
-                                            <li class="p-4 bold" style="width: 150px;">
+                                            <li class="p-4 bold time-slot" style="width: 150px;"
+                                                data-slot={{ $slot->id }}>
                                                 {{ date('h:i A', strtotime($slot->time)) }}
                                             </li>
                                         @endforeach
@@ -158,9 +163,9 @@
                                             <ul class="filter-check d-grid gap-1"
                                                 style="grid-template-columns: repeat(2, 1fr)">
                                                 @foreach ($addons as $addon)
-                                                    <li>
+                                                    <li class="addon-slot">
                                                         <label class="checkboxes style-1">
-                                                            <input type="checkbox" />
+                                                            <input type="checkbox" data-addon={{ $addon->id }} />
                                                             <span class="checkbox__checkmark"></span>
                                                             <span class="checkbox__body gap-2"
                                                                 style="justify-content: flex-start; font-weight: 500">
@@ -178,12 +183,12 @@
                                 @endif
                                 {{-- End Addons --}}
 
-                                <div class="btn-group">
-                                    <a href={{ url('/products/1/order') }} class="btn-solid btn-sm addtocart-btn">
+                                <button class="btn-group">
+                                    <a class="btn-solid btn-sm addtocart-btn">
                                         Book Now
                                     </a>
-                                </div>
-                            </div>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>

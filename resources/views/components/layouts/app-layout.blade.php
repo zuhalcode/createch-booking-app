@@ -57,8 +57,6 @@
     <!-- Main Css -->
     <link rel="stylesheet" type="text/css" href={{ asset('/css/style.css') }} />
 
-
-
 </head>
 <!-- Head End -->
 
@@ -95,12 +93,15 @@
     <!-- Script Js -->
     <script src={{ asset('/assets/js/script.js') }}></script>
 
+    {{-- jquery --}}
+    <script src="{{ asset('/vendor/libs/jquery/jquery.js') }}"></script>
+
     <!-- Main Js -->
     <script src={{ asset('/js/script.js') }}></script>
+    <script src={{ asset('/js/jqscript.js') }}></script>
 
     <!-- Include Midtrans Snap JS library -->
     <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-O_8ibf3JNJJ-RB5C"></script>
-
 </body>
 <!-- Body End -->
 
