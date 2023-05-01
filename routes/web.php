@@ -4,10 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SlotController;
 use App\Http\Controllers\Admin\BranchController;
-use App\Http\Controllers\User\ProductController;
 use App\Http\Controllers\User\HomepageController;
-use App\Http\Controllers\User\OrderController as UserOrderController;
 use App\Http\Controllers\Admin\CompanyController as AdminCompanyController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SuperAdmin\CompanyController as SuperAdminCompanyController;
@@ -65,8 +64,7 @@ Route::controller(AuthController::class)->group(fn() => [
 // Handling for Dashboard
 Route::prefix('dashboard')->middleware('auth')->group(function () {
 
-    // Handling Dashboard for Customer
-    Route::get('/order-detail', fn() => view('dashboard.order-detail'));
+    Route::get('/order-detail', [OrderController::class, 'indexOrderDetail']);
 
     // Handling Dashboard for Admin
     Route::group([], function () {
@@ -85,13 +83,13 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
         Route::resource('/products', AdminProductController::class);
 
         Route::controller(SlotController::class)->group(fn() => [
-            Route::get('/slots', 'indexSlotManagement'),
-            Route::post('/slots/create', 'createSlot'),
+            Route::get('/slots', 'createSlot'),
+            Route::post('/slots', 'storeSlot'),
         ]);
 
-        Route::get('/order-management', function () {
-            return view('dashboard.orders');
-        });
+        Route::controller(OrderController::class)->group(fn() => [
+            Route::get('/orders', 'index'),
+        ]);
 
         Route::get('/bookings', function () {
             return view('dashboard.bookings');
@@ -101,10 +99,13 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     // Handling Dashboard for Super Admin
     Route::middleware('super-admin')->group(function () {
         Route::controller(SuperAdminCompanyController::class)->group(fn() => [
+            Route::get('/administrators', 'indexAdmin'),
+            Route::post('/administrators', 'storeAdmin'),
+
             Route::get('/companies', 'indexCompany'),
             Route::post('/companies', 'createCompany'),
             Route::post('/companies/{id}', 'getCompanyById'),
-            Route::post('/companies/{id}/edit', 'editCompanyById'),
+            Route::post('/companies/{id}/edit', 'updateCompany'),
             Route::delete('/companies/{id}', 'destroy'),
         ]);
     });

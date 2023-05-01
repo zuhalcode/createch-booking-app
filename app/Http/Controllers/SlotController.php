@@ -8,13 +8,13 @@ use Illuminate\Http\Request;
 
 class SlotController extends Controller
 {
-    public function indexSlotManagement()
+    public function createSlot()
     {
         $products = Product::all();
         return view('dashboard.products.slots', ['products' => $products]);
     }
 
-    public function createSlot(Request $req)
+    public function storeSlot(Request $req)
     {
         $validatedData = $req->validate([
             'product_id' => [ 

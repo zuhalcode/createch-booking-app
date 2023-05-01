@@ -24,7 +24,11 @@ class UserFactory extends Factory
             ['name' => 'zuhal', 'email' => 'zuhal@gmail.com', 'role_id' => 1],
             ['name' => 'jasmine', 'email' => 'jasmine@gmail.com', 'role_id' => 2],
             ['name' => 'maira', 'email' => 'maira@gmail.com', 'role_id' => 3],
+            ['name' => $this->faker->name(), 'email' => $this->faker->unique()->userName() . '@gmail.com', 'role_id' => 3],
+            ['name' => $this->faker->name(), 'email' => $this->faker->unique()->userName() . '@gmail.com', 'role_id' => 3],
+            ['name' => $this->faker->name(), 'email' => $this->faker->unique()->userName() . '@gmail.com', 'role_id' => 3]
         ];
+        
     
         static $index = 0;
     
@@ -35,9 +39,7 @@ class UserFactory extends Factory
         $index++;
     
         // reset $index to 0 once it reaches the end of the $users array
-        if ($index >= count($users)) {
-            $index = 0;
-        }
+        if ($index >= count($users)) $index = 0;
     
         return [
             'name' => $userData['name'],

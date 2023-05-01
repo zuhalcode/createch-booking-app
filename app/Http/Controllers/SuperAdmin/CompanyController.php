@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\SuperAdmin;
 
+use App\Models\User;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class CompanyController extends Controller
 {
@@ -13,6 +15,34 @@ class CompanyController extends Controller
         $companies = Company::all();
         return view('dashboard.super-admin.companies',[
             'companies' => $companies
+        ]);
+    }
+
+    public function indexAdmin()
+    {
+        $users = User::where('role_id', 2)->get();
+        return view('dashboard.super-admin.administrators',[
+            'users' => $users
+        ]);
+    }
+
+    public function storeAdmin(Request $req)
+    {
+        $validatedData = $req->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'password' => 'required'
+        ]);
+
+        $validatedData['password'] = Hash::make($validatedData['password']);
+
+        User::create([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'phone' => $validatedData['phone'],
+            'password' => $validatedData['password'],
+            'role_id' => 2,
         ]);
     }
 
@@ -37,7 +67,7 @@ class CompanyController extends Controller
         return response()->json(['company' => $company]);
     }
 
-    public function editCompanyById(Request $req, $id)
+    public function updateCompany(Request $req, $id)
     {
         $validatedData = $req->validate([
             'name' => 'required|max:255',

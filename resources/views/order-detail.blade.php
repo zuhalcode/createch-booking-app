@@ -4,25 +4,25 @@
     <!-- Overlay -->
     <a href="javascript:void(0)" class="overlay-general"></a>
 
-    <x-app.header :logo="$company->logo" />
+    <x-app-header />
 
     <!-- Main Start -->
     <main class="main">
         <!-- Breadcrumb Start -->
         <div class="breadcrumb-wrap">
             <div class="banner">
-                <img class="bg-img bg-top" src="../assets/images/inner-page/banner-p.jpg" alt="banner" />
+                <img class="bg-img bg-top" src={{ asset('/assets/images/inner-page/banner-p.jpg') }} alt="banner" />
                 <div class="container-lg">
                     <div class="breadcrumb-box">
                         <div class="heading-box">
                             <h1>Order</h1>
                         </div>
                         <ol class="breadcrumb">
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href={{ url('/') }}>Home</a></li>
                             <li>
                                 <a href="javascript:void(0)"><i data-feather="chevron-right"></i></a>
                             </li>
-                            <li class="current"><a href="cart.html">Order</a></li>
+                            <li class="current"><a href={{ url("/products/$order->id/order") }}>Order</a></li>
                         </ol>
                     </div>
                 </div>
@@ -50,25 +50,31 @@
                                         <tr>
                                             <td>
                                                 <div class="product-detail">
-                                                    <img class="pr-img"
-                                                        src="../assets/images/fashion/product/front/8.jpg"
-                                                        alt="image" />
+                                                    <img class="pr-img" src={{ $product->image }} alt="image" />
                                                     <div class="details">
-                                                        <h4 class="title-color font-default2">Concrete Jungle Pack</h4>
+                                                        <h4 class="title-color font-default2">{{ $product->name }}</h4>
                                                         <span class="size gap-2 d-flex d-sm-none">
-                                                            Price : <span>Rp. 12.000</span>
+                                                            Price :
+                                                            <span>
+                                                                {{ Str::shortened_price($product->price) }}
+                                                            </span>
                                                         </span>
                                                         <span class="size gap-2 d-flex">
                                                             Date : <span>23 Jan 2023</span>
                                                         </span>
                                                         <span class="size gap-2 d-flex">
-                                                            Time Slot : <span>11:00 PM</span>
+                                                            Time Slot :
+                                                            <span>
+                                                                {{ date('h:i A', strtotime($slot->time)) }}
+                                                            </span>
                                                         </span>
                                                     </div>
                                                 </div>
                                             </td>
 
-                                            <td class="price d-none d-sm-table-cell">$120.00</td>
+                                            <td class="price d-none d-sm-table-cell">
+                                                {{ Str::shortened_price($product->price) }}
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -82,23 +88,28 @@
                                     </thead>
 
                                     <tbody>
-                                        @for ($i = 0; $i < 10; $i++)
+                                        @foreach ($addons as $addon)
                                             <tr>
                                                 <td>
                                                     <div class="product-detail">
                                                         <div class="details">
                                                             <h4 class="title-color font-default2" style="width: 320px">
-                                                                Pomade {{ $i }}
+                                                                {{ $addon->name }}
                                                             </h4>
                                                             <span class="size gap-2 d-flex d-sm-none">
-                                                                Price : <span>Rp. 12.000</span>
+                                                                Price :
+                                                                <span>
+                                                                    {{ Str::shortened_price($addon->price) }}
+                                                                </span>
                                                             </span>
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="price d-none d-sm-table-cell">Rp. 120.000</td>
+                                                <td class="price d-none d-sm-table-cell">
+                                                    {{ Str::shortened_price($addon->price) }}
+                                                </td>
                                             </tr>
-                                        @endfor
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -116,7 +127,7 @@
                                         <ul class="order-summery">
                                             <li>
                                                 <span>Item total</span>
-                                                <span>Rp. 200.000</span>
+                                                <span>{{ Str::shortened_price($order->total_price) }}</span>
                                             </li>
 
                                             <li>
@@ -126,7 +137,7 @@
 
                                             <li class="pb-0">
                                                 <span>Total Amount</span>
-                                                <span>Rp. 750.000</span>
+                                                <span>{{ Str::shortened_price($order->total_price) }}</span>
                                             </li>
                                         </ul>
                                         <div class="row g-3 mt-2">
@@ -198,8 +209,8 @@
                                             <div class="input-box">
                                                 <label for="password">Password</label>
                                                 <div class="icon-input">
-                                                    <input class="form-control" type="password" required
-                                                        name="password" id="password" />
+                                                    <input class="form-control" type="password" required name="password"
+                                                        id="password" />
                                                     <img class="showHidePassword"
                                                         src="https://themes.pixelstrap.com/oslo/assets/icons/svg/eye-1.svg"
                                                         alt="eye" />

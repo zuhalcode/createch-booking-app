@@ -17,6 +17,7 @@ class AddonFactory extends Factory
     public function definition()
     {
         return [
+            'product_id' => $this->faker->numberBetween(1, 20),
             'name' => $this->faker->name(),
             'price' => $this->faker->numberBetween(1000, 50000),
         ];

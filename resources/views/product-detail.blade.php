@@ -4,7 +4,7 @@
     <!-- Overlay -->
     <a href="javascript:void(0)" class="overlay-general"></a>
 
-    <x-app.header :logo="$company->logo" />
+    <x-app-header />
 
     <!-- Main Start -->
     <main class="main">
@@ -108,7 +108,7 @@
                                 <h2>{{ $product->name }}</h2>
 
                                 <div class="option price">
-                                    <span>Rp. {{ number_format($product->price, 0, ',', '.') }}</span>
+                                    <span>{{ Str::shortened_price($product->price) }}</span>
                                 </div>
 
                                 <div class="option">
@@ -171,7 +171,7 @@
                                                                 style="justify-content: flex-start; font-weight: 500">
                                                                 {{ ucfirst($addon->name) }}
                                                                 <p>
-                                                                    {{ number_format($addon->price / 1000, 0) . 'K' }}
+                                                                    {{ Str::shortened_price($addon->price) }}
                                                                 </p>
                                                             </span>
                                                         </label>

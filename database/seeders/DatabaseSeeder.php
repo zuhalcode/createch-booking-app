@@ -26,15 +26,15 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Role::factory()->count(3)->create();
-        User::factory()->count(3)->create();
+        User::factory()->count(6)->create();
         Province::factory()->count(34)->create();
         JawaCityFactory::new()->count(67)->create();
         Company::factory()->count(3)->create();
-        Holiday::factory()->count(30)->create(['company_id' => 1]);
+        Holiday::factory()->count(30)->create();
         Cover::factory()->count(3)->create();
-        Product::factory()->count(10)->create();
-        Slot::factory()->count(3)->create(['company_id' => 1, 'product_id' => 1]);
-        AddOn::factory()->count(3)->create(['product_id' => 1]);
+        Product::factory()->count(20)->create();
+        Slot::factory()->count(20)->create();
+        AddOn::factory()->count(20)->create();
 
         // Jasmine
 

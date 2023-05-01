@@ -21,11 +21,11 @@ class Sidebar extends Component
                 'icon' => 'bx-line-chart', 
                 'role' => 'admin'
             ],
-            [
-                'name' => 'Companies Management', 
-                'route' => '/dashboard/companies', 
-                'icon' => 'bx-building', 
-                'role' => 'super-admin'
+            ['name' => 'Companies Management', 'route' => '', 'icon' => 'bx-home-circle', 'role' => 'super-admin',
+                'submenu' => [
+                    ['name' => 'List Companies', 'route' => '/dashboard/companies'],
+                    ['name' => 'Admin Management', 'route' => '/dashboard/administrators'],
+                ],
             ],
             
             ['name' => 'Company Management', 'route' => '', 'icon' => 'bx-home-circle', 'role' => 'admin',
@@ -45,7 +45,7 @@ class Sidebar extends Component
             ],
             [
                 'name' => 'Order Management', 
-                'route' => '/dashboard/order-management', 
+                'route' => '/dashboard/orders', 
                 'icon' => 'bxs-receipt', 
                 'role' => 'admin'
             ],

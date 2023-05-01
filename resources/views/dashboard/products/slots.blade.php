@@ -29,7 +29,7 @@
                                     <hr class="my-0" />
                                     <div class="card-body">
                                         <form id="formAccountSettings" method="POST"
-                                            action={{ url('/dashboard/slots/create') }}>
+                                            action={{ url('/dashboard/slots') }}>
                                             @csrf
                                             <div class="row">
                                                 <div class="mb-3">

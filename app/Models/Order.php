@@ -24,7 +24,7 @@ class Order extends Model
         return $this->belongsTo(Product::class);
     }
 
-    public function slots()
+    public function slot()
     {
         return $this->belongsTo(Slot::class);
     }

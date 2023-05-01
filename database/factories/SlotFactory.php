@@ -16,13 +16,12 @@ class SlotFactory extends Factory
      */
     public function definition()
     {
-        $start_time = '12:00 AM';
-        $end_time = '12:00 PM';
-        $time = $this->faker->dateTimeBetween($start_time, $end_time)->format('h:i');
-
         return [
-            'time' => $time,
+            'company_id' => $this->faker->numberBetween(1, 3),
+            'product_id' => $this->faker->numberBetween(1, 20),
+            'time' => $this->faker->dateTimeBetween('12:00 AM', '12:00 PM')->format('h:i'),
             'max_user' => $this->faker->numberBetween(1, 100),
         ];
     }
+
 }

@@ -27,7 +27,7 @@ class CustomerController extends Controller
     // Handle Homepage
     public function index() 
     {
-        if(auth()->check()) $company = Company::where('id', auth()->user()->company->id)->first();
+        if(auth()->check()) $company = Company::where('id', 1)->first();
         else $company = Company::findOrFail(1);
 
         $products = Product::where('company_id', $company->id)->get();
@@ -78,24 +78,33 @@ class CustomerController extends Controller
     // Handle Orders
     public function showOrder($id)
     {
+        $order = Order::find($id);
+        $user = auth()->user();
         // Set transaction data
         $params = [
             'transaction_details' => [
                 'order_id' => $id,
-                'gross_amount' => 200000,
+                'gross_amount' => $order->total_price,
             ],
             'customer_details' => [
-                'first_name' => 'semangat',
-                'last_name' => 'huwaaa',
-                'email' => 'email@gmail.com',
-                'phone' => '0237812412',
+                'first_name' => $user->name,
+                'last_name' => '',
+                'email' => $user->email,
+                'phone' => $user->phone,
             ]
         ];
 
         $snapToken = \Midtrans\Snap::getSnapToken($params);
         $company = Company::where('user_id', auth()->user()->id)->first();
 
-        return view('order-detail', ['company' => $company, 'payment_token' => $snapToken]);
+        return view('order-detail', [
+            'company' => $company, 
+            'payment_token' => $snapToken,
+            'product' => $order->product,
+            'addons' => $order->addons,
+            'slot' => $order->slot,
+            'order' => $order
+        ]);
     }
 
     public function storeOrder(Request $req)

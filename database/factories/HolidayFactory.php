@@ -21,6 +21,7 @@ class HolidayFactory extends Factory
         $endDate = $currentYear . '-12-31';
 
         return [
+            'company_id' => $this->faker->numberBetween(1, 3),
             'name' => $this->faker->word(),
             'date' => $this->faker->dateTimeBetween($startDate, $endDate)->format('Y-m-d'),
         ];

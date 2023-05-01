@@ -24,47 +24,22 @@
                                             <th>Price</th>
                                             <th>Expires</th>
                                             <th>Status</th>
-                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
-                                        <tr class="table-dark">
-                                            <td>1</td>
-                                            <td>12 Januari 2023</td>
-                                            <td>Barry Hunter</td>
-                                            <td>Rp. 23.000</td>
-                                            <td>12 Juni 2023</td>
-                                            <td><span class="badge bg-label-success me-1">Completed</span></td>
-                                            <td>
-                                                <i class="bx bx-edit-alt me-1"></i>
-                                                <i class="bx bx-trash me-1"></i>
-                                            </td>
-                                        </tr>
-                                        <tr class="table-info">
-                                            <td>1</td>
-                                            <td>12 Januari 2023</td>
-                                            <td>Barry Hunter</td>
-                                            <td>Rp. 23.000</td>
-                                            <td>12 Juni 2023</td>
-                                            <td><span class="badge bg-label-danger me-1">Danger</span></td>
-                                            <td>
-                                                <i class="bx bx-edit-alt me-1"></i>
-                                                <i class="bx bx-trash me-1"></i>
-                                            </td>
-                                        </tr>
-                                        <tr class="table-primary">
-                                            <td>1</td>
-                                            <td>12 Januari 2023</td>
-                                            <td>Barry Hunter</td>
-                                            <td>Rp. 23.000</td>
-                                            <td>12 Juni 2023</td>
-                                            <td><span class="badge bg-label-warning me-1">Warning</span></td>
-                                            <td>
-                                                <i class="bx bx-edit-alt me-1"></i>
-                                                <i class="bx bx-trash me-1"></i>
-                                            </td>
-                                        </tr>
-
+                                        @foreach ($orders as $order)
+                                            <tr class="table-dark">
+                                                <td>{{ $order->id }}</td>
+                                                <td>{{ $order->created_at->format('d-m-Y') }}</td>
+                                                <td>{{ $order->user->name }}</td>
+                                                <td>{{ Str::shortened_price($order->total_price) }}</td>
+                                                <td>12 Juni 2023</td>
+                                                <td>
+                                                    <span
+                                                        class="badge bg-label-success me-1">{{ $order->status }}</span>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
