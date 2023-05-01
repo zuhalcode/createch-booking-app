@@ -9,6 +9,7 @@ use App\Http\Controllers\User\HomepageController;
 use App\Http\Controllers\User\OrderController as UserOrderController;
 use App\Http\Controllers\Admin\CompanyController as AdminCompanyController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\SuperAdmin\CompanyController as SuperAdminCompanyController;
 
 /*
@@ -25,15 +26,23 @@ use App\Http\Controllers\SuperAdmin\CompanyController as SuperAdminCompanyContro
 Route::get('/', [HomepageController::class, 'index']);
 Route::get('/tes', fn () => view('tes'));
 
-Route::controller(ProductController::class)->group(fn() => [
-    Route::get('/products/{id}', 'indexById'),
-]);
+// Route::controller(ProductController::class)->group(fn() => [
+//     Route::get('/products/{id}', 'indexById'),
+// ]);
 
-Route::controller(UserOrderController::class)->group(fn() => [
-    Route::get('/products/{id}/order', 'orderIndex'),
-    // Route::get('/order', 'payment'),
-    Route::post('/orders', 'createOrder'),
-    Route::get('/order-success', 'orderSuccessIndex')->middleware('auth'),
+// Route::controller(UserOrderController::class)->group(fn() => [
+//     Route::get('/products/{id}/order', 'orderIndex'),
+//     // Route::get('/order', 'payment'),
+//     Route::post('/orders', 'createOrder'),
+//     Route::get('/order-success', 'orderSuccessIndex')->middleware('auth'),
+// ]);
+
+Route::controller(CustomerController::class)->group(fn() => [
+    Route::get('/', 'index'),
+    Route::get('/products/{id}', 'showProduct'),
+    Route::get('/products/{id}/order', 'showOrder'),
+    Route::post('/orders', 'storeOrder'),
+    Route::get('/order-success', 'indexOrderSuccess')->middleware('auth'),
 ]);
 
 // Handling for Authentication
