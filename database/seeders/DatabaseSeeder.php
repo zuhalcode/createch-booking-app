@@ -16,6 +16,13 @@ use App\Models\Province;
 use Illuminate\Database\Seeder;
 use Database\Factories\JawaCityFactory;
 
+// Jasmine
+use Database\Factories\MalukuCityFactory;
+use Database\Factories\LampungCityFactory;
+use Database\Factories\SulawesiCityFactory;
+use Database\Factories\KalimantanCityFactory;
+use Database\Factories\NusaTenggaraCityFactory;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -37,9 +44,11 @@ class DatabaseSeeder extends Seeder
         AddOn::factory()->count(20)->create();
 
         // Jasmine
-
-
-
+        NusaTenggaraCityFactory::new()->count(42)->create();
+        KalimantanCityFactory::new()->count(61)->create();
+        MalukuCityFactory::new()->count(18)->create();
+        LampungCityFactory::new()->count(15)->create();
+        SulawesiCityFactory::new()->count(72)->create();
         // Maira
         
     }
