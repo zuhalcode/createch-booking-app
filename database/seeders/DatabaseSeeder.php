@@ -16,6 +16,23 @@ use App\Models\Province;
 use Illuminate\Database\Seeder;
 use Database\Factories\JawaCityFactory;
 
+
+
+// Maira
+use Database\Factories\RiauCityFactory;
+use Database\Factories\AcehCityFactory;
+use Database\Factories\BaliCityFactory;
+use Database\Factories\BantenCityFactory;
+use Database\Factories\BengkuluCityFactory;
+use Database\Factories\YogyakartaCityFactory;
+use Database\Factories\JakartaCityFactory;
+use Database\Factories\GorontaloCityFactory;
+use Database\Factories\JambiCityFactory;
+use Database\Factories\PapuaCityFactory;
+use Database\Factories\PapuabaratCityFactory;
+use Database\Factories\SumaterabaratCityFactory;
+use Database\Factories\SumateraselatanCityFactory;
+use Database\Factories\SumaterautaraCityFactory;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -41,6 +58,20 @@ class DatabaseSeeder extends Seeder
 
 
         // Maira
-        
+        RiauCityFactory::new()->count(10)->create();
+        AcehCityFactory::new()->count(23)->create();
+        BaliCityFactory::new()->count(10)->create();
+        BantenCityFactory::new()->count(4)->create();
+        BengkuluCityFactory::new()->count(6)->create();
+        YogyakartaCityFactory::new()->count(5)->create();
+        JakartaCityFactory::new()->count(5)->create();
+        GorontaloCityFactory::new()->count(3)->create();
+        JambiCityFactory::new()->count(10)->create();
+        PapuaCityFactory::new()->count(29)->create();
+        PapuabaratCityFactory::new()->count(11)->create();
+        SumaterabaratCityFactory::new()->count(14)->create();
+        SumateraselatanCityFactory::new()->count(15)->create();
+        SumaterautaraCityFactory::new()->count(29)->create();
     }
 }
+  
