@@ -76,6 +76,36 @@ class OrderController extends Controller
         return redirect("/products/$order->id/order");
     }
 
+    public function redirectToOrderDetail(Request $req)
+    {
+        $validatedData = $req->validate([
+            'product_id' => 'required|exists:products,id',
+            'date' => 'required|date',
+            'slot_id' => 'required|exists:slots,id',
+            'addons.*' => 'nullable|exists:addons,id'
+        ]);
+        
+        $product = Product::findOrFail($validatedData['product_id']);
+        
+        $totalPrice = $product->price;
+        
+        $order = Order::create([
+            'user_id' => auth()->user()->id,
+            'product_id' => $validatedData['product_id'],
+            'slot_id' => $validatedData['slot_id'],
+            'total_price' => $totalPrice
+        ]);
+        
+        $selectedAddons = Addon::whereIn('id', $validatedData['addons'] ?? [])->get();
+        
+        foreach ($selectedAddons as $addon) {
+            $price = $addon->price;
+            $order->addons()->attach($addon->id, ['price' => $price]);
+        }
+
+        return redirect("/products/$order->id/order");
+    }
+
     public function orderSuccessIndex() 
     {
         // Generate barcode

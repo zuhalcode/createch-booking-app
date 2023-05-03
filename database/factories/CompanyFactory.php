@@ -22,6 +22,7 @@ class CompanyFactory extends Factory
         return [
             'user_id' => $userIds[$index++],
             'city_id' => 1,
+            'slug' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail,
             'about_us' => $this->faker->paragraph(3)
         ];

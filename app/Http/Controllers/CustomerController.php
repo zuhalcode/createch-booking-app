@@ -107,6 +107,33 @@ class CustomerController extends Controller
         ]);
     }
 
+    public function redirectToOrderDetail(Request $req)
+    {
+        $validatedData = $req->validate([
+            'product_id' => 'required|exists:products,id',
+            'date' => 'required|date',
+            'slot_id' => 'required|exists:slots,id',
+            'addons.*' => 'nullable|exists:addons,id'
+        ]);
+
+        $product = Product::findOrFail($validatedData['product_id']);
+        $selectedAddons = Addon::whereIn('id', $validatedData['addons'] ?? [])->get();
+        $slot = Slot::find($validatedData['slot_id']);
+
+        $totalPrice = $product->price;
+        foreach ($selectedAddons as $addon) {
+            $totalPrice += $addon->price;
+        }
+
+        return view("order-detail", [
+            'product' => $product,
+            'addons' => $selectedAddons,
+            'slot' => $slot,
+            'total_price' => $totalPrice,
+            'payment_token' =>  ''
+        ]);
+    }
+
     public function storeOrder(Request $req)
     {
         $validatedData = $req->validate([
@@ -137,14 +164,14 @@ class CustomerController extends Controller
         return redirect("/products/$order->id/order");
     }
 
-    public function indexOrderSuccess() 
+    public function indexInvoice() 
     {
         // Generate barcode
         $barcode = QrCode::size(250)->generate('123456789');
-        $company = Company::where('id', auth()->user()->company->id)->first();
+        $company = Company::where('id', 1)->first();
 
         // Pass barcode to the view
-        return view('order-success', ['barcode' => $barcode, 'company' => $company]);
+        return view('order-invoice', ['barcode' => $barcode, 'company' => $company]);
     }
     // End Orders
 }

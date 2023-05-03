@@ -53,14 +53,6 @@ $(document).ready(function () {
         }
     );
 
-    // Handling add "selected" class onclick
-    // $(".date-slot").on("click", (e) => {
-    //     e.currentTarget.removeClass("selected");
-    //     $(e.currentTarget).addClass("selected");
-    //     const selectedDate = $(e.currentTarget).data("date");
-    //     $("#selected-date").val(selectedDate);
-    // });
-
     $("#product-detail-order-form").submit((e) => {
         e.preventDefault();
 
@@ -98,6 +90,19 @@ $(document).ready(function () {
 
         // Submit the form
         $("#product-detail-order-form").unbind("submit").submit();
+    });
+
+    // Handling company slug input onchange
+    const companyName = $("#company-name");
+    const companySlug = $("#company-slug");
+    companyName.on("change", () => {
+        $.ajax({
+            url: `/dashboard/companies/create-slug?name=${companyName.val()}`,
+            method: "GET",
+            dataType: "json",
+            success: (data) => companySlug.val(data.slug),
+            error: (error) => console.error(error),
+        });
     });
 });
 
@@ -140,3 +145,5 @@ const showModalEditCompany = (id) => {
 
     $("#modalEditCompany").modal("show");
 };
+
+const handleSlugOnChange = (nameId, slugId) => {};

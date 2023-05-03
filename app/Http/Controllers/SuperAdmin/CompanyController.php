@@ -7,6 +7,7 @@ use App\Models\Company;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class CompanyController extends Controller
 {
@@ -52,13 +53,24 @@ class CompanyController extends Controller
             'name' => 'required|max:255',
         ]);
 
-        $validatedData['user_id'] = auth()->user()->id;
-        $validatedData['city_id'] = 1;
-        $validatedData['email'] = $req['name'].'@gmail.com';
+        $email = $validatedData['name'] . '@gmail.com';
 
-        Company::create($validatedData);
+        $slug = SlugService::createSlug(Company::class, 'slug', $validatedData['name']);
+
+        Company::create([
+            'user_id' => auth()->user()->id,
+            'city_id' => 1,
+            'email' => $email,
+            'slug' => $slug,
+        ]);
 
         return back()->with('success', 'Perusahaan baru telah ditambahkan!');
+    }
+
+    public function createSlug(Request $req)
+    {
+        $slug = SlugService::createSlug(Company::class, 'slug', $req->name);
+        return response()->json(['slug' => $slug]);
     }
 
     public function getCompanyById($id)

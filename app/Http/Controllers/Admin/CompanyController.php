@@ -6,6 +6,7 @@ use App\Models\Cover;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class CompanyController extends Controller
 {

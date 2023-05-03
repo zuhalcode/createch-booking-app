@@ -25,23 +25,15 @@ use App\Http\Controllers\SuperAdmin\CompanyController as SuperAdminCompanyContro
 Route::get('/', [HomepageController::class, 'index']);
 Route::get('/tes', fn () => view('tes'));
 
-// Route::controller(ProductController::class)->group(fn() => [
-//     Route::get('/products/{id}', 'indexById'),
-// ]);
-
-// Route::controller(UserOrderController::class)->group(fn() => [
-//     Route::get('/products/{id}/order', 'orderIndex'),
-//     // Route::get('/order', 'payment'),
-//     Route::post('/orders', 'createOrder'),
-//     Route::get('/order-success', 'orderSuccessIndex')->middleware('auth'),
-// ]);
-
 Route::controller(CustomerController::class)->group(fn() => [
     Route::get('/', 'index'),
     Route::get('/products/{id}', 'showProduct'),
     Route::get('/products/{id}/order', 'showOrder'),
+
+    Route::get('/orders/detail', 'redirectToOrderDetail'),
     Route::post('/orders', 'storeOrder'),
-    Route::get('/order-success', 'indexOrderSuccess')->middleware('auth'),
+
+    Route::get('/orders/invoice', 'indexInvoice')->middleware('auth'),
 ]);
 
 // Handling for Authentication
@@ -103,6 +95,8 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
             Route::post('/administrators', 'storeAdmin'),
 
             Route::get('/companies', 'indexCompany'),
+            Route::get('/companies/create-slug', 'createSlug'),
+            
             Route::post('/companies', 'createCompany'),
             Route::post('/companies/{id}', 'getCompanyById'),
             Route::post('/companies/{id}/edit', 'updateCompany'),

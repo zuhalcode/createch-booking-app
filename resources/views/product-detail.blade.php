@@ -103,7 +103,8 @@
 
                     <div class="col-md-5">
                         <div class="product-detail-box">
-                            <form class="product-option" id="product-detail-order-form" method="POST" action="/orders">
+                            <form class="product-option" id="product-detail-order-form" method="GET"
+                                action={{ url('/orders/detail') }}>
                                 @csrf
                                 <h2>{{ $product->name }}</h2>
 

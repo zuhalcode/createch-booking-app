@@ -18,8 +18,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('city_id')->constrained();
-            $table->text('about_us')->nullable();
             $table->string('name')->nullable()->default('bookly');
+            $table->string('slug')->unique();
+            $table->text('about_us')->nullable();
             $table->string('email')->unique()->nullable();
             $table->string('phone')->nullable()->default('085123456789');
             $table->string('address')->nullable()->default('surabaya');

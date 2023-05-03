@@ -22,7 +22,7 @@
                             <li>
                                 <a href="javascript:void(0)"><i data-feather="chevron-right"></i></a>
                             </li>
-                            <li class="current"><a href={{ url("/products/$order->id/order") }}>Order</a></li>
+                            <li class="current"><a href={{ url("/products/$product->id/order") }}>Order</a></li>
                         </ol>
                     </div>
                 </div>
@@ -127,7 +127,7 @@
                                         <ul class="order-summery">
                                             <li>
                                                 <span>Item total</span>
-                                                <span>{{ Str::shortened_price($order->total_price) }}</span>
+                                                <span>{{ Str::shortened_price($total_price) }}</span>
                                             </li>
 
                                             <li>
@@ -137,18 +137,16 @@
 
                                             <li class="pb-0">
                                                 <span>Total Amount</span>
-                                                <span>{{ Str::shortened_price($order->total_price) }}</span>
+                                                <span>{{ Str::shortened_price($total_price) }}</span>
                                             </li>
                                         </ul>
                                         <div class="row g-3 mt-2">
                                             <div class="col-6 col-md-12">
                                                 @if (auth()->check())
-                                                    <div class="btn-solid checkout-btn" onclick="handlePayButton()"
+                                                    <a href={{ url('/orders/invoice') }} class="btn-solid checkout-btn"
                                                         style="cursor: pointer">
-                                                        <input type="hidden" id="midtrans_client_token"
-                                                            value="{{ $payment_token }}">
                                                         Checkout <i class="arrow"></i>
-                                                    </div>
+                                                    </a>
                                                 @else
                                                     <div class="btn-solid checkout-btn" style="cursor: pointer"
                                                         data-bs-toggle="modal" data-bs-target="#addNewAddress">

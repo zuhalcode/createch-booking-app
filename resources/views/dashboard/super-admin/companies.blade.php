@@ -82,6 +82,7 @@
         <div class="modal fade" id="modalCompany" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <form class="modal-content" method="POST" action={{ '/dashboard/companies' }}>
+                    @csrf
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalCenterTitle">Masukkan Nama Perusahaan</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -89,14 +90,19 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col mb-3">
-                                <label for="nameWithTitle" class="form-label">Nama Perusahaan</label>
-                                <input type="text" name="name" id="nameWithTitle" class="form-control"
+                                <label class="form-label">Nama Perusahaan</label>
+                                <input type="text" name="name" id="company-name" class="form-control"
                                     placeholder="Masukkan Nama" />
                             </div>
+
+                            {{-- <div class="col mb-3">
+                                <label class="form-label">Slug</label>
+                                <input type="text" name="slug" class="form-control" id="company-slug" readonly />
+                            </div> --}}
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Tambah Perusahaan</button>
+                        <button type="submit" class="btn btn-primary">Tambah Perusahaan</button>
                     </div>
                 </form>
             </div>
