@@ -144,7 +144,6 @@ class ProductController extends Controller
         });
 
         if(!empty($addons)) {
-            dd('jalan bree');
             foreach ($validatedData['addon'] as $index => $addon) {
                 $addonData = [
                     'product_id' => $product->id,
@@ -170,5 +169,4 @@ class ProductController extends Controller
         $product->delete();
         return back()->with('success', 'Product deleted successfully.');
     }
-
 }

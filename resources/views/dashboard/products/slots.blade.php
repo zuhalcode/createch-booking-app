@@ -1,7 +1,4 @@
 <x-layouts.dashboard-layout>
-    @if (session('success'))
-        <x-ui.toast type="bg-success">{{ session('success') }}</x-ui.toast>
-    @endif
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">

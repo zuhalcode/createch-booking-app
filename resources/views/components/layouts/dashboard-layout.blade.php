@@ -43,6 +43,16 @@
 </head>
 
 <body>
+    @if (session('success'))
+        <x-ui.toast type="bg-success">
+            {{ session('success') }}
+        </x-ui.toast>
+    @elseif(session('error'))
+        <x-ui.toast type="bg-danger">
+            {{ session('error') }}
+        </x-ui.toast>
+    @endif
+
     {{ $slot }}
 
     <!-- Core JS -->

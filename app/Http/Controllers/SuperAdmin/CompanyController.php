@@ -67,11 +67,11 @@ class CompanyController extends Controller
         return back()->with('success', 'Perusahaan baru telah ditambahkan!');
     }
 
-    public function createSlug(Request $req)
-    {
-        $slug = SlugService::createSlug(Company::class, 'slug', $req->name);
-        return response()->json(['slug' => $slug]);
-    }
+    // public function createSlug(Request $req)
+    // {
+    //     $slug = SlugService::createSlug(Company::class, 'slug', $req->name);
+    //     return response()->json(['slug' => $slug]);
+    // }
 
     public function getCompanyById($id)
     {
@@ -86,6 +86,8 @@ class CompanyController extends Controller
             'email' => 'required|email',
             'phone' => 'required|max:255',
         ]);
+
+        $ValidatedData['slug'] = SlugService::createSlug(Company::class, 'slug', $validatedData['name']);
 
         $company = Company::findOrFail($id);
         $company->update($validatedData);

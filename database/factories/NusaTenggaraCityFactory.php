@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\City;
-use Database\Factories\NusaTenggaraCityFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
