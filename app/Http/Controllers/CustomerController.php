@@ -11,6 +11,7 @@ use App\Models\Company;
 use App\Models\Holiday;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 // Set your Merchant Server Key
@@ -133,18 +134,21 @@ class CustomerController extends Controller
         ]);
     }
 
-    public function storeOrder(Request $req)
+    public function storeOrder(Request $req, $slug)
     {
         $validatedData = $req->validate([
             'product_id' => 'required|exists:products,id',
-            'date' => 'required|date',
             'slot_id' => 'required|exists:slots,id',
             'addons.*' => 'nullable|exists:addons,id'
         ]);
         
-        $product = Product::findOrFail($validatedData['product_id']);
-        
+        $company = Company::where('slug', $slug)->first();
+
+        $product = Product::where('company_id', $company->id)->findOrFail($validatedData['product_id']);
+        $selectedAddons = Addon::where('product_id', $product->id)->whereIn('id', $validatedData['addons'] ?? [])->get();
+
         $totalPrice = $product->price;
+        foreach ($selectedAddons as $addon) $totalPrice += $addon->price;
         
         $order = Order::create([
             'user_id' => auth()->user()->id,
@@ -160,17 +164,35 @@ class CustomerController extends Controller
             $order->addons()->attach($addon->id, ['price' => $price]);
         }
 
-        return redirect("/products/$order->id/order");
+        return redirect("/$slug/orders/invoice/$order->id");
     }
 
-    public function indexInvoice($slug) 
+    public function indexInvoice($slug, $id) 
     {
-        // Generate barcode
-        $barcode = QrCode::size(250)->generate('123456789');
+        $order = Order::where('user_id', Auth::user()->id)->find($id);
         $company = Company::where('slug', $slug)->first();
 
-        // Pass barcode to the view
-        return view('order-invoice', ['barcode' => $barcode, 'company' => $company, 'slug' => $slug]);
+        // Set transaction data
+        $params = [
+            'transaction_details' => [
+                'order_id' => rand(1, 99999),
+                'gross_amount' => $order->total_price,
+            ],
+            'customer_details' => [
+                'first_name' => $order->user->name,
+                'last_name' => '',
+                'email' => $order->user->email,
+                'phone' => $order->user->phone,
+            ]
+        ];
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+        return view('order-invoice', [
+            'company' => $company, 
+            'order' => $order, 
+            'slug' => $slug,
+            'midtrans_token' => $snapToken
+        ]);
     }
     // End Orders
 }

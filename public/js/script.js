@@ -11,17 +11,15 @@
 })();
 
 // Handle Midtrans
-const handlePayButton = (btnId) => {
+const handlePayButton = () => {
+    const path = window.location.pathname;
+    const pathOrigin = window.location.origin;
+    const slug = path.split("/")[1];
+
     snap.pay(document.getElementById("midtrans_client_token").value, {
-        onSuccess: function (result) {
-            window.location.href = "/order-success";
-        },
-        onPending: function (result) {
-            window.location.href = "/order-success";
-        },
-        onError: function (result) {
-            // Handle the error case
-        },
+        onSuccess: () => (window.location.href = `${path}`),
+        onPending: () => (window.location.href = `${path}`),
+        onError: () => {},
     });
 };
 

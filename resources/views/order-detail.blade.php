@@ -146,9 +146,21 @@
                                         <div class="row g-3 mt-2">
                                             <div class="col-6 col-md-12">
                                                 @if (auth()->check())
-                                                    <form href={{ url("/$slug/orders/invoice") }}
-                                                        class="btn-solid checkout-btn" style="cursor: pointer">
-                                                        Checkout <i class="arrow"></i>
+                                                    <form action={{ url("/$slug/orders") }} id="checkout-form"
+                                                        method="POST" style="cursor: pointer">
+                                                        @csrf
+                                                        <input type="hidden" name="total_price"
+                                                            value={{ $total_price }}>
+                                                        <input type="hidden" name="product_id"
+                                                            value={{ $product->id }}>
+                                                        <input type="hidden" name="slot_id" value={{ $slot->id }}>
+                                                        @foreach ($addons as $addon)
+                                                            <input type="hidden" name="addons[]"
+                                                                value={{ $addon->id }}>
+                                                        @endforeach
+
+                                                        <button class="btn-solid checkout-btn">Checkout</button>
+                                                        <i class="arrow"></i>
                                                     </form>
                                                 @else
                                                     <div class="btn-solid checkout-btn" style="cursor: pointer"
@@ -211,8 +223,8 @@
                                             <div class="input-box">
                                                 <label for="password">Password</label>
                                                 <div class="icon-input">
-                                                    <input class="form-control" type="password" required name="password"
-                                                        id="password" />
+                                                    <input class="form-control" type="password" required
+                                                        name="password" id="password" />
                                                     <img class="showHidePassword"
                                                         src="https://themes.pixelstrap.com/oslo/assets/icons/svg/eye-1.svg"
                                                         alt="eye" />

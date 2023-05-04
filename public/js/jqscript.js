@@ -145,5 +145,3 @@ const showModalEditCompany = (id) => {
 
     $("#modalEditCompany").modal("show");
 };
-
-const handleSlugOnChange = (nameId, slugId) => {};

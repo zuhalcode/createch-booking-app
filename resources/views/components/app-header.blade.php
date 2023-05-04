@@ -31,7 +31,7 @@
                                 <ul class="navbar-nav">
                                     <!-- Home -->
                                     <li class="nav-item">
-                                        <a class="nav-link" href={{ url('/') }}>Home</a>
+                                        <a class="nav-link" href={{ url("/$slug") }}>Home</a>
                                     </li>
 
                                     @if (auth()->check())

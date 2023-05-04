@@ -35,7 +35,7 @@ Route::prefix('/{slug}')->group(fn() => [
         Route::get('/orders/detail', 'redirectToOrderDetail'),
         Route::post('/orders', 'storeOrder'),
     
-        Route::get('/orders/invoice', 'indexInvoice')->middleware('auth'),
+        Route::get('/orders/invoice/{id}', 'indexInvoice')->middleware('auth'),
     ]),
 
     // Handling for Authentication
