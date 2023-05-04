@@ -25,25 +25,25 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class CustomerController extends Controller
 {
     // Handle Homepage
-    public function index() 
+    public function index($slug) 
     {
-        if(auth()->check()) $company = Company::where('id', 1)->first();
-        else $company = Company::findOrFail(1);
-
+        $company = Company::where('slug', $slug)->first();
         $products = Product::where('company_id', $company->id)->get();
         $cover = Cover::where('company_id', $company->id)->first();
+        
         return view('welcome', [
             'company' => $company,
             'cover' => $cover,
-            'products' => $products
+            'products' => $products,
+            'slug' => $company->slug
         ]);
     }
     // End Homepage
 
     // Handle Products
-    public function showProduct($id)
+    public function showProduct($slug, $id)
     {
-        $company = Company::where('user_id', 1)->first();
+        $company = Company::where('slug', $slug)->first();
         $product = Product::find($id);
 
         if(!$product) return abort(404);
@@ -65,6 +65,7 @@ class CustomerController extends Controller
 
         return view('product-detail', [
             'company' => $company,
+            'slug' => $slug,
             'product' => $product,
             'addons' => $addons,
             'slots' => $slots,

@@ -35,19 +35,20 @@
                                     </li>
 
                                     @if (auth()->check())
-                                        @if (auth()->user()->role->id === 1 || auth()->user()->role->id === 2)
+                                        @canany(['admin', 'super-admin'])
                                             <li class="nav-item">
                                                 <a class="nav-link" href={{ url('/dashboard') }}>Dashboard</a>
                                             </li>
                                         @else
                                             <li class="nav-item">
-                                                <a class="nav-link"
-                                                    href={{ url('/dashboard/order-detail') }}>Dashboard</a>
+                                                <a class="nav-link" href={{ url('/dashboard/order-detail') }}>
+                                                    Dashboard
+                                                </a>
                                             </li>
-                                        @endif
+                                        @endcanany
 
                                         <li class="nav-item" style="cursor: pointer">
-                                            <form id="logout-form-nav" action={{ url('/auth/logout') }} method="post">
+                                            <form id="logout-form-nav" action={{ route('logout') }} method="post">
                                                 @csrf
                                                 <div class="nav-link" onclick="handleLogout('logout-form-nav')">
                                                     Logout
@@ -57,11 +58,11 @@
                                     @else
                                         <!-- Auth -->
                                         <li class="nav-item">
-                                            <a class="nav-link" href={{ url('/auth/login') }}>Login</a>
+                                            <a class="nav-link" href={{ url("/$slug/auth/login") }}>Login</a>
                                         </li>
 
                                         <li class="nav-item">
-                                            <a class="nav-link" href={{ url('/auth/register') }}>Register</a>
+                                            <a class="nav-link" href={{ url("/$slug/auth/register") }}>Register</a>
                                         </li>
                                         {{-- End Auth --}}
                                     @endif

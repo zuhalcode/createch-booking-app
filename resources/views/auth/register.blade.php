@@ -20,7 +20,7 @@
                             <h5>CREATE ACCOUNT<span class="bg-theme-blue"></span></h5>
                             <p class="font-md content-color">How do i get access order,wishlist and recommendation ?</p>
 
-                            <form id="formAuthentication" action={{ url('/auth/register') }} method="POST"
+                            <form id="formAuthentication" action={{ url("/$slug/auth/register") }} method="POST"
                                 class="custom-form form-pill">
                                 @csrf
                                 <div class="mb-3">
@@ -46,9 +46,10 @@
                                     </div>
                                 </div>
 
-                                <button type="submit" class="btn-solid rounded-pill line-none theme-color">SignUp
-                                    <i class="arrow"></i></button>
-                                <a href={{ url('/') }}
+                                <button type="submit" class="btn-solid rounded-pill line-none theme-color">
+                                    SignUp <i class="arrow"></i>
+                                </button>
+                                <a href={{ url("/$slug") }}
                                     class="btn-solid rounded-pill line-none btn-outline mt-3 d-flex justify-content-center">
                                     Home <i class="arrow"></i>
                                 </a>
@@ -56,14 +57,14 @@
 
                             <span class="backto-link font-default content-color text-decoration-none">
                                 Already have an Account?
-                                <a class="text-decoration-underline theme-color" href={{ '/auth/login' }}>
+                                <a class="text-decoration-underline theme-color" href={{ url("/$slug/auth/login") }}>
                                     Sign In
                                 </a>
                             </span>
 
                             <span class="line"><span>Or </span> </span>
                             <a href="https://www.google.com/" class="button-link"><img
-                                    src="../assets/icons/png/google.png" alt="google" /> Sign up </a>
+                                    src={{ asset('/assets/icons/png/google.png') }} alt="google" /> Sign up </a>
                         </div>
                     </div>
                 </div>

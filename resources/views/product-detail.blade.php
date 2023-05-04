@@ -4,14 +4,14 @@
     <!-- Overlay -->
     <a href="javascript:void(0)" class="overlay-general"></a>
 
-    <x-app-header />
+    <x-app-header :slug="$slug" />
 
     <!-- Main Start -->
     <main class="main">
         <!-- Breadcrumb Start -->
         <div class="breadcrumb-wrap">
             <div class="banner">
-                <img class="bg-img bg-top" src="../assets/images/inner-page/banner-p.jpg" alt="banner" />
+                <img class="bg-img bg-top" src={{ asset('/assets/images/inner-page/banner-p.jpg') }} alt="banner" />
 
                 <div class="container-lg">
                     <div class="breadcrumb-box">
@@ -19,12 +19,12 @@
                             <h1>Product</h1>
                         </div>
                         <ol class="breadcrumb">
-                            <li><a href={{ url('/') }}>Home</a></li>
+                            <li><a href={{ url("/$slug") }}>Home</a></li>
                             <li>
                                 <a href="javascript:void(0)"><i data-feather="chevron-right"></i></a>
                             </li>
                             <li class="current">
-                                <a href={{ url("/products/$product->id") }}>Product</a>
+                                <a href={{ url("/$slug/products/$product->id") }}>Product</a>
                             </li>
                         </ol>
                     </div>
@@ -104,7 +104,7 @@
                     <div class="col-md-5">
                         <div class="product-detail-box">
                             <form class="product-option" id="product-detail-order-form" method="GET"
-                                action={{ url('/orders/detail') }}>
+                                action={{ url("/$slug/orders/detail") }}>
                                 @csrf
                                 <h2>{{ $product->name }}</h2>
 

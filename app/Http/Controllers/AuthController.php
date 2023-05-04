@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    public function indexLogin($slug)
+    {
+        return view('auth.login', ['slug' => $slug]);
+    }
+
+    public function indexRegister($slug)
+    {
+        return view('auth.register', ['slug' => $slug]);
+    }
+
     public function loginModal(Request $req) {
         $credentials = $req->validate([
             'email' => 'required|email',
@@ -38,7 +48,7 @@ class AuthController extends Controller
         return back()->with('success', 'Login Berhasil!, silahkan selesaikan order anda');
     }
 
-    public function login(Request $req)
+    public function login(Request $req, $slug)
     {
         $credentials = $req->validate([
             'email' => 'required|email',
@@ -53,7 +63,7 @@ class AuthController extends Controller
         return back()->with('loginError', 'Login gagal!');
     }
 
-    public function register(Request $req)
+    public function register(Request $req, $slug)
     {
         $validatedData = $req->validate([
             'name' => 'required|max:255',

@@ -1,10 +1,10 @@
 <!-- Document Footer Start -->
 <footer class="footer-document footer-document2 ratio_asos mb-xxl">
     <div class="bg-footer-l">
-        <img src="../assets/images/bag/banner/bg-footer-l.png" alt="banner" />
+        <img src={{ asset('/assets/images/bag/banner/bg-footer-l.png') }} alt="banner" />
     </div>
     <div class="bg-footer-r">
-        <img src="../assets/images/bag/banner/bg-footer-r.png" alt="banner" />
+        <img src={{ asset('/assets/images/bag/banner/bg-footer-r.png') }} alt="banner" />
     </div>
     <div>
         <div class="container-lg">

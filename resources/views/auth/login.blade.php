@@ -20,7 +20,7 @@
                             <h5>LOGIN <span class="bg-theme-blue"></span></h5>
                             <p class="font-md content-color">How do i get access order,wishlist and recomendation ?</p>
 
-                            <form form id="formAuthentication" action={{ url('/auth/login') }} method="POST"
+                            <form form id="formAuthentication" action={{ url("/$slug/auth/login") }} method="POST"
                                 class="custom-form form-pill">
                                 @csrf
                                 <div class="mb-3">
@@ -43,7 +43,7 @@
                                 <button type="submit" class="btn-solid rounded-pill line-none">
                                     Signin <i class="arrow"></i>
                                 </button>
-                                <a href={{ url('/') }}
+                                <a href={{ url("/$slug") }}
                                     class="btn-solid rounded-pill line-none btn-outline mt-3 d-flex justify-content-center">
                                     Home <i class="arrow"></i>
                                 </a>
@@ -51,14 +51,14 @@
 
                             <span class="backto-link font-default content-color text-decoration-none">
                                 If you are new,
-                                <a class="text-decoration-underline theme-color" href={{ url('/auth/register') }}>
+                                <a class="text-decoration-underline theme-color" href={{ url("/$slug/auth/register") }}>
                                     Create Now
                                 </a>
                             </span>
                             <span class="line"><span>Or </span> </span>
                             <div class="link-group">
                                 <a href="https://www.google.com/" class="button-link"><img
-                                        src="../assets/icons/png/google.png" alt="google" /> Sign in </a>
+                                        src={{ asset('/assets/icons/png/google.png') }} alt="google" /> Sign in </a>
                             </div>
                         </div>
                     </div>

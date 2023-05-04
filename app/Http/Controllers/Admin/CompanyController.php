@@ -6,12 +6,13 @@ use App\Models\Cover;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class CompanyController extends Controller
 {
     public function editLandingPage() {
-        $cover = Cover::where('id', auth()->user()->company->id)->first();
+        $cover = Cover::where('id', Auth::user()->company->id)->first();
         return view('dashboard.company.landing-page', ['cover' => $cover]);
     }
 

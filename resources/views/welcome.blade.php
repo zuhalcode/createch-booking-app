@@ -4,7 +4,7 @@
     <!-- Overlay -->
     <a href="javascript:void(0)" class="overlay-general overlay-common"></a>
 
-    <x-app-header />
+    <x-app-header :slug="$slug" />
 
     <!-- Main Start -->
     <main class="main">
@@ -52,13 +52,13 @@
         <section class="sub-banner-5 pt-0">
             <div class="container-lg">
                 <div class="sub-banner">
-                    <img class="bg-img" src="../assets/images/furniture/banner/sub-banner2.jpg" alt="sub-banner" />
+                    <img class="bg-img" src={{ '/assets/images/furniture/banner/sub-banner2.jpg' }} alt="sub-banner" />
 
                     <div class="content-box">
                         <h5 class="title-banner">
                             About Us
                         </h5>
-                        <h6 class="collection-title"><span class="line"></span> Bookly</h6>
+                        <h6 class="collection-title"><span class="line"></span>Bookly</h6>
                         <p>
                             {{ $company->about_us }}
                         </p>
@@ -76,7 +76,6 @@
                                     Book Now
                                 </div>
                             </div>
-
 
                             <div class="contact-info">
                                 <a class="phone-link" href="tel:254562541254">
@@ -129,7 +128,7 @@
                                 class="row gy-3 gy-sm-4 gy-xxl-5 g-xxl-3 gx-2 gx-sm-3 row-cols-3 row-cols-xl-4 row-cols-xxl-5 ratio_asos">
 
                                 @foreach ($products as $product)
-                                    <x-app.product-card :img="asset($product->image)" :price="$product->price" :href="'/products/' . $product->id">
+                                    <x-app.product-card :img="asset($product->image)" :price="$product->price" :href="'/' . $slug . '/products/' . $product->id">
                                         {{ $product->name }}
                                     </x-app.product-card>
                                 @endforeach
