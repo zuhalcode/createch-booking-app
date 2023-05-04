@@ -58,7 +58,7 @@
                         <h5 class="title-banner">
                             About Us
                         </h5>
-                        <h6 class="collection-title"><span class="line"></span>Bookly</h6>
+                        <h6 class="collection-title"><span class="line"></span>{{ ucfirst($company->name) }}</h6>
                         <p>
                             {{ $company->about_us }}
                         </p>

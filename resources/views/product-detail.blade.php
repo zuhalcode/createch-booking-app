@@ -128,8 +128,11 @@
                                     </div>
                                     <ul class="size-list" style="white-space: nowrap; overflow-x: auto;">
                                         @foreach ($dates as $date)
+                                            @php
+                                                $holidayDate = in_array($date->format('Y-m-d'), $holidays);
+                                            @endphp
                                             <li class="p-4 bold d-flex flex-column rounded-1 date-slot
-                                                {{ in_array($date->format('Y-m-d'), $holidayDates) ? 'bg-danger text-white' : '' }}"
+                                                {{ $holidayDate ? 'bg-danger text-white' : '' }}"
                                                 data-date={{ $date->format('d-m-Y') }}>
                                                 {{ $date->format('j') }} <span>{{ $date->format('M') }}</span>
                                             </li>

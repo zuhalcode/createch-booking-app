@@ -77,7 +77,7 @@ class AuthController extends Controller
         return redirect('/auth/login')->with('success', 'Registrasi berhasil! Silahkan login');
     }
 
-    public function logout(Request $req)
+    public function logout(Request $req, $slug)
     {
         Auth::logout();
         $req->session()->invalidate(); 

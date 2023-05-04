@@ -42,38 +42,24 @@ class DatabaseSeeder extends Seeder
     {
         Role::factory()->count(3)->create();
         User::factory()->count(6)->create();
-        
         Province::factory()->count(34)->create();
-    
+
         JawaCityFactory::new()->count(67)->create();
         NusaTenggaraCityFactory::new()->count(42)->create();
         KalimantanCityFactory::new()->count(61)->create();
         MalukuCityFactory::new()->count(18)->create();
         LampungCityFactory::new()->count(15)->create();
         SulawesiCityFactory::new()->count(72)->create();
-
-        // Revisi
-        // 
         RiauAcehBaliCityFactory::new()->count(43)->create();
-        // 
-        // 
         BantenBengkuluYogyakartaJakartaGorontaloJambiCityFactory::new()->count(29)->create();
-        // 
-        // 
         PapuaPapuaBaratCityFactory::new()->count(40)->create();
-        // 
-        // End Revisi
-
         SumateraCityFactory::new()->count(58)->create();
 
         Company::factory()->count(3)->create();
         Holiday::factory()->count(30)->create();
         Cover::factory()->count(3)->create();
-        Product::factory()->count(20)->create();
-        Slot::factory()->count(20)->create();
-        AddOn::factory()->count(20)->create();
-
-        
+        Product::factory()->count(50)->create();
+        Slot::factory()->count(100)->create();
+        AddOn::factory()->count(100)->create();
     }
 }
-  

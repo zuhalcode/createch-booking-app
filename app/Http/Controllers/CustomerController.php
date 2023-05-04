@@ -44,7 +44,7 @@ class CustomerController extends Controller
     public function showProduct($slug, $id)
     {
         $company = Company::where('slug', $slug)->first();
-        $product = Product::find($id);
+        $product = Product::where('company_id', $company->id)->findOrFail($id);
 
         if(!$product) return abort(404);
 
@@ -53,15 +53,13 @@ class CustomerController extends Controller
 
         // Get the holidays for the current month
         $currentDate = Carbon::now();
-        $holidays = Holiday::orderBy('date')->get();
+        $holidays = Holiday::orderBy('date')->pluck('date')->toArray();
 
         $dates = [];
         for ($i = 0; $i < 30; $i++) {
             $date = $currentDate->copy()->addDays($i);
             $dates[] = $date;
         }
-
-        $holidayDates = $holidays->pluck('date')->toArray();
 
         return view('product-detail', [
             'company' => $company,
@@ -71,7 +69,6 @@ class CustomerController extends Controller
             'slots' => $slots,
             'dates' => $dates,
             'holidays' => $holidays,
-            'holidayDates' => $holidayDates,
         ]);
     }
     // End Products
@@ -108,7 +105,7 @@ class CustomerController extends Controller
         ]);
     }
 
-    public function redirectToOrderDetail(Request $req)
+    public function redirectToOrderDetail(Request $req, $slug)
     {
         $validatedData = $req->validate([
             'product_id' => 'required|exists:products,id',
@@ -127,6 +124,7 @@ class CustomerController extends Controller
         }
 
         return view("order-detail", [
+            'slug' => $slug,
             'product' => $product,
             'addons' => $selectedAddons,
             'slot' => $slot,
@@ -165,14 +163,14 @@ class CustomerController extends Controller
         return redirect("/products/$order->id/order");
     }
 
-    public function indexInvoice() 
+    public function indexInvoice($slug) 
     {
         // Generate barcode
         $barcode = QrCode::size(250)->generate('123456789');
-        $company = Company::where('id', 1)->first();
+        $company = Company::where('slug', $slug)->first();
 
         // Pass barcode to the view
-        return view('order-invoice', ['barcode' => $barcode, 'company' => $company]);
+        return view('order-invoice', ['barcode' => $barcode, 'company' => $company, 'slug' => $slug]);
     }
     // End Orders
 }

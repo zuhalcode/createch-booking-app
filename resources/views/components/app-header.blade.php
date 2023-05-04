@@ -48,7 +48,7 @@
                                         @endcanany
 
                                         <li class="nav-item" style="cursor: pointer">
-                                            <form id="logout-form-nav" action={{ route('logout') }} method="post">
+                                            <form id="logout-form-nav" action={{ url('/logout') }} method="post">
                                                 @csrf
                                                 <div class="nav-link" onclick="handleLogout('logout-form-nav')">
                                                     Logout

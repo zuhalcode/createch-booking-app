@@ -4,7 +4,7 @@
     <!-- Overlay -->
     <a href="javascript:void(0)" class="overlay-general"></a>
 
-    <x-app-header />
+    <x-app-header :slug="$slug" />
 
     <!-- Main Start -->
     <main class="main">

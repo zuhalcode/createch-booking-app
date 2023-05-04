@@ -18,7 +18,7 @@ class SlotFactory extends Factory
     {
         return [
             'company_id' => $this->faker->numberBetween(1, 3),
-            'product_id' => $this->faker->numberBetween(1, 20),
+            'product_id' => $this->faker->numberBetween(1, 50),
             'time' => $this->faker->dateTimeBetween('12:00 AM', '12:00 PM')->format('h:i'),
             'max_user' => $this->faker->numberBetween(1, 100),
         ];

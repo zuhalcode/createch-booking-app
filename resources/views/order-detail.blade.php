@@ -4,7 +4,7 @@
     <!-- Overlay -->
     <a href="javascript:void(0)" class="overlay-general"></a>
 
-    <x-app-header />
+    <x-app-header :slug="$slug" />
 
     <!-- Main Start -->
     <main class="main">
@@ -18,11 +18,11 @@
                             <h1>Order</h1>
                         </div>
                         <ol class="breadcrumb">
-                            <li><a href={{ url('/') }}>Home</a></li>
+                            <li><a href={{ url("/$slug") }}>Home</a></li>
                             <li>
                                 <a href="javascript:void(0)"><i data-feather="chevron-right"></i></a>
                             </li>
-                            <li class="current"><a href={{ url("/products/$product->id/order") }}>Order</a></li>
+                            <li class="current"><a href={{ url()->current() }}>Order</a></li>
                         </ol>
                     </div>
                 </div>
@@ -79,39 +79,42 @@
                                     </tbody>
                                 </table>
 
-                                <table class="table cart-table m-md-0 mt-3">
-                                    <thead>
-                                        <tr>
-                                            <th class="d-none d-sm-table-cell">ADDONS</th>
-                                            <th class="d-none d-sm-table-cell">PRICE</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-                                        @foreach ($addons as $addon)
+                                @if (!$addons->isEmpty())
+                                    <table class="table cart-table m-md-0 mt-3">
+                                        <thead>
                                             <tr>
-                                                <td>
-                                                    <div class="product-detail">
-                                                        <div class="details">
-                                                            <h4 class="title-color font-default2" style="width: 320px">
-                                                                {{ $addon->name }}
-                                                            </h4>
-                                                            <span class="size gap-2 d-flex d-sm-none">
-                                                                Price :
-                                                                <span>
-                                                                    {{ Str::shortened_price($addon->price) }}
-                                                                </span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="price d-none d-sm-table-cell">
-                                                    {{ Str::shortened_price($addon->price) }}
-                                                </td>
+                                                <th class="d-none d-sm-table-cell">ADDONS</th>
+                                                <th class="d-none d-sm-table-cell">PRICE</th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+
+                                        <tbody>
+                                            @foreach ($addons as $addon)
+                                                <tr>
+                                                    <td>
+                                                        <div class="product-detail">
+                                                            <div class="details">
+                                                                <h4 class="title-color font-default2"
+                                                                    style="width: 320px">
+                                                                    {{ $addon->name }}
+                                                                </h4>
+                                                                <span class="size gap-2 d-flex d-sm-none">
+                                                                    Price :
+                                                                    <span>
+                                                                        {{ Str::shortened_price($addon->price) }}
+                                                                    </span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="price d-none d-sm-table-cell">
+                                                        {{ Str::shortened_price($addon->price) }}
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -143,19 +146,20 @@
                                         <div class="row g-3 mt-2">
                                             <div class="col-6 col-md-12">
                                                 @if (auth()->check())
-                                                    <a href={{ url('/orders/invoice') }} class="btn-solid checkout-btn"
-                                                        style="cursor: pointer">
+                                                    <form href={{ url("/$slug/orders/invoice") }}
+                                                        class="btn-solid checkout-btn" style="cursor: pointer">
                                                         Checkout <i class="arrow"></i>
-                                                    </a>
+                                                    </form>
                                                 @else
                                                     <div class="btn-solid checkout-btn" style="cursor: pointer"
-                                                        data-bs-toggle="modal" data-bs-target="#addNewAddress">
+                                                        data-bs-toggle="modal" data-bs-target="#authModal">
                                                         Checkout <i class="arrow"></i>
                                                     </div>
                                                 @endif
                                             </div>
+
                                             <div class="col-6 col-md-12">
-                                                <a href={{ url('/') }}
+                                                <a href={{ url("/$slug") }}
                                                     class="btn-outline w-100 justify-content-center checkout-btn">
                                                     Back To Home
                                                 </a>
@@ -174,7 +178,7 @@
     <!-- Main End -->
 
     <!-- Auth Modal Start -->
-    <div class="modal fade addnew-address" id="addNewAddress" tabindex="-1" aria-labelledby="addNewAddressLabel"
+    <div class="modal fade addnew-address" id="authModal" tabindex="-1" aria-labelledby="addNewAddressLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -195,7 +199,7 @@
                                             How do i get access order,wishlist and recomendation ?
                                         </p>
 
-                                        <form method="POST" action={{ url('/login-modal') }}
+                                        <form method="POST" action={{ url("/$slug/login-modal") }}
                                             class="custom-form form-pill">
                                             @csrf
                                             <div class="input-box">
@@ -245,7 +249,7 @@
                                         <p class="font-md content-color">How do i get access order,wishlist and
                                             recommendation ?</p>
 
-                                        <form action={{ url('/register-modal') }} class="custom-form form-pill"
+                                        <form action={{ url("/$slug/register-modal") }} class="custom-form form-pill"
                                             method="POST">
                                             @csrf
                                             <div class="input-box">
@@ -289,7 +293,7 @@
                                         </span>
                                         <span class="line"><span>Or</span></span>
                                         <a href="https://www.google.com/" class="button-link">
-                                            <img src="../assets/icons/png/google.png" alt="google" />
+                                            <img src={{ asset('/assets/icons/png/google.png') }} alt="google" />
                                             Sign up
                                         </a>
                                     </div>
