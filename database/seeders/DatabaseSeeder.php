@@ -17,26 +17,19 @@ use Illuminate\Database\Seeder;
 use Database\Factories\AcehCityFactory;
 
 // Jasmine
-use Database\Factories\BaliCityFactory;
 use Database\Factories\JawaCityFactory;
-use Database\Factories\RiauCityFactory;
-use Database\Factories\JambiCityFactory;
-use Database\Factories\PapuaCityFactory;
-use Database\Factories\BantenCityFactory;
 use Database\Factories\MalukuCityFactory;
-use Database\Factories\JakartaCityFactory;
 use Database\Factories\LampungCityFactory;
-use Database\Factories\BengkuluCityFactory;
 use Database\Factories\SulawesiCityFactory;
-use Database\Factories\GorontaloCityFactory;
-use Database\Factories\KalimantanCityFactory;
-use Database\Factories\PapuabaratCityFactory;
-use Database\Factories\YogyakartaCityFactory;
-use Database\Factories\NusaTenggaraCityFactory;
-use Database\Factories\SumaterabaratCityFactory;
 use Database\Factories\SumateraCityFactory;
+use Database\Factories\KalimantanCityFactory;
+use Database\Factories\NusaTenggaraCityFactory;
+use Database\Factories\RiauAcehBaliCityFactory;
+use Database\Factories\SumaterabaratCityFactory;
 use Database\Factories\SumaterautaraCityFactory;
+use Database\Factories\PapuaPapuaBaratCityFactory;
 use Database\Factories\SumateraselatanCityFactory;
+use Database\Factories\BantenBengkuluYogyakartaJakartaGorontaloJambiCityFactory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -61,21 +54,13 @@ class DatabaseSeeder extends Seeder
 
         // Revisi
         // 
-        RiauCityFactory::new()->count(10)->create();
-        AcehCityFactory::new()->count(23)->create();
-        BaliCityFactory::new()->count(10)->create();
+        RiauAcehBaliCityFactory::new()->count(43)->create();
         // 
         // 
-        BantenCityFactory::new()->count(4)->create();
-        BengkuluCityFactory::new()->count(6)->create();
-        YogyakartaCityFactory::new()->count(5)->create();
-        JakartaCityFactory::new()->count(5)->create();
-        GorontaloCityFactory::new()->count(3)->create();
-        JambiCityFactory::new()->count(10)->create();
+        BantenBengkuluYogyakartaJakartaGorontaloJambiCityFactory::new()->count(29)->create();
         // 
         // 
-        PapuaCityFactory::new()->count(29)->create();
-        PapuabaratCityFactory::new()->count(11)->create();
+        PapuaPapuaBaratCityFactory::new()->count(40)->create();
         // 
         // End Revisi
 
