@@ -12,15 +12,11 @@ use App\Models\Holiday;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 // Set your Merchant Server Key
 \Midtrans\Config::$serverKey = 'SB-Mid-server-e-cseZ8LxEVvtAgQCFFBYixX';
-// Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
 \Midtrans\Config::$isProduction = false;
-// Set sanitization on (default)
 \Midtrans\Config::$isSanitized = true;
-// Set 3DS transaction for credit card to true
 \Midtrans\Config::$is3ds = true;
 
 class CustomerController extends Controller
@@ -79,6 +75,7 @@ class CustomerController extends Controller
     {
         $order = Order::find($id);
         $user = auth()->user();
+
         // Set transaction data
         $params = [
             'transaction_details' => [
@@ -120,9 +117,8 @@ class CustomerController extends Controller
         $slot = Slot::find($validatedData['slot_id']);
 
         $totalPrice = $product->price;
-        foreach ($selectedAddons as $addon) {
-            $totalPrice += $addon->price;
-        }
+
+        foreach ($selectedAddons as $addon) $totalPrice += $addon->price;
 
         return view("order-detail", [
             'slug' => $slug,
@@ -130,7 +126,6 @@ class CustomerController extends Controller
             'addons' => $selectedAddons,
             'slot' => $slot,
             'total_price' => $totalPrice,
-            'payment_token' =>  ''
         ]);
     }
 
@@ -149,7 +144,7 @@ class CustomerController extends Controller
 
         $totalPrice = $product->price;
         foreach ($selectedAddons as $addon) $totalPrice += $addon->price;
-        
+
         $order = Order::create([
             'user_id' => auth()->user()->id,
             'product_id' => $validatedData['product_id'],

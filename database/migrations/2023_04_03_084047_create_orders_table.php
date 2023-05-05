@@ -15,11 +15,14 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('branch_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('product_id')->constrained();
             $table->foreignId('slot_id')->constrained();
             $table->integer('total_price');
+            $table->string('midtrans_token', 255);
             $table->enum('status', ['Pending', 'Processed', 'Completed', 'Canceled']);
+            $table->timestamp('expired_at')->nullable();
             $table->timestamps();
         });
     }

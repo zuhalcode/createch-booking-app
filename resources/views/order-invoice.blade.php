@@ -30,70 +30,121 @@
         <section class="p-3 mt-2">
             <div class="row g-3 g-lg-4 ms-2 summery-wrap">
                 <div class="col-8 mx-auto success-icon rounded-3 d-flex flex-column gap-3 cart-wrap grand-total-wrap">
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex gap-3">
-                            <div>
-                                <img style="height: 50px; width: 120px"
-                                    src={{ asset('/assets/images/logos/logo-4.png') }} alt="logo" />
-                            </div>
-                            <div class="d-flex flex-column success-contain">
-                                <h1 class="text-start">{{ $company->name }}</h1>
-                                <h5 class="font-light text-start">{{ $company->email }}</h5>
-                            </div>
-                        </div>
-
-                        <div class="d-flex flex-column success-contain font-light text-end text-capitalize">
-                            <h5>{{ $company->address }}</h5>
-                            <h5>{{ $company->city->name }}</h5>
-                            <h5>{{ $company->city->province->name }}</h5>
-                        </div>
-                    </div>
 
                     <div class="d-flex p-3 rounded-3 justify-content-between text-white mt-2"
                         style="background-color: #c69057">
                         <div class="d-flex flex-column gap-2">
-                            <h5><b>Invoice Number</b></h5>
-                            <h5>INV-2022-{{ $order->id }}</h5>
-                            <h5>Issued date: {{ $order->created_at->format('j M Y') }}</h5>
-                            <h5>Expires date: 18 Jan 2022</h5>
+                            <h5><b>Invoice : </b> order-basic-239749141</h5>
                         </div>
 
-                        <div class="d-flex flex-column gap-2">
-                            <h5>Billed to</h5>
-                            <h5>{{ $order->user->name }}</h5>
-                            {{-- <h5>Moonlight Agency LTD</h5> --}}
-                            <h5>{{ $order->user->address }}</h5>
+                        <div class="d-flex gap-2">
+                            <h5><b>Status :</b></h5>
+                            <span class="badge bg-primary text-white"
+                                style="font-size: .8rem">{{ $order->status }}</span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex gap-3">
+                            <div class="d-flex flex-column text-start success-contain">
+                                <h5><b>To :</b></h5>
+                                <h5>{{ ucfirst($order->user->name) }}</h5>
+                                <h5>{{ $order->user->email }}</h5>
+                                <h5>{{ $order->user->phone }}</h5>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-column success-contain font-light text-end text-capitalize">
+                            <h5><b>Issued date :</b> {{ $order->created_at->format('l, d F Y') }}</h5>
+                            <h5><b>Expires date :</b> 18 Jan 2022</h5>
                         </div>
                     </div>
 
                     <div class="mt-2">
                         <div class="order-summery-box">
-                            <h5 class="cart-title">Detail Harga</h5>
-                            <ul class="order-summery">
-                                <li>
-                                    <span>{{ $order->product->name }}</span>
-                                    <span>{{ Str::shortened_price($order->product->price) }}</span>
-                                </li>
+                            <h3>Invoice Items</h3>
+                            <table class="table cart-table m-md-0">
+                                <thead class="text-start">
+                                    <tr>
+                                        <th class="d-none d-sm-table-cell">PRODUCT</th>
+                                        <th class="d-none d-sm-table-cell">PRICE</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-start">
+                                    <tr>
+                                        <td>
+                                            <div class="product-detail">
+                                                <div class="details">
+                                                    <h4 class="title-color font-default2">
+                                                        {{ ucfirst($order->product->name) }}
+                                                    </h4>
+                                                    <span class="size gap-2 d-flex d-sm-none">
+                                                        Price :
+                                                        <span>
+                                                            {{ Str::shortened_price($order->product->price) }}
+                                                        </span>
+                                                    </span>
+                                                    <span class="size gap-2 d-flex">
+                                                        Date : <span>23 Jan 2023</span>
+                                                    </span>
+                                                    <span class="size gap-2 d-flex">
+                                                        Time Slot :
+                                                        <span>
+                                                            {{ date('h:i A', strtotime($order->slot->time)) }}
+                                                        </span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </td>
 
-                                @foreach ($order->addons as $addon)
-                                    <li>
-                                        <span>{{ $addon->name }}</span>
-                                        <span class="font-danger">
-                                            {{ Str::shortened_price($addon->pivot->price) }}
-                                        </span>
-                                    </li>
-                                @endforeach
+                                        <td class="price d-none d-sm-table-cell">
+                                            {{ Str::shortened_price($order->product->price) }}
+                                        </td>
+                                    </tr>
+                                    @foreach ($order->addons as $addon)
+                                        <tr>
+                                            <td>
+                                                <div class="product-detail">
+                                                    <div class="details">
+                                                        <h4 class="title-color font-default2" style="width: 320px">
+                                                            {{ $addon->name }}
+                                                        </h4>
+                                                        <span class="size gap-2 d-flex d-sm-none">
+                                                            Price :
+                                                            <span>
+                                                                {{ Str::shortened_price($addon->price) }}
+                                                            </span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="price d-none d-sm-table-cell">
+                                                {{ Str::shortened_price($addon->price) }}
+                                            </td>
+                                        </tr>
+                                    @endforeach
 
-                                <li>
-                                    <span>Biaya Tambahan</span>
-                                    <span>Rp. 5.000</span>
-                                </li>
-
-                                <li class="pb-0">
-                                    <span class="font-weight-bold">Biaya Total</span>
-                                    <span>{{ Str::shortened_price($order->total_price) }}</span>
-                                </li>
-                            </ul>
+                                    <tr>
+                                        <td></td>
+                                        <td class="price d-none d-sm-table-cell text-start">
+                                            <p class="d-flex" style="gap: 3.4rem">
+                                                <b>Subtotal</b>
+                                                <span>{{ Str::shortened_price($order->product->price) }}</span>
+                                            </p>
+                                            <p class="d-flex" style="gap: 2.8rem">
+                                                <b>PPN (0%)</b>
+                                                <span>{{ Str::shortened_price(0) }}</span>
+                                            </p>
+                                            <p class="d-flex" style="gap: 5rem">
+                                                <b>Total</b>
+                                                <span class="font-weight-bold">
+                                                    <b>{{ Str::shortened_price($order->total_price) }}</b>
+                                                </span>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -103,17 +154,15 @@
                         <div class="cart-wrap grand-total-wrap">
                             <div>
                                 <div class="order-summery-box">
-                                    <div class="d-flex justify-content-between">
-                                        <h5 class="cart-title">Status Order</h5>
-                                        <h5 class="cart-title">{{ $order->status }}</h5>
-                                    </div>
+                                    <h5 class="cart-title">Total Due</h5>
+                                    <h2 class="">{{ Str::shortened_price($order->total_price) }}</h2>
                                     <div class="row g-3 mt-2">
                                         <div class="col-6 col-md-12">
                                             <input type="hidden" id="midtrans_client_token"
                                                 value={{ $midtrans_token }}>
                                             <div class="btn-solid checkout-btn" onclick="handlePayButton()"
                                                 style="cursor: pointer">
-                                                Checkout <i class="arrow"></i>
+                                                Pay Now <i class="arrow"></i>
                                             </div>
                                         </div>
 

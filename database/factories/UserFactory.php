@@ -45,6 +45,7 @@ class UserFactory extends Factory
             'name' => $userData['name'],
             'email' => $userData['email'],
             'password' => Hash::make('zuhal123'),
+            'phone' => $this->faker->phoneNumber('id_ID'),
             'role_id' => $userData['role_id'],
         ];
     }
