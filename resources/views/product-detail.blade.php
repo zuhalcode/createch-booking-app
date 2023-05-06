@@ -21,7 +21,7 @@
                         <ol class="breadcrumb">
                             <li><a href={{ url("/$slug") }}>Home</a></li>
                             <li>
-                                <a href="javascript:void(0)"><i data-feather="chevron-right"></i></a>
+                                <i data-feather="chevron-right"></i>
                             </li>
                             <li class="current">
                                 <a href={{ url("/$slug/products/$product->id") }}>Product</a>
