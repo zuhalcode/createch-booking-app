@@ -1,9 +1,10 @@
 <!-- Header Start -->
-@if (request()->is('products/*') || request()->is('orders') || request()->is('order-success'))
-    <header class="header-common ">
+@if (request()->is("$slug"))
+    <header class="header-common header4 header4LogoChange">
     @else
-        <header class="header-common header4 header4LogoChange">
+        <header class="header-common">
 @endif
+<!-- Top Header -->
 <div class="container-lg">
     <div class="nav-wrap">
         <!-- Navigation Start -->
@@ -26,6 +27,7 @@
                                 <button class="btn-close lead" type="button" data-bs-dismiss="offcanvas"
                                     aria-label="Close"></button>
                             </div>
+
                             <div class="offcanvas-body">
                                 <!-- Menu-->
                                 <ul class="navbar-nav">
@@ -66,7 +68,6 @@
                                         </li>
                                         {{-- End Auth --}}
                                     @endif
-
                                 </ul>
                             </div>
                         </div>

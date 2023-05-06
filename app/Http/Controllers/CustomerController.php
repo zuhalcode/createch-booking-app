@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Slot;
 use App\Models\AddOn;
+use App\Models\Branch;
 use App\Models\Cover;
 use App\Models\Order;
 use App\Models\Company;
@@ -27,12 +28,13 @@ class CustomerController extends Controller
         $company = Company::where('slug', $slug)->first();
         $products = Product::where('company_id', $company->id)->get();
         $cover = Cover::where('company_id', $company->id)->first();
-        
+
         return view('welcome', [
             'company' => $company,
             'cover' => $cover,
             'products' => $products,
-            'slug' => $company->slug
+            'slug' => $company->slug,
+            'branchSlug' => $company->slug
         ]);
     }
     // End Homepage
@@ -80,7 +82,7 @@ class CustomerController extends Controller
         $params = [
             'transaction_details' => [
                 'order_id' => $id,
-                'gross_amount' => $order->total_price,
+                'gross_amount' => $order->total_price ?? 0,
             ],
             'customer_details' => [
                 'first_name' => $user->name,

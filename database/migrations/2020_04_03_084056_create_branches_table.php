@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('company_id')->constrained();
             $table->foreignId('product_id')->constrained();
             $table->foreignId('city_id')->constrained();
-
+            $table->string('slug')->unique();
             $table->string('name');
             $table->string('phone')->nullable();
             $table->string('address')->nullable();

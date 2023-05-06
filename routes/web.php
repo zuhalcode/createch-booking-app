@@ -25,7 +25,6 @@ use App\Http\Controllers\SuperAdmin\CompanyController as SuperAdminCompanyContro
 Route::get('/tes', fn () => view('tes'));
 
 Route::prefix('/{slug}')->group(fn() => [
-
     // Handling for Customer Page
     Route::controller(CustomerController::class)->group(fn() => [
         Route::get('/', 'index'),

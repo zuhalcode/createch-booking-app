@@ -14,7 +14,7 @@ class AppHeader extends Component
      *
      * @return void
      */
-    public function __construct($slug)
+    public function __construct($slug = '')
     {
         $this->logo = Company::find(1)->logo;
         $this->slug = $slug;

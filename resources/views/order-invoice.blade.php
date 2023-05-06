@@ -138,7 +138,7 @@
                                             <p class="d-flex" style="gap: 5rem">
                                                 <b>Total</b>
                                                 <span class="font-weight-bold">
-                                                    <b>{{ Str::shortened_price($order->total_price) }}</b>
+                                                    <b>{{ Str::shortened_price($order->total_price ?? 0) }}</b>
                                                 </span>
                                             </p>
                                         </td>
