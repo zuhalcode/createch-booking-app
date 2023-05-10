@@ -16,7 +16,6 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
             $table->foreignId('city_id')->constrained();
             $table->string('name')->nullable()->default('bookly');
             $table->string('slug')->unique();

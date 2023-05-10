@@ -27,4 +27,9 @@ class Slot extends Model
     {
         return $this->belongsTo(Company::class);
     }
+
+    public function branches()
+    {
+        return $this->belongsToMany(Branch::class);
+    }
 }

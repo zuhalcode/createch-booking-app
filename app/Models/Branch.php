@@ -39,4 +39,9 @@ class Branch extends Model
     {
         return $this->hasMany(SocialMedia::class);
     }
+
+    public function slots()
+    {
+        return $this->belongsToMany(Slot::class);
+    }
 }

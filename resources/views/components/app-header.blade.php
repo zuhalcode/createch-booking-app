@@ -39,18 +39,24 @@
                                     @if (auth()->check())
                                         @canany(['admin', 'super-admin'])
                                             <li class="nav-item">
-                                                <a class="nav-link" href={{ url('/dashboard') }}>Dashboard</a>
+                                                <a class="nav-link" href={{ url("/$slug/dashboard") }}>Dashboard</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href={{ url("/$slug/invoices") }}>
+                                                    Invoice
+                                                </a>
                                             </li>
                                         @else
                                             <li class="nav-item">
-                                                <a class="nav-link" href={{ url('/dashboard/order-detail') }}>
-                                                    Dashboard
+                                                <a class="nav-link" href={{ url("/$slug/invoices") }}>
+                                                    Invoice
                                                 </a>
                                             </li>
                                         @endcanany
 
                                         <li class="nav-item" style="cursor: pointer">
-                                            <form id="logout-form-nav" action={{ url('/logout') }} method="post">
+                                            <form id="logout-form-nav" action={{ url("/$slug/auth/logout") }}
+                                                method="post">
                                                 @csrf
                                                 <div class="nav-link" onclick="handleLogout('logout-form-nav')">
                                                     Logout

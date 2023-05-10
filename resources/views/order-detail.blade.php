@@ -153,6 +153,8 @@
                                                             value={{ $total_price }}>
                                                         <input type="hidden" name="product_id"
                                                             value={{ $product->id }}>
+                                                        <input type="hidden" name="branch_id"
+                                                            value={{ $branch_id }}>
                                                         <input type="hidden" name="slot_id" value={{ $slot->id }}>
                                                         @foreach ($addons as $addon)
                                                             <input type="hidden" name="addons[]"
@@ -226,13 +228,13 @@
                                                     <input class="form-control" type="password" required
                                                         name="password" id="password" />
                                                     <img class="showHidePassword"
-                                                        src="https://themes.pixelstrap.com/oslo/assets/icons/svg/eye-1.svg"
+                                                        src="https://themes.pixelstrap.com/oslo/assets/icons/svg/eye-2.svg"
                                                         alt="eye" />
                                                 </div>
                                             </div>
                                             <div>
                                                 <button type="submit" class="btn-solid rounded-pill line-none">
-                                                    Signin<i class="arrow"></i>
+                                                    Signin <i class="arrow"></i>
                                                 </button>
                                             </div>
                                         </form>

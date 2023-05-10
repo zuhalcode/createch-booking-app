@@ -18,7 +18,8 @@
                     <div class="content-box">
                         <div>
                             <h5>LOGIN <span class="bg-theme-blue"></span></h5>
-                            <p class="font-md content-color">How do i get access order,wishlist and recomendation ?</p>
+                            <p class="font-md content-color">
+                                How do i get access order,wishlist and recomendation ?</p>
 
                             <form form id="formAuthentication" action={{ url("/$slug/auth/login") }} method="POST"
                                 class="custom-form form-pill">
@@ -32,10 +33,9 @@
                                 <div class="input-box">
                                     <label for="password">Password</label>
                                     <div class="icon-input">
-                                        <input class="form-control" type="password" required name="password"
-                                            id="password" />
+                                        <input class="form-control" type="password" name="password" required />
                                         <img class="showHidePassword"
-                                            src="https://themes.pixelstrap.com/oslo/assets/icons/svg/eye-1.svg"
+                                            src="https://themes.pixelstrap.com/oslo/assets/icons/svg/eye-2.svg"
                                             alt="eye" />
                                     </div>
                                 </div>
@@ -57,8 +57,10 @@
                             </span>
                             <span class="line"><span>Or </span> </span>
                             <div class="link-group">
-                                <a href="https://www.google.com/" class="button-link"><img
-                                        src={{ asset('/assets/icons/png/google.png') }} alt="google" /> Sign in </a>
+                                <a href="https://www.google.com/" class="button-link">
+                                    <img src={{ asset('/assets/icons/png/google.png') }} alt="google" />
+                                    Sign in
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -66,7 +68,7 @@
 
                 <div class="order-1 order-lg-2 col-lg-7">
                     <div class="img-box">
-                        <img class="bg-img" src="../assets/images/inner-page/banner-p2.jpg" alt="banner" />
+                        <img class="bg-img" src={{ asset('/assets/images/inner-page/banner-p2.jpg') }} alt="banner" />
                     </div>
                 </div>
             </div>

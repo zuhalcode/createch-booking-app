@@ -15,16 +15,34 @@ class PivotTableSeeder extends Seeder
      */
     public function run()
     {
-        // Replace 'table1' and 'table2' with your actual table names
-        $table1 = DB::table('branches')->pluck('id');
-        $table2 = DB::table('products')->pluck('id');
+        $branches = DB::table('branches')->pluck('id');
+        $products = DB::table('products')->pluck('id');
+        $slots = DB::table('slots')->pluck('id');
 
-        foreach ($table1 as $id1) {
-            foreach ($table2 as $id2) {
-                // Replace 'pivot_table' with your actual pivot table name
+        foreach ($branches as $id1) {
+            // Generate random number between 1 and 50 (number of products)
+            $numProducts = rand(1, 50);
+            $randomProducts = $products->random($numProducts);
+
+            // Attach the randomly selected products to the branch
+            foreach ($randomProducts as $id2) {
                 DB::table('branch_product')->insert([
                     'branch_id' => $id1,
                     'product_id' => $id2,
+                ]);
+            }
+        }
+
+        foreach ($branches as $id1) {
+            // Generate random number between 1 and 10 (number of slots)
+            $numSlots = rand(1, 6);
+            $randomSlots = $slots->random($numSlots);
+
+            // Attach the randomly selected slots to the branch
+            foreach ($randomSlots as $id2) {
+                DB::table('branch_slot')->insert([
+                    'branch_id' => $id1,
+                    'slot_id' => $id2,
                 ]);
             }
         }

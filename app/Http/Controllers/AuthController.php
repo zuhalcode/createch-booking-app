@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -24,7 +25,7 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
-        
+
         if(Auth::attempt($credentials)){
             $req->session()->regenerate();
             return back();
@@ -33,7 +34,10 @@ class AuthController extends Controller
         return back()->with('loginError', 'Login gagal!');
     }
 
-    public function registerModal(Request $req) {
+    public function registerModal(Request $req, $slug) 
+    {
+        $company = Company::where('slug', $slug)->first();
+
         $validatedData = $req->validate([
             'name' => 'required|max:255',
             'email' => 'required|email',
@@ -42,6 +46,8 @@ class AuthController extends Controller
 
         $validatedData['password'] = Hash::make($validatedData['password']);
         $user = User::create($validatedData);
+
+        $company->users()->attach($user->id);
 
         Auth::login($user);
 
@@ -54,10 +60,10 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
-        
+
         if(Auth::attempt($credentials)){
             $req->session()->regenerate();
-            return redirect('/');
+            return redirect("/$slug");
         }
 
         return back()->with('loginError', 'Login gagal!');
@@ -65,6 +71,8 @@ class AuthController extends Controller
 
     public function register(Request $req, $slug)
     {
+        $company = Company::where('slug', $slug)->first();
+
         $validatedData = $req->validate([
             'name' => 'required|max:255',
             'email' => 'required|email',
@@ -72,17 +80,19 @@ class AuthController extends Controller
         ]);
 
         $validatedData['password'] = Hash::make($validatedData['password']);
-        User::create($validatedData);
+        $user = User::create($validatedData);
 
-        return redirect('/auth/login')->with('success', 'Registrasi berhasil! Silahkan login');
+        $company->users()->attach($user->id);
+
+        return redirect("/$slug/auth/login")->with('success', 'Registrasi berhasil! Silahkan login');
     }
 
     public function logout(Request $req, $slug)
     {
         Auth::logout();
-        $req->session()->invalidate(); 
+        $req->session()->invalidate();
         $req->session()->regenerateToken();
-        return redirect('/auth/login');
+        return redirect("/$slug/auth/login");
     }
     
     

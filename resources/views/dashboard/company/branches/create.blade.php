@@ -3,7 +3,7 @@
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
 
-            <x-dashboard.sidebar />
+            <x-dashboard.sidebar :slug="$slug" />
 
             <!-- Layout container -->
             <div class="layout-page">
@@ -25,7 +25,7 @@
                                             id="firstName" name="firstName" autofocus autocomplete="off" />
                                     </div>
 
-                                    <div class="mb-3 ">
+                                    <div class="mb-3">
                                         <label class="form-label" for="phone">Phone Number</label>
                                         <div class="input-group input-group-merge">
                                             <span class="input-group-text">INA (+62)</span>
@@ -35,6 +35,30 @@
                                     </div>
 
                                     <div class="mb-3 ">
+                                        <label class="form-label">Province</label>
+                                        <select class="form-select" id="province_id">
+                                            <option selected>Choose...</option>
+                                            @foreach ($provinces as $province)
+                                                <option value={{ $province->id }}>
+                                                    {{ ucfirst($province->name) }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3 ">
+                                        <label class="form-label">City</label>
+                                        <select class="form-select" name="city" id="city">
+                                            <option selected>Choose...</option>
+                                            @foreach ($cities as $city)
+                                                <option value={{ $city->id }}>
+                                                    {{ ucfirst($city->name) }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
                                         <label for="state" class="form-label">Address</label>
                                         <input class="form-control" type="text" id="state" name="state"
                                             placeholder="Surabaya" autocomplete="off" />

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Slot;
 use App\Models\AddOn;
-use App\Models\Branch;
 use App\Models\Cover;
 use App\Models\Order;
 use App\Models\Company;
@@ -34,7 +33,6 @@ class CustomerController extends Controller
             'cover' => $cover,
             'products' => $products,
             'slug' => $company->slug,
-            'branchSlug' => $company->slug
         ]);
     }
     // End Homepage
@@ -68,6 +66,7 @@ class CustomerController extends Controller
             'slots' => $slots,
             'dates' => $dates,
             'holidays' => $holidays,
+            'branches' => $company->branches
         ]);
     }
     // End Products
@@ -111,7 +110,8 @@ class CustomerController extends Controller
             'product_id' => 'required|exists:products,id',
             'date' => 'required|date',
             'slot_id' => 'required|exists:slots,id',
-            'addons.*' => 'nullable|exists:addons,id'
+            'branch_id' => 'required|exists:branches,id',
+            'addons.*' => 'nullable'
         ]);
 
         $product = Product::findOrFail($validatedData['product_id']);
@@ -124,6 +124,7 @@ class CustomerController extends Controller
 
         return view("order-detail", [
             'slug' => $slug,
+            'branch_id' => $validatedData['branch_id'],
             'product' => $product,
             'addons' => $selectedAddons,
             'slot' => $slot,
@@ -135,6 +136,7 @@ class CustomerController extends Controller
     {
         $validatedData = $req->validate([
             'product_id' => 'required|exists:products,id',
+            'branch_id' => 'required|exists:branches,id',
             'slot_id' => 'required|exists:slots,id',
             'addons.*' => 'nullable|exists:addons,id'
         ]);
@@ -149,6 +151,7 @@ class CustomerController extends Controller
 
         $order = Order::create([
             'user_id' => auth()->user()->id,
+            'branch_id' => 1,
             'product_id' => $validatedData['product_id'],
             'slot_id' => $validatedData['slot_id'],
             'total_price' => $totalPrice
@@ -161,10 +164,20 @@ class CustomerController extends Controller
             $order->addons()->attach($addon->id, ['price' => $price]);
         }
 
-        return redirect("/$slug/orders/invoice/$order->id");
+        return redirect("/$slug/invoices/$order->id");
     }
 
-    public function indexInvoice($slug, $id) 
+    public function indexInvoice($slug) 
+    {
+        $company = Company::where('slug', $slug)->first();
+        $invoices = Order::where('user_id', Auth::user()->id)->get();
+        return view('invoices', [
+            'slug' => $company->slug,
+            'invoices' => $invoices,
+        ]);
+    }
+
+    public function showInvoice($slug, $id) 
     {
         $order = Order::where('user_id', Auth::user()->id)->find($id);
         $company = Company::where('slug', $slug)->first();
@@ -184,7 +197,7 @@ class CustomerController extends Controller
         ];
         $snapToken = \Midtrans\Snap::getSnapToken($params);
 
-        return view('order-invoice', [
+        return view('invoice-detail', [
             'company' => $company, 
             'order' => $order, 
             'slug' => $slug,

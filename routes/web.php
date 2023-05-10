@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SlotController;
 use App\Http\Controllers\Admin\BranchController;
-use App\Http\Controllers\User\HomepageController;
 use App\Http\Controllers\Admin\CompanyController as AdminCompanyController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
@@ -22,9 +21,9 @@ use App\Http\Controllers\SuperAdmin\CompanyController as SuperAdminCompanyContro
 |
 */
 
-
 Route::prefix('/{slug}')->group(fn() => [
     Route::get('/tes/{id}', [CustomerController::class, 'showProduct']),
+
     // Handling for Customer Page
     Route::controller(CustomerController::class)->group(fn() => [
         Route::get('/', 'index'),
@@ -34,7 +33,8 @@ Route::prefix('/{slug}')->group(fn() => [
         Route::get('/orders/detail', 'redirectToOrderDetail'),
         Route::post('/orders', 'storeOrder'),
     
-        Route::get('/orders/invoice/{id}', 'indexInvoice')->middleware('auth'),
+        Route::get('/invoices', 'indexInvoice')->middleware('auth'),
+        Route::get('/invoices/{id}', 'showInvoice')->middleware('auth'),
     ]),
 
     // Handling for Authentication
@@ -48,7 +48,7 @@ Route::prefix('/{slug}')->group(fn() => [
         
             Route::post('/logout', 'logout'),
         ]),
-    
+
         // Handling for authentication form in modal
         Route::post('/login-modal', 'loginModal'),
         Route::post('/register-modal', 'registerModal'),
@@ -61,18 +61,26 @@ Route::prefix('/{slug}')->group(fn() => [
     
         // Handling Dashboard for Admin
         Route::group([], fn () => [
-            Route::get('/', function () {
-                return view('dashboard.index');
-            }),
-    
             Route::controller(AdminCompanyController::class)->group(fn() => [
+                // Handle Dashboard
+                Route::get('/', 'indexDashboard'),
+
+                // Handle Landing Page
                 Route::get('/landing-page', 'editLandingPage'),
                 Route::put('/landing-page', 'updateLandingPage'),
+
+                // Handle Company
                 Route::get('/company', 'editCompany'),
                 Route::put('/company/{id}', 'updateCompany'),
+                Route::put('/company/{id}', 'updateCompany'),
+
+                // Handle Branches
+                Route::get('/branches', 'indexBranch'),
+                Route::get('/branches/create', 'createBranch'),
+                Route::post('/branches', 'storeBranch'),
+
             ]),
     
-            Route::resource('/branches', BranchController::class),
             Route::resource('/products', AdminProductController::class),
     
             Route::controller(SlotController::class)->group(fn() => [

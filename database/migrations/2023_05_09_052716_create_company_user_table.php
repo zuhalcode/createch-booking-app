@@ -13,20 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('branches', function (Blueprint $table) {
-            $table->id();
+        Schema::create('company_user', function (Blueprint $table) {
             $table->foreignId('company_id')->constrained();
-            $table->foreignId('city_id')->constrained();
-            $table->string('slug')->unique();
-            $table->string('name');
-            $table->string('phone')->nullable();
-            $table->string('address')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
+            $table->foreignId('user_id')->constrained();
         });
     }
-    
-    
 
     /**
      * Reverse the migrations.
@@ -35,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('branches');
+        Schema::dropIfExists('company_user');
     }
 };

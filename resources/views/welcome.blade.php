@@ -23,7 +23,7 @@
                             <span class="corner"></span>
                         </span>
 
-                        <h1>
+                        <h1 class="d-flex flex-column">
                             {{ $cover->first_heading_text }}
                             <span>{{ $cover->second_heading_text }}</span>
                         </h1>

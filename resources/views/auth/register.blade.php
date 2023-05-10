@@ -38,10 +38,9 @@
                                     <label for="password">Password</label>
                                     <div class="icon-input">
                                         <input class="form-control" type="password" required name="password"
-                                            id="password"
                                             placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
                                         <img class="showHidePassword"
-                                            src="https://themes.pixelstrap.com/oslo/assets/icons/svg/eye-1.svg"
+                                            src="https://themes.pixelstrap.com/oslo/assets/icons/svg/eye-2.svg"
                                             alt="eye" />
                                     </div>
                                 </div>
@@ -63,13 +62,16 @@
                             </span>
 
                             <span class="line"><span>Or </span> </span>
-                            <a href="https://www.google.com/" class="button-link"><img
-                                    src={{ asset('/assets/icons/png/google.png') }} alt="google" /> Sign up </a>
+                            <a href="https://www.google.com/" class="button-link">
+                                <img src={{ asset('/assets/icons/png/google.png') }} alt="google" />
+                                Sign up
+                            </a>
                         </div>
                     </div>
                 </div>
                 <div class="order-1 order-lg-2 col-lg-7">
                     <div class="img-box">
+                        <img class="bg-img" src={{ asset('/assets/images/inner-page/banner-p2.jpg') }} alt="banner" />
                     </div>
                 </div>
             </div>

@@ -40,68 +40,65 @@ $(document).ready(function () {
     });
 
     // Handling Input only Number
-    $('input[name="price"], input[name="addon-price[]"]').on(
-        "input",
-        function () {
-            // remove any non-numeric characters from input
-            const cleanedValue = $(this)
-                .val()
-                .replace(/[^0-9\.]/g, "");
+    $(
+        'input[name="price"], input[name="phone"], input[name="addon-price[]"]'
+    ).on("input", function () {
+        // remove any non-numeric characters from input
+        const cleanedValue = $(this)
+            .val()
+            .replace(/[^0-9\.]/g, "");
 
-            // update input value with cleaned value
-            $(this).val(cleanedValue);
-        }
-    );
-
-    $("#product-detail-order-form").submit((e) => {
-        e.preventDefault();
-
-        // Get the selected date and slot from the UI
-        const selectedDate = $(".date-slot.active").attr("data-date");
-        const selectedSlot = $(".time-slot.active").attr("data-slot");
-        const selectedAddons = [];
-
-        // Loop through each checked addon checkbox and add it to the selectedAddons array
-        $(".addon-slot input[type='checkbox']:checked").each(function () {
-            selectedAddons.push($(this).attr("data-addon"));
-        });
-
-        // Create a hidden input for each selected addon
-        selectedAddons.forEach(function (addon) {
-            $("<input />")
-                .attr("type", "hidden")
-                .attr("name", "addons[]")
-                .attr("value", addon)
-                .appendTo("#product-detail-order-form");
-        });
-
-        // Set the date and slot as hidden form inputs
-        $("<input />")
-            .attr("type", "hidden")
-            .attr("name", "date")
-            .attr("value", selectedDate)
-            .appendTo("#product-detail-order-form");
-
-        $("<input />")
-            .attr("type", "hidden")
-            .attr("name", "slot_id")
-            .attr("value", selectedSlot)
-            .appendTo("#product-detail-order-form");
-
-        // Submit the form
-        $("#product-detail-order-form").unbind("submit").submit();
+        // update input value with cleaned value
+        $(this).val(cleanedValue);
     });
 
-    // Handling company slug input onchange
-    const companyName = $("#company-name");
-    const companySlug = $("#company-slug");
-    companyName.on("change", () => {
+    // Handle show and hide password
+    $(".showHidePassword").click(function () {
+        var passwordInput = $("input[name='password']");
+        var showHideIcon = $(".showHidePassword");
+
+        if (passwordInput.attr("type") === "password") {
+            passwordInput.attr("type", "text");
+            showHideIcon.attr(
+                "src",
+                "https://themes.pixelstrap.com/oslo/assets/icons/svg/eye-1.svg"
+            );
+        } else {
+            passwordInput.attr("type", "password");
+            showHideIcon.attr(
+                "src",
+                "https://themes.pixelstrap.com/oslo/assets/icons/svg/eye-2.svg"
+            );
+        }
+    });
+
+    // Handle filtering city in dashboard Branches
+    $("#province_id").change(function () {
+        var provinceId = $(this).val();
+        var cityDropdown = $("#city");
+
+        // Clear city dropdown
+        cityDropdown.empty();
+        cityDropdown.append("<option selected>Choose...</option>");
+
+        // Fetch cities based on selected province
         $.ajax({
-            url: `/dashboard/companies/create-slug?name=${companyName.val()}`,
+            url: `/api/cities/${provinceId}`,
             method: "GET",
-            dataType: "json",
-            success: (data) => companySlug.val(data.slug),
-            error: (error) => console.error(error),
+            success: function (res) {
+                // Populate city dropdown with fetched cities
+                $.each(res.cities, function (i, city) {
+                    const option = `
+                    <option value="${
+                        city.id
+                    }">${city.name.toUpperCase()}</option>`;
+                    cityDropdown.append(option);
+                });
+            },
+            error: function () {
+                // Handle error case
+                alert("Failed to fetch cities.");
+            },
         });
     });
 });
@@ -144,4 +141,66 @@ const showModalEditCompany = (id) => {
     });
 
     $("#modalEditCompany").modal("show");
+};
+
+// Handle submit on Book now in product detail
+const handleOnSubmit = (id) => {
+    // Get the selected date and slot from the UI
+    const selectedDate = $(".date-slot.active").attr("data-date");
+    const selectedSlot = $(".time-slot.active").attr("data-slot");
+    const selectedBranch = $(".branch.active").attr("data-branch");
+    const selectedAddons = [];
+
+    // Loop through each checked addon checkbox and add it to the selectedAddons array
+    $(".addon-slot input[type='checkbox']:checked").each(function () {
+        selectedAddons.push($(this).attr("data-addon"));
+    });
+
+    // Create a hidden input for each selected addon
+    selectedAddons.forEach(function (addon) {
+        $("<input />")
+            .attr("type", "hidden")
+            .attr("name", "addons[]")
+            .attr("value", addon)
+            .appendTo(`#${id}`);
+    });
+
+    // Set the date and slot as hidden form inputs
+    $("<input />")
+        .attr("type", "hidden")
+        .attr("name", "date")
+        .attr("value", selectedDate)
+        .appendTo(`#${id}`);
+
+    $("<input />")
+        .attr("type", "hidden")
+        .attr("name", "branch_id")
+        .attr("value", selectedBranch)
+        .appendTo(`#${id}`);
+
+    $("<input />")
+        .attr("type", "hidden")
+        .attr("name", "slot_id")
+        .attr("value", selectedSlot)
+        .appendTo(`#${id}`);
+
+    // Submit the form
+    $(`#${id}`).unbind("submit").submit();
+};
+
+// Handle Redirect to Invoice by id
+const handleOnRedirect = (href) => {
+    alert(href);
+};
+
+// Handle reset form on changing branch
+const resetForm = () => {
+    // Remove the active class from all date slots, time slots, and addon slots
+    $(".date-slot, .time-slot, .addon-slot input[type='checkbox']").removeClass(
+        "active"
+    );
+    // Remove any hidden addon inputs
+    $("input[name='addons[]']").remove();
+    // Remove the hidden date and slot inputs
+    $("input[name='date'], input[name='slot_id']").remove();
 };

@@ -2,29 +2,33 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\City;
 use App\Models\Cover;
 use App\Models\Company;
+use App\Models\Province;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class CompanyController extends Controller
 {
-    public function editLandingPage() {
-        $cover = Cover::where('id', Auth::user()->company->id)->first();
-        return view('dashboard.company.landing-page', ['cover' => $cover]);
+    // Handling Dashboard
+    public function indexDashboard($slug) {
+        return view('dashboard.index', ['slug' => $slug]);
+    }
+    // End Handling Dashboard
+
+    // Handling Landing Page
+    public function editLandingPage($slug) 
+    {
+        $company = Company::where('slug', $slug)->first();
+        $cover = Cover::where('company_id', $company->id)->first();
+        return view('dashboard.company.landing-page', ['cover' => $cover, 'slug' => $slug]);
     }
 
-    public function editCompany()
+    public function updateLandingPage(Request $req, $slug)
     {
-        $company = Company::where('id', auth()->user()->company->id)->first();
-        return view('dashboard.company.index', ['company' => $company]);
-    }
-
-    public function updateLandingPage(Request $req)
-    {
-        $cover = Cover::where('company_id', auth()->user()->company->id)->first();
+        $company = Company::where('slug', $slug)->first();
+        $cover = Cover::where('company_id', $company->id)->first();
 
         $validatedData = $req->validate([
             'first_heading_text' => 'required|max:255',
@@ -50,10 +54,18 @@ class CompanyController extends Controller
 
         return back()->with('success', 'Landing Page updated successfully!');
     }
+    // End Handling Landing Page
 
-    public function updateCompany(Request $req)
+    // Handling Company
+    public function editCompany($slug)
     {
-        $company = Company::where('user_id', auth()->user()->id)->first();
+        $company = Company::where('slug', $slug)->first();
+        return view('dashboard.company.index', ['company' => $company, 'slug' => $slug]);
+    }
+
+    public function updateCompany(Request $req, $slug)
+    {
+        $company = Company::where('slug', $slug)->first();
 
         $validatedData = $req->validate([
             'name' => 'required|max:255',
@@ -74,7 +86,7 @@ class CompanyController extends Controller
             $logo->storeAs('logos', $filename);
             $company->logo = "/storage/logos/$filename";
         }
-        
+
         $company->name = $validatedData['name'];
         $company->email = $validatedData['email'];
         $company->phone = $validatedData['phone'];
@@ -85,4 +97,37 @@ class CompanyController extends Controller
 
         return back()->with('success', 'Landing Page updated successfully!');
     }
+    // End Handling Company
+
+    // Handling Branch
+    public function indexBranch($slug)
+    {   
+        return view('dashboard.company.branches.index', [
+            'slug' => $slug
+        ]);
+    }
+
+    public function createBranch($slug)
+    {
+        $provinces = Province::all();
+        $cities = City::all();
+
+        return view('dashboard.company.branches.create', [
+            'slug' => $slug,
+            'provinces' => $provinces,
+            'cities' => $cities,
+        ]);
+    }
+
+    public function storeBranch(Request $req, $slug)
+    {
+        $validatedData = $req->validate([
+            'name' => 'required|max:255',
+            'phone' => 'required',
+            'address' => 'required',
+        ]);
+
+        return view('dashboard.company.branches.create', ['slug' => $slug]);
+    }
+    // End Handling Branch
 }
