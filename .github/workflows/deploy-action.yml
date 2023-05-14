@@ -1,51 +1,28 @@
 name: Deploy Laravel
 on:
-  push:
-    branches:
-      - master
-
+  workflow_dispatch
 jobs:
-  deploy:
+  laravel-tests:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.1'
-
-      - name: Install Composer Dependencies
-        run: composer install --no-interaction --no-scripts --prefer-dist
-
+      -   name: Checkout Repository
+          uses: actions/checkout@master
+      -   name: Setup Enviroment
+          uses: shivammathur/setup-php@v2
+          with:
+            php-version: '8.1'
       - name: Copy .env
-        run: cp .env.example .env
-
-      - name: Generate Application Key
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      - name: Update Dependencies
+        run: composer update
+      - name: Install Dependencies
+        run: composer install
+      - name: Generate key
         run: php artisan key:generate
-
-      - name: Update .env File
-        run: |
-          sed -i "s/DB_DATABASE=.*/DB_DATABASE=${{ secrets.BOOKLY_DB_DATABASE }}/" .env
-          sed -i "s/DB_USERNAME=.*/DB_USERNAME=${{ secrets.BOOKLY_DB_USERNAME }}/" .env
-          sed -i "s/DB_PASSWORD=.*/DB_PASSWORD=${{ secrets.BOOKLY_DB_PASSWORD }}/" .env
-
-      - name: Run Migrations and Seed Database
-        run: php artisan migrate --seed --force
-
-      - name: Deploy Application
-        run: |
-          mv public public_temp
-          mv .env public_temp/.env
-          mv public_temp public
-
       - name: Upload via FTP by Actions Github
         uses: airvzxf/ftp-deployment-action@latest
         with:
           server: ${{ secrets.FTP_SERVER }}
           user: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./public
-          remote-dir: /public_html/dev.book.petona.id
           delete: "false"
