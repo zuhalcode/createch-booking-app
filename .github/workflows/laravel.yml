@@ -1,24 +1,42 @@
 name: Deploy Laravel
 on:
   workflow_dispatch
+
 jobs:
   laravel-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
+
       - name: Setup Environment
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.1'
+
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
       - name: Update Dependencies
         run: composer update
+
       - name: Install Dependencies
         run: composer install
+
       - name: Generate key
         run: php artisan key:generate
+
+      - name: Set up database configuration
+        run: |
+          echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
+          echo "DB_PORT=${{ secrets.DB_PORT }}" >> .env
+          echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
+          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+
+      - name: Run migrations and seed
+        run: php artisan migrate:fresh --seed
+
       - name: Upload via FTP by Actions Github
         uses: airvzxf/ftp-deployment-action@latest
         with:
