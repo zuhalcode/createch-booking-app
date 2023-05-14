@@ -1,39 +1,44 @@
 name: Deploy Laravel
 on:
-  workflow_dispatch
+  push:
+    branches:
+      - main
 
 jobs:
-  laravel-tests:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Setup Environment
+      - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.1'
 
+      - name: Install Composer Dependencies
+        run: composer install --no-interaction --no-scripts --prefer-dist
+
       - name: Copy .env
         run: cp .env.example .env
 
-      - name: Update Dependencies
-        run: composer update
-
-      - name: Install Dependencies
-        run: composer install
-
-      - name: Generate key
+      - name: Generate Application Key
         run: php artisan key:generate
 
-      - name: Set up database configuration
+      - name: Update .env File
         run: |
           sed -i "s/DB_DATABASE=.*/DB_DATABASE=${{ secrets.DB_DATABASE }}/" .env
           sed -i "s/DB_USERNAME=.*/DB_USERNAME=${{ secrets.DB_USERNAME }}/" .env
           sed -i "s/DB_PASSWORD=.*/DB_PASSWORD=${{ secrets.DB_PASSWORD }}/" .env
 
-      - name: Run migrations and seed
-        run: php artisan migrate:fresh --seed
+      - name: Run Migrations and Seed Database
+        run: php artisan migrate --seed --force
+
+      - name: Deploy Application
+        run: |
+          mv public public_temp
+          mv .env public_temp/.env
+          mv public_temp public
 
       - name: Upload via FTP by Actions Github
         uses: airvzxf/ftp-deployment-action@latest
@@ -41,4 +46,6 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           user: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./public
+          remote-dir: /public_html/anjay
           delete: "false"
