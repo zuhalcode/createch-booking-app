@@ -27,7 +27,6 @@ jobs:
 
       - name: Update .env File
         run: |
-          sed -i "s/APP_URL=.*/APP_URL=${{ secrets.BOOKLY_APP_URL }}/" .env
           sed -i "s/DB_HOST=.*/DB_HOST=${{ secrets.BOOKLY_DB_HOST }}/" .env
           sed -i "s/DB_PORT=.*/DB_PORT=${{ secrets.BOOKLY_DB_PORT }}/" .env
           sed -i "s/DB_DATABASE=.*/DB_DATABASE=${{ secrets.BOOKLY_DB_DATABASE }}/" .env
