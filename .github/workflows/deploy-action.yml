@@ -27,9 +27,9 @@ jobs:
 
       - name: Update .env File
         run: |
-          sed -i "s/DB_DATABASE=.*/DB_DATABASE=${{ secrets.DB_DATABASE }}/" .env
-          sed -i "s/DB_USERNAME=.*/DB_USERNAME=${{ secrets.DB_USERNAME }}/" .env
-          sed -i "s/DB_PASSWORD=.*/DB_PASSWORD=${{ secrets.DB_PASSWORD }}/" .env
+          sed -i "s/DB_DATABASE=.*/DB_DATABASE=${{ secrets.BOOKLY_DB_DATABASE }}/" .env
+          sed -i "s/DB_USERNAME=.*/DB_USERNAME=${{ secrets.BOOKLY_DB_USERNAME }}/" .env
+          sed -i "s/DB_PASSWORD=.*/DB_PASSWORD=${{ secrets.BOOKLY_DB_PASSWORD }}/" .env
 
       - name: Run Migrations and Seed Database
         run: php artisan migrate --seed --force
