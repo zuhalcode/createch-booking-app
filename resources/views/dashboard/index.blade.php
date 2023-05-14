@@ -2,7 +2,7 @@
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
-            <x-dashboard.sidebar :slug="$slug" />
+            <x-dashboard.sidebar />
 
             <!-- Layout container -->
             <div class="layout-page">

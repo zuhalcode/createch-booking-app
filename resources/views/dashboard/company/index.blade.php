@@ -3,7 +3,6 @@
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
 
-
             <x-dashboard.sidebar :slug="$slug" />
 
             <!-- Layout container -->

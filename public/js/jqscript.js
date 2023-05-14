@@ -122,16 +122,16 @@ const showImagePreview = (inputId, targetId) => {
 // Handling show modal edit company
 const showModalEditCompany = (id) => {
     const token = $('meta[name="csrf-token"]').attr("content");
+
     $.ajax({
-        url: `/dashboard/companies/${id}`,
-        method: "POST",
+        url: `/api/companies/${id}`,
+        method: "GET",
         headers: { "X-CSRF-Token": token },
         success: function (res) {
             const company = res.company;
             $('#modalEditCompany input[name="name"]').val(company.name);
             $('#modalEditCompany input[name="email"]').val(company.email);
             $('#modalEditCompany input[name="phone"]').val(company.phone);
-
             $("#formEditCompany").attr(
                 "action",
                 `/dashboard/companies/${id}/edit`
@@ -140,7 +140,40 @@ const showModalEditCompany = (id) => {
         error: (err) => console.log(err),
     });
 
+    $.ajax({
+        url: `/api/companies/${id}/admins`,
+        method: "GET",
+        headers: { "X-CSRF-Token": token },
+        success: (res) => res.admins.map((admin) => {
+            const option = `<option value="${admin.id}">${admin.name}</option>`;
+            $("#user_id").append(option);
+        }),
+        error: (err) => console.log(err),
+    });
+
     $("#modalEditCompany").modal("show");
+};
+
+// Handling show modal edit company
+const showModalEditUser = (userId) => {
+    const token = $('meta[name="csrf-token"]').attr("content");
+    var slug = window.location.pathname.split('/')[1];
+    $.ajax({
+        url: `/api/companies/users/${userId}`,
+        method: "GET",
+        headers: { "X-CSRF-Token": token },
+        success: function (res) {
+            const user = res.user;
+            $('#modalEditUser input[name="name"]').val(user.name);
+            $('#modalEditUser input[name="email"]').val(user.email);
+            $('#modalEditUser input[name="phone"]').val(user.phone);
+
+            $("#formEditUser").attr("action",`/${slug}/dashboard/users/${userId}`);
+        },
+        error: (err) => console.log(err),
+    });
+
+    $("#modalEditUser").modal("show");
 };
 
 // Handle submit on Book now in product detail
@@ -186,11 +219,6 @@ const handleOnSubmit = (id) => {
 
     // Submit the form
     $(`#${id}`).unbind("submit").submit();
-};
-
-// Handle Redirect to Invoice by id
-const handleOnRedirect = (href) => {
-    alert(href);
 };
 
 // Handle reset form on changing branch

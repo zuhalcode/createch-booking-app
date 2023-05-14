@@ -28,6 +28,7 @@
     <link rel="stylesheet" href={{ asset('/vendor/css/core.css') }} class="template-customizer-core-css" />
     <link rel="stylesheet" href={{ asset('/vendor/css/theme-default.css') }} class="template-customizer-theme-css" />
     <link rel="stylesheet" href={{ asset('/css/demo.css') }} />
+    <link rel="stylesheet" href={{ asset('/css/dashboard.css') }} />
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href={{ asset('/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }} />
@@ -37,18 +38,17 @@
     <!-- Helpers -->
     <script src={{ asset('/vendor/js/helpers.js') }}></script>
 
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src={{ asset('/js/config.js') }}></script>
 </head>
 
 <body>
     @if (session('success'))
-        <x-ui.toast type="bg-success">
+        <x-ui.toast type="bg-success" title="{{ Route::current()->parameter('slug') }}">
             {{ session('success') }}
         </x-ui.toast>
     @elseif(session('error'))
-        <x-ui.toast type="bg-danger">
+        <x-ui.toast type="bg-danger" title="{{ Route::current()->parameter('slug') }}">
             {{ session('error') }}
         </x-ui.toast>
     @endif

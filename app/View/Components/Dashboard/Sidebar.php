@@ -3,33 +3,36 @@
 namespace App\View\Components\Dashboard;
 
 use Illuminate\View\Component;
+use Illuminate\Support\Facades\Route;
 
 class Sidebar extends Component
 {
     public $menus;
-    public $slug;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($slug)
+    public function __construct()
     {
+        $slug = Route::current()->parameter('slug');
         $this->menus = [
             [
                 "name" => "Dashboard",
-                "route" => "/$slug/dashboard", 
-                "icon" => "bx-line-chart", 
+                "route" => "/$slug/dashboard",
+                "icon" => "bx-line-chart",
                 "role" => "admin"
             ],
-            ["name" => "Companies Management", "route" => "", "icon" => "bx-home-circle", "role" => "super-admin",
+            [
+                "name" => "Companies Management", "route" => "", "icon" => "bx-home-circle", "role" => "super-admin",
                 "submenu" => [
                     ["name" => "List Companies", "route" => "/$slug/dashboard/companies"],
-                    ["name" => "Admin Management", "route" => "/$slug/dashboard/administrators"],
+                    ["name" => "User Management", "route" => "/$slug/dashboard/users"],
                 ],
             ],
-            
-            ["name" => "Company Management", "route" => "", "icon" => "bx-home-circle", "role" => "admin",
+
+            [
+                "name" => "Company Management", "route" => "", "icon" => "bx-home-circle", "role" => "admin",
                 "submenu" => [
                     ["name" => "Company Detail", "route" => "/$slug/dashboard/company"],
                     ["name" => "Landing Page Management", "route" => "/$slug/dashboard/landing-page"],
@@ -37,7 +40,8 @@ class Sidebar extends Component
                     ["name" => "Create Branch", "route" => "/$slug/dashboard/branches/create"],
                 ]
             ],
-            ["name" => "Product Management", "route" => "", "icon" => "bx-store-alt", "role" => "admin",
+            [
+                "name" => "Product Management", "route" => "", "icon" => "bx-store-alt", "role" => "admin",
                 "submenu" => [
                     ["name" => "List Product", "route" => "/$slug/dashboard/products"],
                     ["name" => "Create Product", "route" => "/$slug/dashboard/products/create"],
@@ -45,21 +49,21 @@ class Sidebar extends Component
                 ]
             ],
             [
-                "name" => "Order Management", 
-                "route" => "/$slug/dashboard/orders", 
-                "icon" => "bxs-receipt", 
+                "name" => "Order Management",
+                "route" => "/$slug/dashboard/orders",
+                "icon" => "bxs-receipt",
                 "role" => "admin"
             ],
             [
-                "name" => "Order Detail", 
-                "route" => "/$slug/dashboard/order-detail", 
-                "icon" => "bx-dock-top", 
+                "name" => "Order Detail",
+                "route" => "/$slug/dashboard/order-detail",
+                "icon" => "bx-dock-top",
                 "role" => "customer"
             ],
             [
-                "name" => "Home", 
-                "route" => "/$slug", 
-                "icon" => "bxs-dashboard", 
+                "name" => "Home",
+                "route" => "/$slug",
+                "icon" => "bxs-dashboard",
                 "role" => "customer"
             ],
 

@@ -18,9 +18,11 @@ class CompanyFactory extends Factory
     public function definition()
     {
         static $slugIndex = 0;
+        static $nameIndex = 0;
         $slugs = ['bookly', 'amerta', 'redis'];
         return [
             'city_id' => 1,
+            'name' => $slugs[$nameIndex++],
             'slug' => $slugs[$slugIndex++],
             'email' => $this->faker->unique()->safeEmail,
             'about_us' => $this->faker->paragraph(3)

@@ -80,7 +80,8 @@
 
         {{-- Logout --}}
         <li class="menu-item" style="cursor: pointer;" onclick="handleLogout('logout-sidebar')">
-            <form id="logout-sidebar" action={{ url('/auth/logout') }} method="post" class="menu-link">
+            <form id="logout-sidebar" action={{ url(Route::current()->parameter('slug') . '/auth/logout') }}
+                method="POST" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-log-out"></i>
                 @csrf
                 <div>Logout</div>

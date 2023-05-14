@@ -20,13 +20,14 @@ class AuthController extends Controller
         return view('auth.register', ['slug' => $slug]);
     }
 
-    public function loginModal(Request $req) {
+    public function loginModal(Request $req)
+    {
         $credentials = $req->validate([
             'email' => 'required|email',
             'password' => 'required'
         ]);
 
-        if(Auth::attempt($credentials)){
+        if (Auth::attempt($credentials)) {
             $req->session()->regenerate();
             return back();
         }
@@ -34,7 +35,7 @@ class AuthController extends Controller
         return back()->with('loginError', 'Login gagal!');
     }
 
-    public function registerModal(Request $req, $slug) 
+    public function registerModal(Request $req, $slug)
     {
         $company = Company::where('slug', $slug)->first();
 
@@ -61,7 +62,7 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        if(Auth::attempt($credentials)){
+        if (Auth::attempt($credentials)) {
             $req->session()->regenerate();
             return redirect("/$slug");
         }
@@ -94,6 +95,4 @@ class AuthController extends Controller
         $req->session()->regenerateToken();
         return redirect("/$slug/auth/login");
     }
-    
-    
 }

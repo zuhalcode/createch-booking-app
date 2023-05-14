@@ -102,9 +102,7 @@ class CompanyController extends Controller
     // Handling Branch
     public function indexBranch($slug)
     {   
-        return view('dashboard.company.branches.index', [
-            'slug' => $slug
-        ]);
+        return view('dashboard.company.branches.index', ['slug' => $slug]);
     }
 
     public function createBranch($slug)

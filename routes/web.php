@@ -21,32 +21,32 @@ use App\Http\Controllers\SuperAdmin\CompanyController as SuperAdminCompanyContro
 |
 */
 
-Route::prefix('/{slug}')->group(fn() => [
+Route::prefix('/{slug}')->group(fn () => [
     Route::get('/tes/{id}', [CustomerController::class, 'showProduct']),
 
     // Handling for Customer Page
-    Route::controller(CustomerController::class)->group(fn() => [
+    Route::controller(CustomerController::class)->group(fn () => [
         Route::get('/', 'index'),
         Route::get('/products/{id}', 'showProduct'),
         Route::get('/products/{id}/order', 'showOrder'),
-    
+
         Route::get('/orders/detail', 'redirectToOrderDetail'),
         Route::post('/orders', 'storeOrder'),
-    
+
         Route::get('/invoices', 'indexInvoice')->middleware('auth'),
         Route::get('/invoices/{id}', 'showInvoice')->middleware('auth'),
     ]),
 
     // Handling for Authentication
-    Route::controller(AuthController::class)->group(fn() => [
-        Route::prefix('/auth')->group(fn() => [
+    Route::controller(AuthController::class)->group(fn () => [
+        Route::prefix('/auth')->group(fn () => [
             Route::get('/login', 'indexLogin')->name('login')->middleware('guest'),
             Route::post('/login', 'login'),
-            
+
             Route::get('/register', 'indexRegister')->middleware('guest'),
             Route::post('/register', 'register'),
-        
-            Route::post('/logout', 'logout'),
+
+            Route::post('/logout', 'logout')->name('logout'),
         ]),
 
         // Handling for authentication form in modal
@@ -55,13 +55,13 @@ Route::prefix('/{slug}')->group(fn() => [
     ]),
 
     // Handling for Dashboard
-    Route::prefix('/dashboard')->middleware('auth')->group(fn() => [
+    Route::prefix('/dashboard')->middleware('auth')->group(fn () => [
 
         Route::get('/order-detail', [OrderController::class, 'indexOrderDetail']),
-    
+
         // Handling Dashboard for Admin
         Route::group([], fn () => [
-            Route::controller(AdminCompanyController::class)->group(fn() => [
+            Route::controller(AdminCompanyController::class)->group(fn () => [
                 // Handle Dashboard
                 Route::get('/', 'indexDashboard'),
 
@@ -80,38 +80,36 @@ Route::prefix('/{slug}')->group(fn() => [
                 Route::post('/branches', 'storeBranch'),
 
             ]),
-    
+
             Route::resource('/products', AdminProductController::class),
-    
-            Route::controller(SlotController::class)->group(fn() => [
+
+            Route::controller(SlotController::class)->group(fn () => [
                 Route::get('/slots', 'createSlot'),
                 Route::post('/slots', 'storeSlot'),
             ]),
-    
-            Route::controller(OrderController::class)->group(fn() => [
+
+            Route::controller(OrderController::class)->group(fn () => [
                 Route::get('/orders', 'index'),
             ]),
 
             Route::get('/bookings', fn () => view('dashboard.bookings')),
 
         ])->middleware(['admin', 'super-admin']),
-    
+
         // Handling Dashboard for Super Admin
         Route::middleware('super-admin')->group(function () {
-            Route::controller(SuperAdminCompanyController::class)->group(fn() => [
-                Route::get('/administrators', 'indexAdmin'),
-                Route::post('/administrators', 'storeAdmin'),
-    
+            Route::controller(SuperAdminCompanyController::class)->group(fn () => [
+                // Handle Administrators 
+                Route::get('/users', 'indexUser'),
+                Route::post('/users', 'storeUser'),
+                Route::put('/users/{userId}', 'updateUser'),
+
+                // Handle Companies 
                 Route::get('/companies', 'indexCompany'),
-                Route::get('/companies/create-slug', 'createSlug'),
-                
-                Route::post('/companies', 'createCompany'),
-                Route::post('/companies/{id}', 'getCompanyById'),
+                Route::post('/companies', 'storeCompany'),
                 Route::post('/companies/{id}/edit', 'updateCompany'),
-                Route::delete('/companies/{id}', 'destroy'),
+                Route::delete('/companies/{id}', 'destroyCompany'),
             ]);
         }),
     ]),
 ]);
-
-

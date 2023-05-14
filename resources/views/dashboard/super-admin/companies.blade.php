@@ -3,7 +3,7 @@
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
 
-            <x-dashboard.sidebar />
+            <x-dashboard.sidebar :slug="$slug" />
 
             <!-- Layout container -->
             <div class="layout-page">
@@ -41,12 +41,17 @@
                                                 <td>{{ $count }}</td>
                                                 <td>{{ $company->name }}</td>
                                                 <td>{{ $company->email }}</td>
-                                                <td>{{ $company->user->name }}</td>
+                                                @if ($company->users->isEmpty())
+                                                    <td></td>
+                                                @endif
+                                                @foreach ($company->users as $user)
+                                                    <td>{{ $user->name }}</td>
+                                                @endforeach
                                                 <td>{{ $company->phone }}</td>
                                                 <td>{{ $company->created_at }}</td>
                                                 <td><span class="badge bg-label-success me-1">Active</span></td>
                                                 <td>
-                                                    <i class="bx bx-edit-alt me-1" id="editCompanyIcon"
+                                                    <i class="bx bx-edit-alt me-1"
                                                         onclick="showModalEditCompany('{{ $company->id }}')"
                                                         style="cursor: pointer"></i>
                                                     <i class="bx bx-trash me-1" style="cursor: pointer"
@@ -73,7 +78,7 @@
         <!-- Modal Add Company -->
         <div class="modal fade" id="modalCompany" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
-                <form class="modal-content" method="POST" action={{ '/dashboard/companies' }}>
+                <form class="modal-content" method="POST" action={{ "/$slug/dashboard/companies" }}>
                     @csrf
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalCenterTitle">Masukkan Nama Perusahaan</h5>
@@ -81,16 +86,11 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col mb-3">
+                            <div class="col">
                                 <label class="form-label">Nama Perusahaan</label>
                                 <input type="text" name="name" id="company-name" class="form-control"
                                     placeholder="Masukkan Nama" />
                             </div>
-
-                            {{-- <div class="col mb-3">
-                                <label class="form-label">Slug</label>
-                                <input type="text" name="slug" class="form-control" id="company-slug" readonly />
-                            </div> --}}
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -112,21 +112,29 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col mb-3">
-                                <label for="nameWithTitle" class="form-label">Name</label>
-                                <input type="text" name="name" id="nameWithTitle" class="form-control"
-                                    placeholder="Enter Name" />
+                                <label class="form-label">Name</label>
+                                <input type="text" name="name" class="form-control" placeholder="Enter Name" />
                             </div>
                         </div>
+
                         <div class="row g-2">
                             <div class="col mb-0">
-                                <label for="emailWithTitle" class="form-label">Email</label>
-                                <input type="text" name="email" id="emailWithTitle" class="form-control"
-                                    placeholder="xxxx@xxx.xx" />
+                                <label class="form-label">Email</label>
+                                <input type="text" name="email" class="form-control" placeholder="xxxx@xxx.xx" />
                             </div>
                             <div class="col mb-0">
-                                <label class="form-label" for="basic-default-phone">Phone</label>
-                                <input type="text" name="phone" id="basic-default-phone"
-                                    class="form-control phone-mask" placeholder="0851 2379 9894" />
+                                <label class="form-label">Phone</label>
+                                <input type="text" name="phone" class="form-control phone-mask"
+                                    placeholder="0851 2379 9894" />
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col mb-3">
+                                <label class="form-label">Admin</label>
+                                <select class="form-select" id="user_id">
+                                    <option selected>Choose...</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -155,7 +163,8 @@
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                             Close
                         </button>
-                        <form action="{{ url('/dashboard/companies', $company->id) }}" method="POST">
+
+                        <form action="{{ url("/$slug/dashboard/companies", $company->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>

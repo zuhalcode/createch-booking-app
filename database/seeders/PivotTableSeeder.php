@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
+use App\Models\Company;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -18,6 +20,9 @@ class PivotTableSeeder extends Seeder
         $branches = DB::table('branches')->pluck('id');
         $products = DB::table('products')->pluck('id');
         $slots = DB::table('slots')->pluck('id');
+
+        $users = User::all();
+        $companies = Company::all();
 
         foreach ($branches as $id1) {
             // Generate random number between 1 and 50 (number of products)
@@ -45,6 +50,17 @@ class PivotTableSeeder extends Seeder
                     'slot_id' => $id2,
                 ]);
             }
+        }
+
+        foreach ($users as $user) {
+            // Skip if the user already has a company
+            if ($user->companies()->exists() || $user->role_id === 1) continue;
+
+            // Retrieve a random company
+            $company = $companies->random();
+
+            // Attach the user to the company with role_id equal to user's role_id
+            $company->users()->attach($user);
         }
     }
 }

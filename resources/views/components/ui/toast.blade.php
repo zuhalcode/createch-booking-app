@@ -3,7 +3,7 @@
     aria-live="assertive" aria-atomic="true">
     <div class="toast-header ">
         <i class="bx bx-bell me-2"></i>
-        <div class="me-auto fw-semibold">{{ ucfirst(Auth::user()->company->name) }}</div>
+        <div class="me-auto fw-semibold">{{ ucfirst($title) }}</div>
         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
     <div class="toast-body">

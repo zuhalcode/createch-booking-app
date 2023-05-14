@@ -20,45 +20,55 @@ class Company extends Model
     use HasFactory, SoftDeletes, Sluggable;
     protected $guarded = ['id'];
 
-    public function users() {
-        return $this->belongsToMany(User::class);
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'company_user');
     }
-    
-    public function city() {
+
+    public function city()
+    {
         return $this->belongsTo(City::class);
     }
 
-    public function holidays() {
+    public function holidays()
+    {
         return $this->hasMany(Holiday::class);
     }
 
-    public function covers() {
+    public function covers()
+    {
         return $this->hasMany(Cover::class);
     }
 
-    public function branches() {
+    public function branches()
+    {
         return $this->hasMany(Branch::class);
     }
 
-    public function subcriptions() {
+    public function subcriptions()
+    {
         return $this->hasMany(Subscription::class);
     }
 
-    public function slots() {
+    public function slots()
+    {
         return $this->hasMany(Slot::class);
     }
 
-    public function products() {
+    public function products()
+    {
         return $this->hasMany(Product::class);
+    }
+
+    public function adminUser()
+    {
+        return $this->users()->wherePivot('role_id', 2)->first();
     }
 
     public function sluggable(): array
     {
         return [
-            'slug' => [
-                'source' => 'company-name'
-            ]
+            'slug' => ['source' => 'company-name']
         ];
     }
-
 }
