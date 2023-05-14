@@ -27,8 +27,6 @@ jobs:
 
       - name: Update .env File
         run: |
-          sed -i "s/DB_HOST=.*/DB_HOST=${{ secrets.BOOKLY_DB_HOST }}/" .env
-          sed -i "s/DB_PORT=.*/DB_PORT=${{ secrets.BOOKLY_DB_PORT }}/" .env
           sed -i "s/DB_DATABASE=.*/DB_DATABASE=${{ secrets.BOOKLY_DB_DATABASE }}/" .env
           sed -i "s/DB_USERNAME=.*/DB_USERNAME=${{ secrets.BOOKLY_DB_USERNAME }}/" .env
           sed -i "s/DB_PASSWORD=.*/DB_PASSWORD=${{ secrets.BOOKLY_DB_PASSWORD }}/" .env
@@ -49,5 +47,5 @@ jobs:
           user: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./public
-          remote-dir: /public_html/anjay
+          remote-dir: /public_html/dev.book.petona.id
           delete: "false"
