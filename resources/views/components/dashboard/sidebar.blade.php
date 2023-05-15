@@ -15,7 +15,7 @@
     <ul class="menu-inner py-1">
         @foreach ($menus as $menu)
             @if ($menu['role'] === 'admin')
-                @canany(['admin', 'super-admin'])
+                @canany(['admin-company', 'super-admin', 'admin-branch'])
                     @if (isset($menu['submenu']))
                         <li class="menu-item">
                             <div class="menu-link menu-toggle" style="cursor: pointer">

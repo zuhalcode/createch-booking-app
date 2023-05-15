@@ -14,10 +14,10 @@
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <!-- Contextual Classes -->
 
-                        <div class="card">
+                        <div class="card ">
                             <h5 class="card-header">List User</h5>
-                            <button type="button" class="btn btn-primary mb-3 w-25 mx-2" data-bs-toggle="modal"
-                                data-bs-target="#modalAddAdmin">
+                            <button type="button" class="btn btn-primary mb-3 mx-4 row col-lg-2" data-bs-toggle="modal"
+                                data-bs-target="#modalAddUser">
                                 Add New User
                             </button>
                             <div class="table-responsive text-nowrap">
@@ -57,7 +57,7 @@
                                                             style="cursor: pointer"></i>
                                                         <i class="bx bx-trash me-1" style="cursor: pointer"
                                                             data-bs-toggle="modal"
-                                                            data-bs-target="#modalCompanyDelete"></i>
+                                                            data-bs-target="#modalUserDelete"></i>
                                                     </td>
                                                 @endif
                                             </tr>
@@ -82,7 +82,7 @@
         <!-- / Layout wrapper -->
 
         <!-- Modal Add Admin -->
-        <div class="modal fade" id="modalAddAdmin" tabindex="-1" aria-hidden="true">
+        <div class="modal fade" id="modalAddUser" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <form class="modal-content" method="POST" action={{ "/$slug/dashboard/users" }}>
                     @csrf
@@ -169,8 +169,7 @@
         <!-- Modal Edit User -->
         <div class="modal fade" id="modalEditUser" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
-                <form class="modal-content" id="formEditUser" method="POST"
-                    action={{ "/$slug/dashboard/users/$user->id" }}>
+                <form class="modal-content" id="formEditUser" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="modal-header">
@@ -178,6 +177,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
+
                     <div class="modal-body">
                         <div class="row">
                             <div class="col mb-3">
@@ -185,6 +185,8 @@
                                 <input type="text" name="name" class="form-control"
                                     placeholder="Masukkan Nama" />
                             </div>
+
+                            <input type="hidden" name="current_user_id" value={{ $user->id }}>
 
                             <div class="col mb-3">
                                 <label for="nameWithTitle" class="form-label">Email</label>
@@ -210,8 +212,9 @@
                                             id="basic-default-password12"
                                             placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                             value="zuhal123" />
-                                        <span id="basic-default-password2" class="input-group-text cursor-pointer"><i
-                                                class="bx bx-hide"></i></span>
+                                        <span id="basic-default-password2" class="input-group-text cursor-pointer">
+                                            <i class="bx bx-hide"></i>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -243,15 +246,17 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Update User</button>
                     </div>
+
                 </form>
             </div>
         </div>
 
         <!-- Modal Delete -->
-        <div class="modal fade" id="modalDeleteAdmin" tabindex="-1" aria-hidden="true">
+        <div class="modal fade" id="modalUserDelete" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">

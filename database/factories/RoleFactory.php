@@ -21,7 +21,7 @@ class RoleFactory extends Factory
     public function definition()
     {
         static $index = 0;
-        $roles = ['super-admin', 'admin', 'customer'];
+        $roles = ['super-admin', 'admin-company', 'admin-branch', 'customer'];
 
         return ['name' => $roles[$index++]];
     }

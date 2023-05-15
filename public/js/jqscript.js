@@ -122,6 +122,7 @@ const showImagePreview = (inputId, targetId) => {
 // Handling show modal edit company
 const showModalEditCompany = (id) => {
     const token = $('meta[name="csrf-token"]').attr("content");
+    let slug = window.location.pathname.split('/')[1];
 
     $.ajax({
         url: `/api/companies/${id}`,
@@ -134,7 +135,7 @@ const showModalEditCompany = (id) => {
             $('#modalEditCompany input[name="phone"]').val(company.phone);
             $("#formEditCompany").attr(
                 "action",
-                `/dashboard/companies/${id}/edit`
+                `/${slug}/dashboard/companies/${id}`
             );
         },
         error: (err) => console.log(err),
@@ -154,10 +155,10 @@ const showModalEditCompany = (id) => {
     $("#modalEditCompany").modal("show");
 };
 
-// Handling show modal edit company
+// Handling show modal edit user
 const showModalEditUser = (userId) => {
     const token = $('meta[name="csrf-token"]').attr("content");
-    var slug = window.location.pathname.split('/')[1];
+    let slug = window.location.pathname.split('/')[1];
     $.ajax({
         url: `/api/companies/users/${userId}`,
         method: "GET",

@@ -37,7 +37,7 @@
                                     </li>
 
                                     @if (auth()->check())
-                                        @canany(['admin', 'super-admin'])
+                                        @canany(['admin-company', 'admin-branch', 'super-admin'])
                                             <li class="nav-item">
                                                 <a class="nav-link" href={{ url("/$slug/dashboard") }}>Dashboard</a>
                                             </li>

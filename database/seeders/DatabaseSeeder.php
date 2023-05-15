@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Role::factory()->count(3)->create();
+        Role::factory()->count(4)->create();
         User::factory()->count(6)->create();
         Province::factory()->count(34)->create();
 

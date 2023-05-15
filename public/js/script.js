@@ -13,8 +13,6 @@
 // Handle Midtrans
 const handlePayButton = () => {
     const path = window.location.pathname;
-    const pathOrigin = window.location.origin;
-    const slug = path.split("/")[1];
 
     snap.pay(document.getElementById("midtrans_client_token").value, {
         onSuccess: () => (window.location.href = `${path}`),

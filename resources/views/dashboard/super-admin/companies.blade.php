@@ -41,12 +41,12 @@
                                                 <td>{{ $count }}</td>
                                                 <td>{{ $company->name }}</td>
                                                 <td>{{ $company->email }}</td>
-                                                @if ($company->users->isEmpty())
-                                                    <td></td>
+                                                @if ($company->users->where('role_id', 2)->first())
+                                                    <td>{{ $company->users->where('role_id', 2)->first()->name }}</td>
+                                                @else
+                                                    <td>None</td>
                                                 @endif
-                                                @foreach ($company->users as $user)
-                                                    <td>{{ $user->name }}</td>
-                                                @endforeach
+
                                                 <td>{{ $company->phone }}</td>
                                                 <td>{{ $company->created_at }}</td>
                                                 <td><span class="badge bg-label-success me-1">Active</span></td>
@@ -86,7 +86,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col">
+                            <div class="col mb-3">
                                 <label class="form-label">Nama Perusahaan</label>
                                 <input type="text" name="name" id="company-name" class="form-control"
                                     placeholder="Masukkan Nama" />
@@ -105,8 +105,9 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <form class="modal-content" id="formEditCompany" method="POST" action=''>
                     @csrf
+                    @method('PUT')
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalCenterTitle">Masukkan Nama Perusahaan</h5>
+                        <h5 class="modal-title">Masukkan Nama Perusahaan</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -132,8 +133,11 @@
                         <div class="row mt-3">
                             <div class="col mb-3">
                                 <label class="form-label">Admin</label>
-                                <select class="form-select" id="user_id">
+                                <select class="form-select" name="user_id">
                                     <option selected>Choose...</option>
+                                    @foreach ($admins as $admin)
+                                        <option value={{ $admin->id }}>{{ $admin->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -150,7 +154,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="deleteModalLabel">
+                        <h5 class="modal-title">
                             Are you sure you want to delete this company?
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"

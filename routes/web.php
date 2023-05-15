@@ -94,7 +94,7 @@ Route::prefix('/{slug}')->group(fn () => [
 
             Route::get('/bookings', fn () => view('dashboard.bookings')),
 
-        ])->middleware(['admin', 'super-admin']),
+        ])->middleware(['admin-company', 'admin-branch', 'super-admin']),
 
         // Handling Dashboard for Super Admin
         Route::middleware('super-admin')->group(function () {
@@ -107,7 +107,7 @@ Route::prefix('/{slug}')->group(fn () => [
                 // Handle Companies 
                 Route::get('/companies', 'indexCompany'),
                 Route::post('/companies', 'storeCompany'),
-                Route::post('/companies/{id}/edit', 'updateCompany'),
+                Route::put('/companies/{id}', 'updateCompany'),
                 Route::delete('/companies/{id}', 'destroyCompany'),
             ]);
         }),
