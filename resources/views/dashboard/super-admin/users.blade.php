@@ -61,9 +61,7 @@
                                                     </td>
                                                 @endif
                                             </tr>
-                                            @php
-                                                $count++;
-                                            @endphp
+                                            @php $count++; @endphp
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -86,6 +84,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <form class="modal-content" method="POST" action={{ "/$slug/dashboard/users" }}>
                     @csrf
+
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalCenterTitle">Add New User</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -97,13 +96,19 @@
                                 <div class="col mb-3">
                                     <label for="nameWithTitle" class="form-label">Name</label>
                                     <input type="text" name="name" class="form-control"
-                                        placeholder="Masukkan Nama" />
+                                        placeholder="Masukkan Nama" required />
+                                    @error('name')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
 
                                 <div class="col mb-3">
                                     <label for="nameWithTitle" class="form-label">Email</label>
                                     <input type="text" name="email" class="form-control"
-                                        placeholder="Masukkan Nama" />
+                                        placeholder="Masukkan Nama" required />
+                                    @error('email')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -111,22 +116,29 @@
                                 <div class="col mb-3">
                                     <label for="price" class="form-label">No WhatsApp</label>
                                     <div class="input-group input-group-merge">
-                                        <span class="input-group-text"><i class="bx bx-phone"></i></span>
+                                        <span class="input-group-text">
+                                            <i class="bx bx-phone"></i>
+                                        </span>
                                         <input type="text" name="phone" class="form-control phone-mask"
-                                            placeholder="0851 2345 2678" value="085123452678"
-                                            aria-describedby="basic-icon-default-phone2" />
+                                            placeholder="0851 2345 2678" value="085123452678" />
                                     </div>
+                                    @error('phone')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
 
                                 <div class="form-password-toggle col mb-3">
                                     <label class="form-label" for="basic-default-password12">Password</label>
                                     <div class="input-group">
                                         <input type="password" name="password" class="form-control"
-                                            id="basic-default-password12"
                                             placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                            value="zuhal123" />
-                                        <span id="basic-default-password2" class="input-group-text cursor-pointer"><i
-                                                class="bx bx-hide"></i></span>
+                                            value="zuhal123" required />
+                                        <span class="input-group-text cursor-pointer">
+                                            <i class="bx bx-hide"></i>
+                                        </span>
+                                        @error('password')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -134,7 +146,7 @@
                             <div class="row">
                                 <div class="col mb-3">
                                     <label class="form-label">Company</label>
-                                    <select class="form-select" name="company_slug">
+                                    <select class="form-select" name="company">
                                         <option selected>Choose...</option>
                                         @foreach ($companies as $company)
                                             <option value={{ $company->slug }}>
@@ -142,11 +154,14 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                    @error('company')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
 
                                 <div class="col mb-3">
                                     <label class="form-label">Role</label>
-                                    <select class="form-select" name="role_id">
+                                    <select class="form-select" name="role">
                                         <option selected>Choose...</option>
                                         @foreach ($roles as $role)
                                             <option value={{ $role->id }}>
@@ -154,6 +169,9 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                    @error('role')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -180,19 +198,26 @@
 
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col mb-3">
-                                <label for="nameWithTitle" class="form-label">Name</label>
-                                <input type="text" name="name" class="form-control"
-                                    placeholder="Masukkan Nama" />
+                            <div class="row">
+                                <div class="col mb-3">
+                                    <label class="form-label">Name</label>
+                                    <input type="text" name="name" class="form-control"
+                                        placeholder="Masukkan Nama" required />
+                                    @error('name')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+
+                                <div class="col mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="text" name="email" class="form-control"
+                                        placeholder="Masukkan Nama" required />
+                                    @error('email')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
                             </div>
 
-                            <input type="hidden" name="current_user_id" value={{ $user->id }}>
-
-                            <div class="col mb-3">
-                                <label for="nameWithTitle" class="form-label">Email</label>
-                                <input type="text" name="email" class="form-control"
-                                    placeholder="Masukkan Nama" />
-                            </div>
 
                             <div class="row">
                                 <div class="col mb-3">
@@ -200,29 +225,33 @@
                                     <div class="input-group input-group-merge">
                                         <span class="input-group-text"><i class="bx bx-phone"></i></span>
                                         <input type="text" name="phone" class="form-control phone-mask"
-                                            placeholder="0851 2345 2678" value="085123452678"
-                                            aria-describedby="basic-icon-default-phone2" />
+                                            placeholder="0851 2345 2678" value="085123452678" required />
                                     </div>
+                                    @error('phone')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
 
                                 <div class="form-password-toggle col mb-3">
                                     <label class="form-label" for="basic-default-password12">Password</label>
                                     <div class="input-group">
                                         <input type="password" name="password" class="form-control"
-                                            id="basic-default-password12"
                                             placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                            value="zuhal123" />
+                                            value="zuhal123" required />
                                         <span id="basic-default-password2" class="input-group-text cursor-pointer">
                                             <i class="bx bx-hide"></i>
                                         </span>
                                     </div>
+                                    @error('password')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col mb-3">
                                     <label class="form-label">Company</label>
-                                    <select class="form-select" name="company_slug">
+                                    <select class="form-select" name="company">
                                         <option selected>Choose...</option>
                                         @foreach ($companies as $company)
                                             <option value={{ $company->slug }}>
@@ -230,11 +259,14 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                    @error('company')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
 
                                 <div class="col mb-3">
                                     <label class="form-label">Role</label>
-                                    <select class="form-select" name="role_id">
+                                    <select class="form-select" name="role">
                                         <option selected>Choose...</option>
                                         @foreach ($roles as $role)
                                             <option value={{ $role->id }}>
@@ -242,6 +274,9 @@
                                             </option>
                                         @endforeach
                                     </select>
+                                    @error('role')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                         </div>

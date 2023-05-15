@@ -51,6 +51,12 @@
         <x-ui.toast type="bg-danger" title="{{ Route::current()->parameter('slug') }}">
             {{ session('error') }}
         </x-ui.toast>
+    @elseif ($errors->any())
+        <x-ui.toast type="bg-danger" title="{{ Route::current()->parameter('slug') }}">
+            @foreach ($errors->all() as $error)
+                {{ $error }}<br>
+            @endforeach
+        </x-ui.toast>
     @endif
 
     {{ $slot }}

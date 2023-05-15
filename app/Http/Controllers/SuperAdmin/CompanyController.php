@@ -128,23 +128,25 @@ class CompanyController extends Controller
             'email' => 'nullable|email|unique:users,email,' . $userId,
             'phone' => 'required',
             'password' => 'required',
-            'company_slug' => 'required',
-            'role_id' => 'required',
-        ]);
+            'company' => 'required|not_in:Choose...',
+            'role' => 'required|not_in:Choose...',
+        ],);
+
+        session()->flash('error', 'Please select a company.');
 
         $user = User::findOrFail($userId);
 
         // Only update the email field if it has changed
         if ($user->email !== $validatedData['email']) $user->email = $req->input('email');
 
-        $user->role_id = $validatedData['role_id'];
+        $user->role_id = $validatedData['role'];
         $user->name = $validatedData['name'];
         $user->phone = $validatedData['phone'];
         $user->password = Hash::make($validatedData['password']);
         $user->update();
 
         // get the company from request
-        $company = Company::where('slug', $validatedData['company_slug'])->first();
+        $company = Company::where('slug', $validatedData['company'])->first();
 
         // Check if the pivot values are different
         if ($company->users()->where('user_id', $user->id)->exists()) {
