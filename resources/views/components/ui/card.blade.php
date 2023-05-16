@@ -6,14 +6,20 @@
             <p class="card-text">
                 {{ Str::of($product->description)->words(12, '...') }}
             </p>
-            <div class="d-flex gap-2">
-                <a href={{ url("/dashboard/products/$product->id/edit") }} class="btn btn-outline-primary">
+            <p class="btn btn-outline-primary">
+                <a class="text-reset" href={{ url("/$slug/dashboard/products/$product->id/edit") }}>
                     Edit
                 </a>
+            </p>
+            @if (Str::contains(request()->url(), 'dashboard/branches'))
+                <p class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modalConfirmDeleteOnBranch">
+                    Delete
+                </p>
+            @else
                 <p class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modalConfirmDelete">
                     Delete
                 </p>
-            </div>
+            @endif
         </div>
     </div>
     <!-- Vertically Centered Modal -->
@@ -38,6 +44,35 @@
                     <form action="{{ url('/dashboard/products', $product->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Delete On Branch -->
+    <div class="modal fade" id="modalConfirmDeleteOnBranch" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">
+                        Confirm removal of product from current branch?
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">This action cannot be undone.</div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <form action="{{ url("/$slug/dashboard/products/branches/" . request()->route('branchId')) }}"
+                        method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <input type="hidden" value={{ $product->id }} name="product_id">
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                 </div>

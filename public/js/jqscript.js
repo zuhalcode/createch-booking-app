@@ -1,4 +1,37 @@
 $(document).ready(function () {
+    // Handling Add new Product in Branch
+    let counter = 1
+    $("#plus-product").on("click", function () {
+        if(counter < 5) {
+            counter++
+            const companyProducts = JSON.parse($("#branch-product-container").attr("data-company-products"));
+    
+            const newSelectElement = $("<select>", {
+                class: "form-select mt-2",
+                name: "products[]",
+                id: `branch-product-selector-${counter}`,
+            });
+    
+            const defaultOption = $("<option>", {
+                selected: true,
+                text: "Choose...",
+            });
+    
+            newSelectElement.append(defaultOption);
+    
+            companyProducts.forEach(function (product) {
+                const option = $("<option>", {
+                    value: product.id,
+                    text: product.name,
+                    class: 'text-capitalize'
+                });
+                newSelectElement.append(option);
+            });
+    
+            $("#branch-product-container").append(newSelectElement)
+        }
+    });
+
     // Handling Add new Addons
     $("#plus-addon").on("click", function () {
         // create new input fields HTML
@@ -175,6 +208,28 @@ const showModalEditUser = (userId) => {
     });
 
     $("#modalEditUser").modal("show");
+};
+
+// Handling show modal edit user
+const showModalEditBranch = (branchId) => {
+    const token = $('meta[name="csrf-token"]').attr("content");
+    let slug = window.location.pathname.split('/')[1];
+    $.ajax({
+        url: `/api/companies/users/${userId}`,
+        method: "GET",
+        headers: { "X-CSRF-Token": token },
+        success: function (res) {
+            const user = res.user;
+            $('#modalEditUser input[name="name"]').val(user.name);
+            $('#modalEditUser input[name="email"]').val(user.email);
+            $('#modalEditUser input[name="phone"]').val(user.phone);
+
+            $("#formEditUser").attr("action",`/${slug}/dashboard/branches/${branchId}`);
+        },
+        error: (err) => console.log(err),
+    });
+
+    $("#modalEditBranch").modal("show");
 };
 
 // Handle submit on Book now in product detail

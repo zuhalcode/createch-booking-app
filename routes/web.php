@@ -56,7 +56,6 @@ Route::prefix('/{slug}')->group(fn () => [
 
     // Handling for Dashboard
     Route::prefix('/dashboard')->middleware('auth')->group(fn () => [
-
         Route::get('/order-detail', [OrderController::class, 'indexOrderDetail']),
 
         // Handling Dashboard for Admin
@@ -72,16 +71,19 @@ Route::prefix('/{slug}')->group(fn () => [
                 // Handle Company
                 Route::get('/company', 'editCompany'),
                 Route::put('/company/{id}', 'updateCompany'),
-                Route::put('/company/{id}', 'updateCompany'),
 
                 // Handle Branches
                 Route::get('/branches', 'indexBranch'),
                 Route::get('/branches/create', 'createBranch'),
+                Route::get('/branches/{branchId}', 'showBranch'),
                 Route::post('/branches', 'storeBranch'),
+                Route::put('/branches/{branchId}', 'updateBranch'),
 
             ]),
 
             Route::resource('/products', AdminProductController::class),
+            Route::post('/products/branches/{branchId}', [AdminProductController::class, 'storeBranchProducts']),
+            Route::delete('/products/branches/{branchId}', [AdminProductController::class, 'destroyBranchProduct']),
 
             Route::controller(SlotController::class)->group(fn () => [
                 Route::get('/slots', 'createSlot'),

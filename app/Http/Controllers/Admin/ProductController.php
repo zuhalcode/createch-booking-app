@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\AddOn;
+use App\Models\Branch;
+use App\Models\Company;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\AddOn;
 
 class ProductController extends Controller
 {
@@ -15,10 +17,13 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
+    public function index($slug)
     {
-        $products = Product::where('company_id', auth()->user()->company->id)->get();
-        return view('dashboard.products.index', ['products' => $products]);
+        $company = Company::where('slug', $slug)->first();
+        return view('dashboard.products.index', [
+            'products' => $company->products,
+            'slug' => $slug,
+        ]);
     }
 
     /**
@@ -26,9 +31,9 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($slug)
     {
-        return view('dashboard.products.create');
+        return view('dashboard.products.create', ['slug' => $slug]);
     }
 
     /**
@@ -37,9 +42,10 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $req)
+    public function store(Request $req, $slug)
     {
-        $companyId = auth()->user()->company->id;
+        $company = Company::where('slug', $slug)->first();
+
         $validatedData = $req->validate([
             'name' => 'required|max:255',
             'price' => 'required',
@@ -52,14 +58,14 @@ class ProductController extends Controller
         $product = new Product;
 
         // Save the Product image
-        if($req->hasFile('image')) {
+        if ($req->hasFile('image')) {
             $image = $req->file('image');
-            $filename = 'product-' . $companyId . '-' . time() . '.' . $image->getClientOriginalExtension();
+            $filename = 'product-' . $company->id . '-' . time() . '.' . $image->getClientOriginalExtension();
             $image->storeAs('products', $filename);
             $product->image = "/storage/products/$filename";
         }
 
-        $product->company_id = $companyId;
+        $product->company_id = $company->id;
         $product->name = $validatedData['name'];
         $product->price = $validatedData['price'];
         $product->description = $validatedData['description'];
@@ -125,7 +131,7 @@ class ProductController extends Controller
         $product = Product::find($id);
 
         // Save the Product image
-        if($req->hasFile('image')) {
+        if ($req->hasFile('image')) {
             $image = $req->file('image');
             $filename = 'product-' . $companyId . '-' . time() . '.' . $image->getClientOriginalExtension();
             $image->storeAs('products', $filename);
@@ -143,7 +149,7 @@ class ProductController extends Controller
             return !is_null($value);
         });
 
-        if(!empty($addons)) {
+        if (!empty($addons)) {
             foreach ($validatedData['addon'] as $index => $addon) {
                 $addonData = [
                     'product_id' => $product->id,
@@ -168,5 +174,29 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $product->delete();
         return back()->with('success', 'Product deleted successfully.');
+    }
+
+    public function storeBranchProducts(Request $req, $slug, $branchId)
+    {
+        $productIds = $req->input('products');
+
+        // Retrieve the products by their IDs
+        $products = Product::whereIn('id', $productIds)->get();
+        $branch = Branch::findOrFail($branchId);
+
+        // Attach the retrieved products to the branch if they are not already attached
+        $branch->products()->syncWithoutDetaching($products);
+
+        return back()->with('success', 'Products added successfully');
+    }
+
+    public function destroyBranchProduct(Request $req, $slug, $branchId)
+    {
+        $validatedData = $req->validate(['product_id' => 'required']);
+
+        $branch = Branch::findOrFail($branchId);
+        $branch->products()->detach($validatedData['product_id']);
+
+        return back()->with('success', 'Product removed successfully');
     }
 }

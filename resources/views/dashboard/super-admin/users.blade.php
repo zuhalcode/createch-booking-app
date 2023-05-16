@@ -14,7 +14,7 @@
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <!-- Contextual Classes -->
 
-                        <div class="card ">
+                        <div class="card">
                             <h5 class="card-header">List User</h5>
                             <button type="button" class="btn btn-primary mb-3 mx-4 row col-lg-2" data-bs-toggle="modal"
                                 data-bs-target="#modalAddUser">
@@ -77,7 +77,6 @@
             <!-- Overlay -->
             <div class="layout-overlay layout-menu-toggle"></div>
         </div>
-        <!-- / Layout wrapper -->
 
         <!-- Modal Add Admin -->
         <div class="modal fade" id="modalAddUser" tabindex="-1" aria-hidden="true">
@@ -317,6 +316,6 @@
                 </div>
             </div>
         </div>
-
     </div>
+    <!-- / Layout wrapper -->
 </x-layouts.dashboard-layout>

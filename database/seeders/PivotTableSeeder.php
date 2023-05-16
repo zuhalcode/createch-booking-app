@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Branch;
 use App\Models\Company;
+use App\Models\Product;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -17,27 +19,34 @@ class PivotTableSeeder extends Seeder
      */
     public function run()
     {
-        $branches = DB::table('branches')->pluck('id');
-        $products = DB::table('products')->pluck('id');
-        $slots = DB::table('slots')->pluck('id');
+        $products = Product::pluck('id');
+        $branches = Branch::pluck('id');
 
-        $users = User::all();
-        $companies = Company::all();
+        foreach ($branches as $branch_id) {
+            // Get the company_id of the branch
+            $branch = Branch::find($branch_id);
+            $company_id = $branch->company_id;
 
-        foreach ($branches as $id1) {
-            // Generate random number between 1 and 50 (number of products)
-            $numProducts = rand(1, 50);
-            $randomProducts = $products->random($numProducts);
+            // Filter products based on the company_id
+            $filteredProducts = $products->filter(function ($product_id) use ($company_id) {
+                $product = Product::find($product_id);
+                return $product->company_id === $company_id;
+            });
+
+            // Generate random number between 1 and the number of filtered products
+            $numProducts = rand(1, $filteredProducts->count());
+            $randomProducts = $filteredProducts->random($numProducts);
 
             // Attach the randomly selected products to the branch
-            foreach ($randomProducts as $id2) {
+            foreach ($randomProducts as $product_id) {
                 DB::table('branch_product')->insert([
-                    'branch_id' => $id1,
-                    'product_id' => $id2,
+                    'branch_id' => $branch_id,
+                    'product_id' => $product_id,
                 ]);
             }
         }
 
+        $slots = DB::table('slots')->pluck('id');
         foreach ($branches as $id1) {
             // Generate random number between 1 and 10 (number of slots)
             $numSlots = rand(1, 6);
@@ -51,6 +60,9 @@ class PivotTableSeeder extends Seeder
                 ]);
             }
         }
+
+        $users = User::all();
+        $companies = Company::all();
 
         foreach ($users as $user) {
             // Skip if the user already has a company

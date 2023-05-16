@@ -17,10 +17,10 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card mb-4">
-                                    <h5 class="card-header">Create Product</h5>
+                                    <h5 class="card-header">Create Productcc</h5>
                                     <hr class="my-0" />
                                     <form id="formAccountSettings" method="POST"
-                                        action={{ url('/dashboard/products') }} class="card-body"
+                                        action={{ url("/$slug/dashboard/products") }} class="card-body"
                                         enctype="multipart/form-data">
                                         @csrf
 

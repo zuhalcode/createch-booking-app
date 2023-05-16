@@ -14,7 +14,7 @@
                         <!-- Contextual Classes -->
                         <div class="row mb-5">
                             @foreach ($products as $product)
-                                <x-ui.card :product="$product" />
+                                <x-ui.card :product="$product" :slug="$slug" />
                             @endforeach
                         </div>
                         <!--/ Contextual Classes -->

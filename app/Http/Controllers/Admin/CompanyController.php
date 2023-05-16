@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\City;
 use App\Models\Cover;
+use App\Models\Branch;
 use App\Models\Company;
 use App\Models\Province;
 use Illuminate\Http\Request;
@@ -12,13 +13,14 @@ use App\Http\Controllers\Controller;
 class CompanyController extends Controller
 {
     // Handling Dashboard
-    public function indexDashboard($slug) {
+    public function indexDashboard($slug)
+    {
         return view('dashboard.index', ['slug' => $slug]);
     }
     // End Handling Dashboard
 
     // Handling Landing Page
-    public function editLandingPage($slug) 
+    public function editLandingPage($slug)
     {
         $company = Company::where('slug', $slug)->first();
         $cover = Cover::where('company_id', $company->id)->first();
@@ -36,17 +38,17 @@ class CompanyController extends Controller
             'short_desc' => 'required',
         ]);
 
-        if($req->hasFile('image')) {
+        if ($req->hasFile('image')) {
             // Delete Old file
             $oldFile = public_path($cover->image);
-            if(file_exists($oldFile)) unlink($oldFile);
+            if (file_exists($oldFile)) unlink($oldFile);
 
             $image = $req->file('image');
             $filename = 'cover-' . $cover->id . '-' . time() . '.' . $image->getClientOriginalExtension();
             $image->storeAs('covers', $filename);
             $cover->image = "/storage/covers/$filename";
         }
-    
+
         $cover->first_heading_text = $validatedData['first_heading_text'];
         $cover->second_heading_text = $validatedData['second_heading_text'];
         $cover->short_desc = $validatedData['short_desc'];
@@ -76,10 +78,10 @@ class CompanyController extends Controller
             'logo' => 'mimes:jpg,png,jpeg|image'
         ]);
 
-        if($req->hasFile('logo')) {
+        if ($req->hasFile('logo')) {
             // Delete Old file
             $oldFile = public_path($company->logo);
-            if(file_exists($oldFile)) unlink($oldFile);
+            if (file_exists($oldFile)) unlink($oldFile);
 
             $logo = $req->file('logo');
             $filename = 'logo-' . $company->id . '-' . time() . '.' . $logo->getClientOriginalExtension();
@@ -101,8 +103,30 @@ class CompanyController extends Controller
 
     // Handling Branch
     public function indexBranch($slug)
-    {   
-        return view('dashboard.company.branches.index', ['slug' => $slug]);
+    {
+        $company = Company::where('slug', $slug)->first();
+        $provinces = Province::all();
+        $cities = City::all();
+
+        return view('dashboard.company.branches.index', [
+            'slug' => $slug,
+            'provinces' => $provinces,
+            'cities' => $cities,
+            'branches' => $company->branches
+        ]);
+    }
+
+    public function showBranch($slug, $branchId)
+    {
+        $branch = Branch::findOrFail($branchId);
+        $company = Company::where('slug', $slug)->first();
+
+        return view('dashboard.company.branches.detail', [
+            'slug' => $slug,
+            'branch' => $branch,
+            'branchProducts' => $branch->products,
+            'companyProducts' => $company->products,
+        ]);
     }
 
     public function createBranch($slug)
