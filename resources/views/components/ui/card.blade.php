@@ -6,6 +6,9 @@
             <p class="card-text">
                 {{ Str::of($product->description)->words(12, '...') }}
             </p>
+            <p class="card-text">
+                {{ Str::shortened_price($product->price) }}
+            </p>
             <p class="btn btn-outline-primary">
                 <a class="text-reset" href={{ url("/$slug/dashboard/products/$product->id/edit") }}>
                     Edit

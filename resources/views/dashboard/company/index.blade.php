@@ -92,7 +92,5 @@
         </div>
         <!-- / Layout page -->
     </div>
-
-
     <!-- / Layout wrapper -->
-    </x-dashboard-layout>
+</x-layouts.dashboard-layout>

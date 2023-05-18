@@ -8,6 +8,7 @@ use App\Models\Company;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -101,11 +102,15 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug, $id)
     {
         $product = Product::find($id);
+        $addons = AddOn::where('product_id', $product->id)->get();
+
         return view('dashboard.products.edit', [
-            'product' => $product
+            'product' => $product,
+            'addons' => $addons,
+            'slug' => $slug,
         ]);
     }
 
@@ -116,51 +121,58 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $req, $id)
+    public function update(Request $req, $slug, $id)
     {
-        $companyId = auth()->user()->company->id;
+        $company = Company::where('slug', $slug)->first();
+
         $validatedData = $req->validate([
             'name' => 'required|max:255',
             'price' => 'required',
-            'addon.*' => 'nullable',
-            'addon-price.*' => 'nullable|min:0',
+            'addons_id.*' => 'required',
+            'addons_name.*' => 'required',
+            'addon-price.*' => 'required|min:0',
             'description' => 'required',
             'image' => 'nullable|mimes:jpg,png,jpeg|image',
         ]);
 
         $product = Product::find($id);
 
-        // Save the Product image
+        // Update the Product image
         if ($req->hasFile('image')) {
+
+            // Remove the previous image if it exists
+            if ($product->image) {
+                Storage::delete($product->image);
+            }
+
             $image = $req->file('image');
-            $filename = 'product-' . $companyId . '-' . time() . '.' . $image->getClientOriginalExtension();
+            $filename = 'product-' . $company->id . '-' . time() . '.' . $image->getClientOriginalExtension();
             $image->storeAs('products', $filename);
             $product->image = "/storage/products/$filename";
         }
 
-        $product->company_id = $companyId;
+        $product->company_id = $company->id;
         $product->name = $validatedData['name'];
         $product->price = $validatedData['price'];
         $product->description = $validatedData['description'];
         $product->update();
 
-        // Check if input array is not null
-        $addons = array_filter($validatedData['addon'], function ($value) {
-            return !is_null($value);
-        });
+        foreach ($validatedData['addons_id'] as $index => $addonId) {
+            $addonData = [
+                'name' => $validatedData['addons_name'][$index], // Updated array key to 'addons_name'
+                'price' => $validatedData['addon-price'][$index]
+            ];
 
-        if (!empty($addons)) {
-            foreach ($validatedData['addon'] as $index => $addon) {
-                $addonData = [
-                    'product_id' => $product->id,
-                    'name' => $addon,
-                    'price' => $validatedData['addon-price'][$index]
-                ];
-                AddOn::create($addonData);
+            // Find the existing addon by ID
+            $existingAddon = AddOn::find($addonId);
+
+            if ($existingAddon) {
+                // Update the existing addon
+                $existingAddon->update($addonData);
             }
         }
 
-        return redirect('/dashboard/products')->with('success', 'Product updated successfully.');
+        return redirect("/$slug/dashboard/products")->with('success', 'Product updated successfully.');
     }
 
     /**

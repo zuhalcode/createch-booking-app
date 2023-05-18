@@ -9,6 +9,8 @@ use App\Models\Company;
 use App\Models\Province;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\SocialMedia;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class CompanyController extends Controller
 {
@@ -105,13 +107,9 @@ class CompanyController extends Controller
     public function indexBranch($slug)
     {
         $company = Company::where('slug', $slug)->first();
-        $provinces = Province::all();
-        $cities = City::all();
 
         return view('dashboard.company.branches.index', [
             'slug' => $slug,
-            'provinces' => $provinces,
-            'cities' => $cities,
             'branches' => $company->branches
         ]);
     }
@@ -147,9 +145,95 @@ class CompanyController extends Controller
             'name' => 'required|max:255',
             'phone' => 'required',
             'address' => 'required',
+            'city' => 'required|not_in:Choose...',
+            'socmed.instagram' => 'nullable',
+            'socmed.twitter' => 'nullable',
+            'socmed.tiktok' => 'nullable',
+            'socmed.facebook' => 'nullable',
         ]);
 
-        return view('dashboard.company.branches.create', ['slug' => $slug]);
+        $company = Company::where('slug', $slug)->first();
+        $validatedData['slug'] = SlugService::createSlug(Branch::class, 'slug', $validatedData['name']);
+
+        $branch = Branch::create([
+            'company_id' => $company->id,
+            'city_id' => $validatedData['city'],
+            'slug' => $validatedData['slug'],
+            'name' => $validatedData['name'],
+            'phone' => $validatedData['phone'],
+            'address' => $validatedData['address'],
+        ]);
+
+        foreach ($validatedData['socmed'] as $platform => $username) {
+            if (!is_null($username) && in_array($platform, ['instagram', 'twitter', 'tiktok', 'facebook'])) {
+                SocialMedia::create([
+                    'branch_id' => $branch->id,
+                    'name' => $platform,
+                    'username' => $username,
+                ]);
+            }
+        }
+
+        return redirect("/$slug/dashboard/branches")->with('success', 'Branch added successfully!');
+    }
+
+    public function editBranch($slug, $branchId)
+    {
+        $provinces = Province::all();
+        $cities = City::all();
+        $branch = Branch::findOrFail($branchId);
+
+        return view('dashboard.company.branches.edit', [
+            'slug' => $slug,
+            'branch' => $branch,
+            'provinces' => $provinces,
+            'cities' => $cities,
+        ]);
+    }
+
+    public function updateBranch(Request $req, $slug, $branchId)
+    {
+        $validatedData = $req->validate([
+            'name' => 'required|max:255',
+            'phone' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'socmed.*' => 'nullable',
+        ]);
+
+        $branch = Branch::findOrFail($branchId);
+        $branch->update([
+            'city' => $validatedData['city'],
+            'name' => $validatedData['name'],
+            'phone' => $validatedData['phone'],
+            'address' => $validatedData['address'],
+        ]);
+
+        $socialMediaData = $validatedData['socmed'];
+        foreach (['instagram', 'twitter', 'facebook', 'tiktok'] as $platform) {
+            $socialMedia = $branch->social_medias->where('name', $platform)->first();
+
+            if (isset($socialMediaData[$platform])) {
+                $username = $socialMediaData[$platform];
+
+                if ($username !== '' && $socialMedia) {
+                    $socialMedia->update([
+                        'branch_id' => $branch->id,
+                        'username' => $username,
+                    ]);
+                } elseif ($username !== '') {
+                    $branch->social_medias()->create([
+                        'branch_id' => $branch->id,
+                        'name' => $platform,
+                        'username' => $username,
+                    ]);
+                }
+            } elseif ($socialMedia) {
+                $socialMedia->delete();
+            }
+        }
+
+        return redirect("/$slug/dashboard/branches")->with('success', 'Branch updated successfully!');
     }
     // End Handling Branch
 }

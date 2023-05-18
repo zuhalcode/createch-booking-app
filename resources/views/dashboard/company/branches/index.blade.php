@@ -23,6 +23,10 @@
                                             <th>Name</th>
                                             <th>Phone</th>
                                             <th>Address</th>
+                                            <th>Instagram</th>
+                                            <th>Twitter</th>
+                                            <th>Facebook</th>
+                                            <th>TikTok</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -38,8 +42,18 @@
                                                 </td>
                                                 <td>{{ $branch->phone }}</td>
                                                 <td>{{ $branch->address }}</td>
+
+                                                @foreach (['instagram', 'twitter', 'facebook', 'tiktok'] as $platform)
+                                                    <td>
+                                                        {{ $branch->social_medias->where('name', $platform)->first()?->username ?? 'NULL' }}
+                                                    </td>
+                                                @endforeach
+
                                                 <td>
-                                                    <i class="bx bx-edit-alt me-1"></i>
+                                                    <a href={{ url("/$slug/dashboard/branches/$branch->id/edit") }}
+                                                        class="text-reset">
+                                                        <i class="bx bx-edit-alt me-1"></i>
+                                                    </a>
                                                     <i class="bx bx-trash me-1" style="cursor: pointer"
                                                         data-bs-toggle="modal" data-bs-target="#modalUserDelete"></i>
                                                 </td>

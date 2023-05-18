@@ -75,10 +75,10 @@ Route::prefix('/{slug}')->group(fn () => [
                 // Handle Branches
                 Route::get('/branches', 'indexBranch'),
                 Route::get('/branches/create', 'createBranch'),
-                Route::get('/branches/{branchId}', 'showBranch'),
                 Route::post('/branches', 'storeBranch'),
+                Route::get('/branches/{branchId}', 'showBranch'),
+                Route::get('/branches/{branchId}/edit', 'editBranch'),
                 Route::put('/branches/{branchId}', 'updateBranch'),
-
             ]),
 
             Route::resource('/products', AdminProductController::class),

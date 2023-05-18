@@ -10,6 +10,8 @@ class SocialMedia extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+    protected $table = 'social_medias';
+
 
     public function branch()
     {

@@ -7,12 +7,13 @@ use App\Models\Company;
 use App\Models\Holiday;
 use App\Models\Product;
 use App\Models\SocialMedia;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Branch extends Model
 {
-    use HasFactory;
+    use HasFactory, Sluggable;
     protected $guarded = ['id'];
 
     public function products()
@@ -43,5 +44,12 @@ class Branch extends Model
     public function slots()
     {
         return $this->belongsToMany(Slot::class);
+    }
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => ['source' => 'name']
+        ];
     }
 }

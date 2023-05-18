@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Cviebrock\EloquentSluggable\Services\SlugService;
-use Illuminate\Validation\Rule;
 
 class CompanyController extends Controller
 {

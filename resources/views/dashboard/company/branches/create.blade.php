@@ -19,12 +19,14 @@
                             <hr class="my-0" />
 
                             <div class="card-body">
-                                <form method="POST">
+                                <form method="POST" action={{ url("/$slug/dashboard/branches") }}>
+                                    @csrf
                                     <div class="row">
                                         <div class="col mb-3">
-                                            <label for="firstName" class="form-label">Branch Name</label>
+                                            <label class="form-label">Branch Name</label>
                                             <input class="form-control" placeholder="Branch Name" type="text"
-                                                id="firstName" name="firstName" autofocus autocomplete="off" />
+                                                name="name" value="{{ old('name') }}" autofocus
+                                                autocomplete="off" />
                                         </div>
 
                                         <div class=" col mb-3">
@@ -32,7 +34,7 @@
                                             <div class="input-group input-group-merge">
                                                 <span class="input-group-text">INA (+62)</span>
                                                 <input type="text" id="phone" name="phone" class="form-control"
-                                                    placeholder="8XXX XXXX XXX" />
+                                                    placeholder="8XXX XXXX XXX" value="{{ old('phone') }}" />
                                             </div>
                                         </div>
                                     </div>
@@ -64,9 +66,9 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="state" class="form-label">Address</label>
-                                        <input class="form-control" type="text" id="state" name="state"
-                                            placeholder="Surabaya" autocomplete="off" />
+                                        <label class="form-label">Address</label>
+                                        <input class="form-control" type="text" name="address" placeholder="Surabaya"
+                                            autocomplete="off" value="{{ old('address') }}" />
                                     </div>
 
                                     <div class="row">
@@ -75,7 +77,8 @@
                                                 Instagram <small>(optional)</small>
                                             </label>
                                             <input class="form-control" type="text" name="socmed[instagram]"
-                                                placeholder="Instagram" autocomplete="off" />
+                                                placeholder="Instagram" autocomplete="off"
+                                                value="{{ old('socmed.instagram') }}" />
                                         </div>
 
                                         <div class="col mb-3">
@@ -83,7 +86,8 @@
                                                 TikTok <small>(optional)</small>
                                             </label>
                                             <input class="form-control" type="text" name="socmed[tiktok]"
-                                                placeholder="Tiktok" autocomplete="off" />
+                                                placeholder="Tiktok" autocomplete="off"
+                                                value="{{ old('socmed.tiktok') }}" />
                                         </div>
                                     </div>
 
@@ -93,7 +97,8 @@
                                                 Facebook <small>(optional)</small>
                                             </label>
                                             <input class="form-control" type="text" name="socmed[facebook]"
-                                                placeholder="Facebook" autocomplete="off" />
+                                                placeholder="Facebook" autocomplete="off"
+                                                value="{{ old('socmed.facebook') }}" />
                                         </div>
 
                                         <div class="col mb-3">
@@ -101,9 +106,9 @@
                                                 Twitter <small>(optional)</small>
                                             </label>
                                             <input class="form-control" type="text" name="socmed[twitter]"
-                                                placeholder="Twitter" autocomplete="off" />
+                                                placeholder="Twitter" autocomplete="off"
+                                                value="{{ old('socmed.twitter') }}" />
                                         </div>
-
                                     </div>
 
                                     <div class="mt-2">
