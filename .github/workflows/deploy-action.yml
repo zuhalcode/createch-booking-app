@@ -1,4 +1,4 @@
-name: Deploy Laravel
+name: Deploy Web
 on:
   workflow_dispatch
 jobs:
