@@ -31,6 +31,9 @@
                                             <input class="form-control" name="image" type="file"
                                                 id="input-product-img"
                                                 onchange="showImagePreview('input-product-img', 'uploaded-product-img')" />
+                                            @error('image')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
 
                                         <div class="mb-3">
@@ -44,6 +47,9 @@
                                                 <input class="form-control" placeholder="Product" autocomplete="off"
                                                     type="text" id="product" name="name" autofocus
                                                     value="{{ $product->name }}" required />
+                                                @error('name')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
 
                                             <div class="mb-3 col-md-6">
@@ -51,6 +57,9 @@
                                                 <input class="form-control" placeholder="Price" autocomplete="off"
                                                     type="text" id="price" name="price" autofocus
                                                     value={{ $product->price }} required />
+                                                @error('price')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
 
                                             <div class="mb-3">
@@ -60,6 +69,9 @@
                                                 <textarea id="basic-default-message" name="description" class="form-control" rows="5"
                                                     placeholder="Hi, Do you have a moment to talk Joe?">{{ $product->description }}
                                                 </textarea>
+                                                @error('description')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
 
 
@@ -82,6 +94,9 @@
                                                         <input class="form-control" placeholder="Addon Name"
                                                             autocomplete="off" type="text" name="addons_name[]"
                                                             autofocus value="{{ $addon->name }}" required />
+                                                        @error('addons_name')
+                                                            <small class="text-danger">{{ $message }}</small>
+                                                        @enderror
                                                     </div>
 
                                                     <div class="mb-2 col-md-6">
@@ -90,6 +105,9 @@
                                                             autocomplete="off" type="text" id="price"
                                                             name="addon-price[]" autofocus value={{ $addon->price }}
                                                             required />
+                                                        @error('addon-price')
+                                                            <small class="text-danger">{{ $message }}</small>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                             @endforeach

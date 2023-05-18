@@ -84,7 +84,6 @@ class AuthController extends Controller
         $user = User::create($validatedData);
 
         $company->users()->attach($user->id);
-
         return redirect("/$slug/auth/login")->with('success', 'Registrasi berhasil! Silahkan login');
     }
 

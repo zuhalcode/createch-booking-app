@@ -27,6 +27,9 @@
                                             <input class="form-control" placeholder="Branch Name" type="text"
                                                 name="name" value="{{ old('name') }}" autofocus
                                                 autocomplete="off" />
+                                            @error('name')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
 
                                         <div class=" col mb-3">
@@ -36,6 +39,9 @@
                                                 <input type="text" id="phone" name="phone" class="form-control"
                                                     placeholder="8XXX XXXX XXX" value="{{ old('phone') }}" />
                                             </div>
+                                            @error('phone')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
 
@@ -69,6 +75,9 @@
                                         <label class="form-label">Address</label>
                                         <input class="form-control" type="text" name="address" placeholder="Surabaya"
                                             autocomplete="off" value="{{ old('address') }}" />
+                                        @error('address')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
 
                                     <div class="row">
@@ -79,6 +88,9 @@
                                             <input class="form-control" type="text" name="socmed[instagram]"
                                                 placeholder="Instagram" autocomplete="off"
                                                 value="{{ old('socmed.instagram') }}" />
+                                            @error('socmed.instagram')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
 
                                         <div class="col mb-3">
@@ -88,6 +100,9 @@
                                             <input class="form-control" type="text" name="socmed[tiktok]"
                                                 placeholder="Tiktok" autocomplete="off"
                                                 value="{{ old('socmed.tiktok') }}" />
+                                            @error('socmed.tiktok')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
 
@@ -99,6 +114,9 @@
                                             <input class="form-control" type="text" name="socmed[facebook]"
                                                 placeholder="Facebook" autocomplete="off"
                                                 value="{{ old('socmed.facebook') }}" />
+                                            @error('socmed.facebook')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
 
                                         <div class="col mb-3">
@@ -108,6 +126,9 @@
                                             <input class="form-control" type="text" name="socmed[twitter]"
                                                 placeholder="Twitter" autocomplete="off"
                                                 value="{{ old('socmed.twitter') }}" />
+                                            @error('socmed.tiktok')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
 

@@ -90,6 +90,9 @@
                                 <label class="form-label">Nama Perusahaan</label>
                                 <input type="text" name="name" id="company-name" class="form-control"
                                     placeholder="Masukkan Nama" />
+                                @error('name')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                         </div>
                     </div>

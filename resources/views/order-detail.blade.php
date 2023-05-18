@@ -218,8 +218,11 @@
                                             @csrf
                                             <div class="input-box">
                                                 <label for="email">Email</label>
-                                                <input class="form-control" type="email" required name="email"
-                                                    id="email" />
+                                                <input class="form-control" type="email" name="email"
+                                                    id="email" required />
+                                                @error('email')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
 
                                             <div class="input-box">
@@ -231,6 +234,9 @@
                                                         src="https://themes.pixelstrap.com/oslo/assets/icons/svg/eye-2.svg"
                                                         alt="eye" />
                                                 </div>
+                                                @error('password')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
                                             <div>
                                                 <button type="submit" class="btn-solid rounded-pill line-none">
@@ -268,28 +274,40 @@
                                             @csrf
                                             <div class="input-box">
                                                 <label for="name">Full Name</label>
-                                                <input class="form-control" type="text" required name="name"
-                                                    id="name" />
+                                                <input class="form-control" type="text" name="name"
+                                                    id="name" required />
+                                                @error('name')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
                                             <div class="input-box">
                                                 <label for="email">Email</label>
                                                 <input class="form-control" type="email" required name="email"
                                                     id="email" />
+                                                @error('email')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
                                             <div class="input-box">
                                                 <label for="phone">WhatsApp Number</label>
                                                 <input class="form-control" type="phone" required name="phone"
-                                                    id="phone" />
+                                                    id="phone" required />
+                                                @error('phone')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
                                             <div class="input-box">
                                                 <label for="password">Password</label>
                                                 <div class="icon-input">
-                                                    <input class="form-control" type="password" required
-                                                        name="password" id="password" />
+                                                    <input class="form-control" type="password" name="password"
+                                                        id="password" required />
                                                     <img class="showHidePassword"
                                                         src="https://themes.pixelstrap.com/oslo/assets/icons/svg/eye-1.svg"
                                                         alt="eye" />
                                                 </div>
+                                                @error('password')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
 
                                             <button type="submit"

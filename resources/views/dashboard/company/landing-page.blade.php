@@ -25,6 +25,9 @@
                                     <label for="input-bg" class="form-label">Cover Image</label>
                                     <input class="form-control" type="file" id="input-bg" name='image'
                                         onchange="showImagePreview('input-bg', 'uploaded-bg')" />
+                                    @error('image')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
 
                                 <div class="mb-3">
@@ -37,6 +40,9 @@
                                     <input class="form-control" type="text" name="first_heading_text"
                                         placeholder="Heading 1" autocomplete="off"
                                         value={{ $cover->first_heading_text }} />
+                                    @error('first_heading_text')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
 
                                 <div class="mb-3">
@@ -44,11 +50,17 @@
                                     <input class="form-control" type="text" name="second_heading_text"
                                         placeholder="Heading 2" autocomplete="off"
                                         value={{ $cover->second_heading_text }} />
+                                    @error('second_heading_text')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="about" class="form-label">Short Desc</label>
                                     <textarea class="form-control" type="text" name="short_desc" placeholder="Short Desc" autocomplete="off">{{ $cover->short_desc }}</textarea>
+                                    @error('short_desc')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
 
                                 <div class="mt-2">

@@ -29,6 +29,9 @@
                                             <input class="form-control" name="image" type="file"
                                                 id="input-product-img"
                                                 onchange="showImagePreview('input-product-img', 'uploaded-product-img')" />
+                                            @error('image')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
 
                                         <div class="mb-3">
@@ -38,15 +41,21 @@
 
                                         <div class="row">
                                             <div class="mb-3 col-md-6">
-                                                <label for="product" class="form-label">Product Name</label>
+                                                <label class="form-label">Product Name</label>
                                                 <input class="form-control" placeholder="Product" autocomplete="off"
-                                                    type="text" id="product" name="name" autofocus />
+                                                    type="text" name="name" autofocus />
+                                                @error('name')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
 
                                             <div class="mb-3 col-md-6">
                                                 <label for="price" class="form-label">Price</label>
                                                 <input class="form-control" placeholder="Price" autocomplete="off"
                                                     type="text" id="price" name="price" autofocus />
+                                                @error('price')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
 
                                             <div class="mb-3">
@@ -55,6 +64,9 @@
                                                 </label>
                                                 <textarea id="basic-default-message" name="description" class="form-control"
                                                     placeholder="Hi, Do you have a moment to talk Joe?"></textarea>
+                                                @error('description')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
 
                                             {{-- Input AddOns --}}
@@ -76,12 +88,18 @@
                                                     <input class="form-control" placeholder="Addon Name"
                                                         autocomplete="off" type="text" id="product" name="addon[]"
                                                         autofocus />
+                                                    @error('addon')
+                                                        <small class="text-danger">{{ $message }}</small>
+                                                    @enderror
                                                 </div>
 
                                                 <div class="mb-2 col-md-6">
                                                     <label for="price" class="form-label">Price</label>
                                                     <input class="form-control" placeholder="Price" autocomplete="off"
                                                         type="text" id="price" name="addon-price[]" autofocus />
+                                                    @error('addon-price')
+                                                        <small class="text-danger">{{ $message }}</small>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             {{-- AddOns --}}

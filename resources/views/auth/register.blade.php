@@ -26,12 +26,18 @@
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Name</label>
                                     <input type="text" class="form-control" id="name" name="name"
-                                        placeholder="Enter your name" autofocus />
+                                        placeholder="Enter your name" autofocus required />
+                                    @error('name')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
                                     <input type="text" class="form-control" id="email" name="email"
                                         placeholder="Enter your email" />
+                                    @error('email')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
 
                                 <div class="input-box">
@@ -43,6 +49,9 @@
                                             src="https://themes.pixelstrap.com/oslo/assets/icons/svg/eye-2.svg"
                                             alt="eye" />
                                     </div>
+                                    @error('password')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
 
                                 <button type="submit" class="btn-solid rounded-pill line-none theme-color">

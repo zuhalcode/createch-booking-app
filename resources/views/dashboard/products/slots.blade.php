@@ -56,6 +56,9 @@
                                                             <input class="form-control" type="number" name="max_user[]"
                                                                 id="max_user" placeholder="0" required />
                                                         </div>
+                                                        @error('max_user')
+                                                            <small class="text-danger">{{ $message }}</small>
+                                                        @enderror
                                                     </div>
                                                 </div>
 
@@ -66,6 +69,9 @@
                                                             <input class="form-control" type="time"
                                                                 placeholder="12:30:00" name="time[]" required />
                                                         </div>
+                                                        @error('time')
+                                                            <small class="text-danger">{{ $message }}</small>
+                                                        @enderror
                                                     </div>
                                                 </div>
 

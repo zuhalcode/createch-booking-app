@@ -106,12 +106,14 @@
                                 </div>
                             </div>
 
-
                             <div class="row">
                                 <div class="mb-3">
                                     <label class="form-label">Address</label>
                                     <input class="form-control" type="text" name="address" placeholder="Surabaya"
                                         autocomplete="off" />
+                                    @error('address')
+                                        <small class="text-danger">{{ $message }}</small>
+                                    @enderror
                                 </div>
                             </div>
                         </div>

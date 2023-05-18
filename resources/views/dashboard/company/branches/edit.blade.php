@@ -27,6 +27,9 @@
                                             <input class="form-control" placeholder="Branch Name" type="text"
                                                 name="name" value="{{ $branch->name }}" autocomplete="off"
                                                 autofocus />
+                                            @error('name')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
 
                                         <div class=" col mb-3">
@@ -36,6 +39,9 @@
                                                 <input type="text" name="phone" class="form-control"
                                                     placeholder="8XXX XXXX XXX" value="{{ $branch->phone }}" />
                                             </div>
+                                            @error('phone')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
 
@@ -71,6 +77,9 @@
                                         <label for="state" class="form-label">Address</label>
                                         <input class="form-control" type="text" name="address" placeholder="Surabaya"
                                             autocomplete="off" value="{{ $branch->address }}" />
+                                        @error('address')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
                                     </div>
 
                                     <div class="row">
@@ -83,6 +92,9 @@
                                                     name="socmed[{{ $platform }}]"
                                                     placeholder="{{ ucfirst($platform) }}" autocomplete="off"
                                                     value="{{ $branch->social_medias->where('name', $platform)->first()?->username }}" />
+                                                @error('socmed.{{ $platform }}')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
                                         @endforeach
                                     </div>
