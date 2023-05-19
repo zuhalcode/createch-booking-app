@@ -155,7 +155,8 @@ class CustomerController extends Controller
             'product_id' => $validatedData['product_id'],
             'slot_id' => $validatedData['slot_id'],
             'total_price' => $totalPrice,
-            'expired_at' => date('Y-m-d H:i:s', strtotime('+1 day'))
+            'expired_at' => now()->addMinute(),
+
         ]);
 
         $selectedAddons = Addon::whereIn('id', $validatedData['addons'] ?? [])->get();

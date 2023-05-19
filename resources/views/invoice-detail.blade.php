@@ -156,19 +156,9 @@
                     <div class="summery-wrap">
                         <div class="cart-wrap grand-total-wrap">
                             <div>
-                                <div class="order-summery-box">
-                                    <h5 class="cart-title">Total Due</h5>
-                                    <h2 class="">{{ Str::shortened_price($order->total_price) }}</h2>
+                                @if (now() > $order->expired_at)
                                     <div class="row g-3 mt-2">
-                                        <div class="col-6 col-md-12">
-                                            <input type="hidden" id="midtrans_client_token"
-                                                value={{ $midtrans_token }}>
-                                            <div class="btn-solid checkout-btn" onclick="handlePayButton()"
-                                                style="cursor: pointer">
-                                                Pay Now <i class="arrow"></i>
-                                            </div>
-                                        </div>
-
+                                        <h5 class="cart-title">This Order has Expired</h5>
                                         <div class="col-6 col-md-12">
                                             <a href={{ url("/$slug") }}
                                                 class="btn-outline w-100 justify-content-center checkout-btn">
@@ -176,7 +166,29 @@
                                             </a>
                                         </div>
                                     </div>
-                                </div>
+                                @else
+                                    <div class="order-summery-box">
+                                        <h5 class="cart-title">Total Due</h5>
+                                        <h2 class="">{{ Str::shortened_price($order->total_price) }}</h2>
+                                        <div class="row g-3 mt-2">
+                                            <div class="col-6 col-md-12">
+                                                <input type="hidden" id="midtrans_client_token"
+                                                    value={{ $midtrans_token }}>
+                                                <div class="btn-solid checkout-btn" onclick="handlePayButton()"
+                                                    style="cursor: pointer">
+                                                    Pay Now <i class="arrow"></i>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-6 col-md-12">
+                                                <a href={{ url("/$slug") }}
+                                                    class="btn-outline w-100 justify-content-center checkout-btn">
+                                                    Back To Home
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
