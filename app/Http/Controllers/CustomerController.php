@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Auth;
 class CustomerController extends Controller
 {
     // Handle Homepage
-    public function index($slug) 
+    public function index($slug)
     {
         $company = Company::where('slug', $slug)->first();
         $products = Product::where('company_id', $company->id)->get();
@@ -43,7 +43,7 @@ class CustomerController extends Controller
         $company = Company::where('slug', $slug)->first();
         $product = Product::where('company_id', $company->id)->findOrFail($id);
 
-        if(!$product) return abort(404);
+        if (!$product) return abort(404);
 
         $addons = AddOn::where('product_id', $product->id)->get();
         $slots = Slot::where('product_id', $product->id)->orderBy('time')->get();
@@ -95,7 +95,7 @@ class CustomerController extends Controller
         $company = Company::where('user_id', auth()->user()->id)->first();
 
         return view('order-detail', [
-            'company' => $company, 
+            'company' => $company,
             'payment_token' => $snapToken,
             'product' => $order->product,
             'addons' => $order->addons,
@@ -140,7 +140,7 @@ class CustomerController extends Controller
             'slot_id' => 'required|exists:slots,id',
             'addons.*' => 'nullable|exists:addons,id'
         ]);
-        
+
         $company = Company::where('slug', $slug)->first();
 
         $product = Product::where('company_id', $company->id)->findOrFail($validatedData['product_id']);
@@ -154,11 +154,12 @@ class CustomerController extends Controller
             'branch_id' => 1,
             'product_id' => $validatedData['product_id'],
             'slot_id' => $validatedData['slot_id'],
-            'total_price' => $totalPrice
+            'total_price' => $totalPrice,
+            'expired_at' => date('Y-m-d H:i:s', strtotime('+1 day'))
         ]);
-        
+
         $selectedAddons = Addon::whereIn('id', $validatedData['addons'] ?? [])->get();
-        
+
         foreach ($selectedAddons as $addon) {
             $price = $addon->price;
             $order->addons()->attach($addon->id, ['price' => $price]);
@@ -167,7 +168,7 @@ class CustomerController extends Controller
         return redirect("/$slug/invoices/$order->id");
     }
 
-    public function indexInvoice($slug) 
+    public function indexInvoice($slug)
     {
         $company = Company::where('slug', $slug)->first();
         $invoices = Order::where('user_id', Auth::user()->id)->get();
@@ -177,7 +178,7 @@ class CustomerController extends Controller
         ]);
     }
 
-    public function showInvoice($slug, $id) 
+    public function showInvoice($slug, $id)
     {
         $order = Order::where('user_id', Auth::user()->id)->find($id);
         $company = Company::where('slug', $slug)->first();
@@ -198,8 +199,8 @@ class CustomerController extends Controller
         $snapToken = \Midtrans\Snap::getSnapToken($params);
 
         return view('invoice-detail', [
-            'company' => $company, 
-            'order' => $order, 
+            'company' => $company,
+            'order' => $order,
             'slug' => $slug,
             'midtrans_token' => $snapToken
         ]);

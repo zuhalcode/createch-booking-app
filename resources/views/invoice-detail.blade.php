@@ -55,8 +55,11 @@
                         </div>
 
                         <div class="d-flex flex-column success-contain font-light text-end text-capitalize">
-                            <h5><b>Issued date :</b> {{ $order->created_at->format('l, d F Y') }}</h5>
-                            <h5><b>Expires date :</b> 18 Jan 2022</h5>
+                            <h5><b>Issued date :</b> {{ $order->created_at->format('l, d F Y H:i') }}</h5>
+                            <h5>
+                                <b>Expired date :</b>
+                                {{ date('l, d F Y H:i', strtotime($order->expired_at)) }}
+                            </h5>
                         </div>
                     </div>
 

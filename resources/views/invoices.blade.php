@@ -79,8 +79,15 @@
                                 <div class="cart-wrap order-content">
                                     <div class="title-box3">
                                         <h3>My Invoices</h3>
-                                        <p>H thanks for placing a delivery order with Oslo! Your order should be home
-                                            with you in soon</p>
+                                        @if ($invoices->isEmpty())
+                                            <p>No Order Activity to Display</p>
+                                        @else
+                                            <p>
+                                                H thanks for placing a delivery order with Oslo! Your order should
+                                                behome
+                                                with you in soon
+                                            </p>
+                                        @endif
                                     </div>
 
                                     <div class="order-wraper">

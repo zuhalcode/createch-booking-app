@@ -77,7 +77,7 @@ class AuthController extends Controller
         $validatedData = $req->validate([
             'name' => 'required|max:255',
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required|confirmed|min:8'
         ]);
 
         $validatedData['password'] = Hash::make($validatedData['password']);
