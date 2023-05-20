@@ -21,7 +21,12 @@ class CheckCompanyRegistration
         $slug = $request->route('slug');
         $company = Company::where('slug', $slug)->first();
 
-        if (!$company || !$company->users()->where('user_id', Auth::id())->exists()) Auth::logout();
+        if (!$company || !$company->users()->where('user_id', Auth::id())->exists()) {
+            if (Auth::check() && Auth::user()->role->name == 'super-admin') {
+                return $next($request);
+            }
+            Auth::logout();
+        }
 
         return $next($request);
     }
