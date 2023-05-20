@@ -83,9 +83,8 @@
                                             <p>No Order Activity to Display</p>
                                         @else
                                             <p>
-                                                H thanks for placing a delivery order with Oslo! Your order should
-                                                behome
-                                                with you in soon
+                                                Hi, Thank you for booking with us. Your booking is being processed and
+                                                will be confirmed soon.
                                             </p>
                                         @endif
                                     </div>
@@ -96,9 +95,12 @@
                                                 <div class="order-header">
                                                     <span><i data-feather="box"></i></span>
                                                     <div class="order-content">
-                                                        <h5 class="order-status success">{{ $invoice->status }}</h5>
-                                                        <p>Place {{ $invoice->created_at->format('d M Y') }} and
-                                                            Delivered on July 18 2022</p>
+                                                        <h5 class="order-status success text-capitalize">
+                                                            {{ $invoice->status }}
+                                                        </h5>
+                                                        <p>
+                                                            Created At {{ $invoice->created_at->format('d M Y') }}
+                                                        </p>
                                                     </div>
                                                 </div>
 

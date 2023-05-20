@@ -212,7 +212,11 @@
                                         <p class="font-md content-color">
                                             How do i get access order,wishlist and recomendation ?
                                         </p>
-
+                                        @if (session('error'))
+                                            <div class="alert alert-danger">
+                                                {{ session('error') }}
+                                            </div>
+                                        @endif
                                         <form method="POST" action={{ url("/$slug/login-modal") }}
                                             class="custom-form form-pill">
                                             @csrf

@@ -13,7 +13,7 @@ class Order extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -32,5 +32,10 @@ class Order extends Model
     public function addons()
     {
         return $this->belongsToMany(AddOn::class, 'addon_order', 'order_id', 'addon_id')->withPivot('price');
+    }
+
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
     }
 }

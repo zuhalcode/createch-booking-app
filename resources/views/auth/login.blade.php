@@ -13,14 +13,20 @@
     <!-- Main Start -->
     <div class="main">
         <section class="page-body p-0">
+
             <div class="row g-0 ratio_asos">
                 <div class="order-2 order-lg-1 col-lg-5">
                     <div class="content-box">
                         <div>
                             <h5>LOGIN <span class="bg-theme-blue"></span></h5>
                             <p class="font-md content-color">
-                                How do i get access order,wishlist and recomendation ?</p>
-
+                                How do i get access order,wishlist and recomendation ?
+                            </p>
+                            @if (session('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
                             <form form id="formAuthentication" action={{ url("/$slug/auth/login") }} method="POST"
                                 class="custom-form form-pill">
                                 @csrf

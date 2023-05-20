@@ -39,7 +39,7 @@
 
                         <div class="d-flex gap-2">
                             <h5><b>Status :</b></h5>
-                            <span class="badge bg-primary text-white"
+                            <span class="badge {{ getStatusBadgeClass($order->status) }} text-white text-capitalize"
                                 style="font-size: .8rem">{{ $order->status }}</span>
                         </div>
                     </div>
@@ -156,7 +156,7 @@
                     <div class="summery-wrap">
                         <div class="cart-wrap grand-total-wrap">
                             <div>
-                                @if (now() > $order->expired_at)
+                                @if ($order->status === 'expired')
                                     <div class="row g-3 mt-2">
                                         <h5 class="cart-title">This Order has Expired</h5>
                                         <div class="col-6 col-md-12">
@@ -173,7 +173,7 @@
                                         <div class="row g-3 mt-2">
                                             <div class="col-6 col-md-12">
                                                 <input type="hidden" id="midtrans_client_token"
-                                                    value={{ $midtrans_token }}>
+                                                    value={{ $order->midtrans_token }}>
                                                 <div class="btn-solid checkout-btn" onclick="handlePayButton()"
                                                     style="cursor: pointer">
                                                     Pay Now <i class="arrow"></i>

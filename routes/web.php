@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SlotController;
-use App\Http\Controllers\Admin\BranchController;
 use App\Http\Controllers\Admin\CompanyController as AdminCompanyController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
@@ -35,7 +34,7 @@ Route::prefix('/{slug}')->group(fn () => [
 
         Route::get('/invoices', 'indexInvoice')->middleware('auth'),
         Route::get('/invoices/{id}', 'showInvoice')->middleware('auth'),
-    ]),
+    ])->middleware('checkCompanyRegistration'),
 
     // Handling for Authentication
     Route::controller(AuthController::class)->group(fn () => [
@@ -89,13 +88,6 @@ Route::prefix('/{slug}')->group(fn () => [
                 Route::get('/slots', 'createSlot'),
                 Route::post('/slots', 'storeSlot'),
             ]),
-
-            Route::controller(OrderController::class)->group(fn () => [
-                Route::get('/orders', 'index'),
-            ]),
-
-            Route::get('/bookings', fn () => view('dashboard.bookings')),
-
         ])->middleware(['admin-company', 'admin-branch', 'super-admin']),
 
         // Handling Dashboard for Super Admin

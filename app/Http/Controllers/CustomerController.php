@@ -7,11 +7,13 @@ use App\Models\Slot;
 use App\Models\AddOn;
 use App\Models\Cover;
 use App\Models\Order;
+use App\Models\Branch;
 use App\Models\Company;
 use App\Models\Holiday;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Middleware\CheckCompanyRegistration;
 
 // Set your Merchant Server Key
 \Midtrans\Config::$serverKey = 'SB-Mid-server-e-cseZ8LxEVvtAgQCFFBYixX';
@@ -21,6 +23,10 @@ use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(CheckCompanyRegistration::class)->only('index');
+    }
     // Handle Homepage
     public function index($slug)
     {
@@ -155,7 +161,7 @@ class CustomerController extends Controller
             'product_id' => $validatedData['product_id'],
             'slot_id' => $validatedData['slot_id'],
             'total_price' => $totalPrice,
-            'expired_at' => now()->addMinute(),
+            'expired_at' => now()->addHours(24),
 
         ]);
 
@@ -172,10 +178,13 @@ class CustomerController extends Controller
     public function indexInvoice($slug)
     {
         $company = Company::where('slug', $slug)->first();
-        $invoices = Order::where('user_id', Auth::user()->id)->get();
+        $branches = Branch::where('company_id', $company->id)->get();
+        $orders = Order::whereIn('branch_id', $branches->pluck('id'))->get();
+
+        // $invoices = Order::where('user_id', Auth::user()->id)->get();
         return view('invoices', [
-            'slug' => $company->slug,
-            'invoices' => $invoices,
+            'slug' => $slug,
+            'invoices' => $orders,
         ]);
     }
 
@@ -183,6 +192,16 @@ class CustomerController extends Controller
     {
         $order = Order::where('user_id', Auth::user()->id)->find($id);
         $company = Company::where('slug', $slug)->first();
+
+        if (now() >= $order->expired_at) {
+            $order->update(['status' => 'expired']);
+
+            return view('invoice-detail', [
+                'company' => $company,
+                'order' => $order,
+                'slug' => $slug,
+            ]);
+        }
 
         // Set transaction data
         $params = [
@@ -199,11 +218,12 @@ class CustomerController extends Controller
         ];
         $snapToken = \Midtrans\Snap::getSnapToken($params);
 
+        $order->update(['midtrans_token' => $snapToken]);
+
         return view('invoice-detail', [
             'company' => $company,
             'order' => $order,
             'slug' => $slug,
-            'midtrans_token' => $snapToken
         ]);
     }
     // End Orders

@@ -46,6 +46,11 @@ class Branch extends Model
         return $this->belongsToMany(Slot::class);
     }
 
+    public function order()
+    {
+        return $this->hasOne(Order::class);
+    }
+
     public function sluggable(): array
     {
         return [

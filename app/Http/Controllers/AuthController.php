@@ -20,19 +20,24 @@ class AuthController extends Controller
         return view('auth.register', ['slug' => $slug]);
     }
 
-    public function loginModal(Request $req)
+    public function loginModal(Request $req, $slug)
     {
         $credentials = $req->validate([
             'email' => 'required|email',
             'password' => 'required'
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $req->session()->regenerate();
-            return back();
+        $company = Company::where('slug', $slug)->first();
+        $user = User::where('email', $credentials['email'])->first();
+
+        if ($user && $user->companies()->where('company_id', $company->id)->exists()) {
+            if (Auth::attempt($credentials)) {
+                $req->session()->regenerate();
+                return back();
+            }
         }
 
-        return back()->with('loginError', 'Login gagal!');
+        return back()->with('error', 'Oops! It seems you haven\'t registered on our site.');
     }
 
     public function registerModal(Request $req, $slug)
@@ -49,7 +54,6 @@ class AuthController extends Controller
         $user = User::create($validatedData);
 
         $company->users()->attach($user->id);
-
         Auth::login($user);
 
         return back()->with('success', 'Login Berhasil!, silahkan selesaikan order anda');
@@ -62,12 +66,17 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $req->session()->regenerate();
-            return redirect("/$slug");
+        $company = Company::where('slug', $slug)->first();
+        $user = User::where('email', $credentials['email'])->first();
+
+        if ($user && $user->companies()->where('company_id', $company->id)->exists()) {
+            if (Auth::attempt($credentials)) {
+                $req->session()->regenerate();
+                return redirect("/$slug");
+            }
         }
 
-        return back()->with('loginError', 'Login gagal!');
+        return back()->with('error', 'Oops! It seems you haven\'t registered on our site.');
     }
 
     public function register(Request $req, $slug)

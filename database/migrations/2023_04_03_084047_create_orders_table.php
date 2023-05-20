@@ -21,7 +21,7 @@ return new class extends Migration
             $table->foreignId('slot_id')->constrained();
             $table->integer('total_price');
             $table->string('midtrans_token', 255)->nullable();
-            $table->enum('status', ['Pending', 'Processed', 'Completed', 'Canceled']);
+            $table->enum('status', ['pending', 'processed', 'completed', 'canceled', 'expired']);
             $table->timestamp('expired_at')->nullable();
             $table->timestamps();
         });
