@@ -21,6 +21,11 @@ class Branch extends Model
         return $this->belongsToMany(Product::class);
     }
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
     public function company()
     {
         return $this->belongsTo(Company::class);

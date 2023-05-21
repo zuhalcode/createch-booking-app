@@ -16,26 +16,31 @@ class NusaTenggaraCityFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    
+
     public function definition()
     {
         $cities = [
-            22 => [ 
+            22 => [
                 'mataram', 'bima', 'sumbawa', 'dompu', 'lombok barat', 'lombok tengah',
                 'lombok timur', 'sumbawa barat', 'lombok utara', 'sumbawa besar', 'praya', 'selong',
                 'gerung', 'taliwang', 'woha', 'pancor', 'labuhan haji', 'jerowaru',
             ],
 
             23 => [
-                'kupang', 'sumba barat', 'sumba timur', 'flores timur', 'manggarai', 'ngada', 
-                'ende', 'alor', 'lembata', 'rote ndao', 'sikka', 'timor tengah selatan', 
-                'timor tengah utara', 'larantuka', 'maumere', 'ruteng', 'waingapu','bajawa', 
+                'kupang', 'sumba barat', 'sumba timur', 'flores timur', 'manggarai', 'ngada',
+                'ende', 'alor', 'lembata', 'rote ndao', 'sikka', 'timor tengah selatan',
+                'timor tengah utara', 'larantuka', 'maumere', 'ruteng', 'waingapu', 'bajawa',
                 'soe', 'atambua', 'kefamenanu', 'lewoleba', 'Ba a',
             ],
         ];
 
         $provinceId = $this->faker->randomElement(array_keys($cities));
-        $city = $this->faker->randomElement($cities[$provinceId]);
+        $provinceCities = $cities[$provinceId];
+        $city = $this->faker->randomElement($provinceCities);
+
+        // Remove the selected city from the available cities in the same province
+        $index = array_search($city, $provinceCities);
+        if ($index !== false) unset($provinceCities[$index]);
 
         return [
             'name' => $city,

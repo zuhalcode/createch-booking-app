@@ -16,18 +16,18 @@ class SulawesiCityFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    
+
     public function definition()
     {
         $cities = [
-            27 => [ 
+            27 => [
                 'mamuju', 'majene', 'mamasa', 'mamuju tengah', 'polewali mandar',
             ],
 
             28 => [
                 'makassar', 'palopo', 'parepare', 'bantaeng', 'barru', 'bone',
-                'bulukumba', 'enrekang', 'gowa', 'jeneponto', 'kepulauan selayar', 'luwu', 
-                'luwu timur', 'luwu utara', 'maros', 'pangkajene kepulauan', 'pinrang', 'sidenreng rappang', 
+                'bulukumba', 'enrekang', 'gowa', 'jeneponto', 'kepulauan selayar', 'luwu',
+                'luwu timur', 'luwu utara', 'maros', 'pangkajene kepulauan', 'pinrang', 'sidenreng rappang',
                 'sinjai', 'soppeng', 'takalar', 'tana toraja', 'toraja utara', 'wajo',
             ],
 
@@ -39,7 +39,7 @@ class SulawesiCityFactory extends Factory
             30 => [
                 'bau-bau', 'kendari', 'bombana', 'buton', 'buton selatan', 'buton tengah',
                 'buton utara', 'kolaka', 'kolaka timur', 'kolaka utara', 'konawe', 'konawe kepulauan',
-                'konawe selatan', 'konawe utara', 'muna', 'wakatobi', 
+                'konawe selatan', 'konawe utara', 'muna', 'wakatobi',
             ],
 
             31 => [
@@ -50,7 +50,12 @@ class SulawesiCityFactory extends Factory
         ];
 
         $provinceId = $this->faker->randomElement(array_keys($cities));
-        $city = $this->faker->randomElement($cities[$provinceId]);
+        $provinceCities = $cities[$provinceId];
+        $city = $this->faker->randomElement($provinceCities);
+
+        // Remove the selected city from the available cities in the same province
+        $index = array_search($city, $provinceCities);
+        if ($index !== false) unset($provinceCities[$index]);
 
         return [
             'name' => $city,

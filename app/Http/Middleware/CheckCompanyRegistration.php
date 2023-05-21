@@ -26,6 +26,7 @@ class CheckCompanyRegistration
                 return $next($request);
             }
             Auth::logout();
+            return redirect("/$slug/auth/login");
         }
 
         return $next($request);

@@ -34,7 +34,7 @@ Route::prefix('/{slug}')->group(fn () => [
 
         Route::get('/invoices', 'indexInvoice')->middleware('auth'),
         Route::get('/invoices/{id}', 'showInvoice')->middleware('auth'),
-    ])->middleware('checkCompanyRegistration'),
+    ]),
 
     // Handling for Authentication
     Route::controller(AuthController::class)->group(fn () => [
@@ -54,7 +54,7 @@ Route::prefix('/{slug}')->group(fn () => [
     ]),
 
     // Handling for Dashboard
-    Route::prefix('/dashboard')->middleware('auth')->group(fn () => [
+    Route::prefix('/dashboard')->middleware(['auth', 'checkCompanyRegistration'])->group(fn () => [
         Route::get('/order-detail', [OrderController::class, 'indexOrderDetail']),
 
         // Handling Dashboard for Admin
@@ -75,7 +75,7 @@ Route::prefix('/{slug}')->group(fn () => [
                 Route::get('/branches', 'indexBranch'),
                 Route::get('/branches/create', 'createBranch'),
                 Route::post('/branches', 'storeBranch'),
-                Route::get('/branches/{branchId}', 'showBranch'),
+                Route::get('/branches/{branchId}/products', 'showBranchProducts'),
                 Route::get('/branches/{branchId}/edit', 'editBranch'),
                 Route::put('/branches/{branchId}', 'updateBranch'),
             ]),

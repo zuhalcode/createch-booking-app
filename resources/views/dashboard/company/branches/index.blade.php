@@ -35,11 +35,7 @@
                                         @foreach ($branches as $branch)
                                             <tr class="table-dark cursor-pointer">
                                                 <td>{{ $count }}</td>
-                                                <td>
-                                                    <a href={{ url("/$slug/dashboard/branches/$branch->id") }}
-                                                        class="text-reset">{{ $branch->name }}
-                                                    </a>
-                                                </td>
+                                                <td>{{ $branch->name }}</td>
                                                 <td>{{ $branch->phone }}</td>
                                                 <td>{{ $branch->address }}</td>
 
@@ -50,6 +46,10 @@
                                                 @endforeach
 
                                                 <td>
+                                                    <a href={{ url("/$slug/dashboard/branches/$branch->id/products") }}
+                                                        class="text-reset">
+                                                        <i class="bx bx-show-alt me-1"></i>
+                                                    </a>
                                                     <a href={{ url("/$slug/dashboard/branches/$branch->id/edit") }}
                                                         class="text-reset">
                                                         <i class="bx bx-edit-alt me-1"></i>

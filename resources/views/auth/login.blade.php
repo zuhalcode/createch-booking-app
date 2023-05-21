@@ -27,6 +27,7 @@
                                     {{ session('error') }}
                                 </div>
                             @endif
+
                             <form form id="formAuthentication" action={{ url("/$slug/auth/login") }} method="POST"
                                 class="custom-form form-pill">
                                 @csrf

@@ -27,6 +27,7 @@ use Database\Factories\NusaTenggaraCityFactory;
 use Database\Factories\RiauAcehBaliCityFactory;
 use Database\Factories\PapuaPapuaBaratCityFactory;
 use Database\Factories\BantenBengkuluYogyakartaJakartaGorontaloJambiCityFactory;
+use Database\Factories\PapuaCityFactory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -49,7 +50,7 @@ class DatabaseSeeder extends Seeder
         SulawesiCityFactory::new()->count(72)->create();
         RiauAcehBaliCityFactory::new()->count(43)->create();
         BantenBengkuluYogyakartaJakartaGorontaloJambiCityFactory::new()->count(29)->create();
-        PapuaPapuaBaratCityFactory::new()->count(40)->create();
+        PapuaCityFactory::new()->count(40)->create();
         SumateraCityFactory::new()->count(58)->create();
 
         Company::factory()->count(3)->create();

@@ -16,13 +16,13 @@ class MalukuCityFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    
+
     public function definition()
     {
         $cities = [
-            20 => [ 
-                'ambon', 'tual', 'maluku tenggara', 'maluku tengah', 'maluku tenggara barat', 'buru', 
-                'kepulauan aru', 'seram bagian barat', 'seram bagian timur', 'buru selatan', 
+            20 => [
+                'ambon', 'tual', 'maluku tenggara', 'maluku tengah', 'maluku tenggara barat', 'buru',
+                'kepulauan aru', 'seram bagian barat', 'seram bagian timur', 'buru selatan',
             ],
 
             21 => [
@@ -32,7 +32,12 @@ class MalukuCityFactory extends Factory
         ];
 
         $provinceId = $this->faker->randomElement(array_keys($cities));
-        $city = $this->faker->randomElement($cities[$provinceId]);
+        $provinceCities = $cities[$provinceId];
+        $city = $this->faker->randomElement($provinceCities);
+
+        // Remove the selected city from the available cities in the same province
+        $index = array_search($city, $provinceCities);
+        if ($index !== false) unset($provinceCities[$index]);
 
         return [
             'name' => $city,

@@ -16,20 +16,20 @@ class KalimantanCityFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    
+
     public function definition()
     {
         $cities = [
-            12 => [ 
-                'pontianak', 'singkawang', 'kubu raya', 'sambas', 'bengkayang', 'sanggau', 
+            12 => [
+                'pontianak', 'singkawang', 'kubu raya', 'sambas', 'bengkayang', 'sanggau',
                 'mempawah', 'melawi', 'kapuas hulu', 'sekadau', 'ketapang', 'sintang',
                 'landak', 'kayong utara',
             ],
 
             13 => [
                 'banjarmasin', 'martapura', 'banjarbaru', 'tanjung', 'barabai', 'batulicin',
-                'kandangan', 'amuntai', 'pelaihari', 'rantau', 'marabahan', 'sungai tabuk', 
-                'tapin', 'hulu sungai selatan', 'hulu sungai tengah', 'hulu sungai utara', 'barito kuala', 'kotabaru', 
+                'kandangan', 'amuntai', 'pelaihari', 'rantau', 'marabahan', 'sungai tabuk',
+                'tapin', 'hulu sungai selatan', 'hulu sungai tengah', 'hulu sungai utara', 'barito kuala', 'kotabaru',
                 'tanah bumbu', 'tanah laut', 'tabalong', 'balangan',
             ],
 
@@ -49,7 +49,12 @@ class KalimantanCityFactory extends Factory
         ];
 
         $provinceId = $this->faker->randomElement(array_keys($cities));
-        $city = $this->faker->randomElement($cities[$provinceId]);
+        $provinceCities = $cities[$provinceId];
+        $city = $this->faker->randomElement($provinceCities);
+
+        // Remove the selected city from the available cities in the same province
+        $index = array_search($city, $provinceCities);
+        if ($index !== false) unset($provinceCities[$index]);
 
         return [
             'name' => $city,

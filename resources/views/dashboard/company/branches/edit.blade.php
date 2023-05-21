@@ -71,6 +71,20 @@
                                                 @endforeach
                                             </select>
                                         </div>
+
+                                        <div class="col mb-3">
+                                            <label class="form-label">Admin</label>
+                                            <select class="form-select text-capitalize" name="city" id="city">
+                                                <option selected>
+                                                    Choose...
+                                                </option>
+                                                @foreach ($admins as $admin)
+                                                    <option value={{ $admin->id }}>
+                                                        {{ $admin->name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
 
                                     <div class="mb-3">

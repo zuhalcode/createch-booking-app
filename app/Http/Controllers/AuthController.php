@@ -37,8 +37,7 @@ class AuthController extends Controller
             }
 
             if (!$user->companies()->where('company_id', $company->id)->exists()) {
-                Auth::logout();
-                return redirect("/$slug/auth/register")->with('error', 'Oops! It seems you haven\'t registered on our site.');
+                return back()->with('error', 'Oops! It seems you haven\'t registered on our site.');
             }
         }
 
@@ -72,16 +71,20 @@ class AuthController extends Controller
         ]);
 
         $company = Company::where('slug', $slug)->first();
-        $user = User::where('email', $credentials['email'])->first();
 
-        if ($user && $user->companies()->where('company_id', $company->id)->exists()) {
-            if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            if ($user->role->name === 'super-admin' || ($company && $company->users()->where('user_id', $user->id)->exists())) {
                 $req->session()->regenerate();
                 return redirect("/$slug");
+            } else {
+                Auth::logout();
+                return back()->with('error', "Oops! It seems you haven't registered on our site.");
             }
+        } else {
+            // Wrong credentials
+            return redirect("/$slug/auth/login")->with('error', 'Invalid credentials. Please check your email and password.');
         }
-
-        return back()->with('error', 'Oops! It seems you haven\'t registered on our site.');
     }
 
     public function register(Request $req, $slug)
@@ -104,8 +107,6 @@ class AuthController extends Controller
     public function logout(Request $req, $slug)
     {
         Auth::logout();
-        // $req->session()->invalidate();
-        // $req->session()->regenerateToken();
         return redirect("/$slug/auth/login");
     }
 }

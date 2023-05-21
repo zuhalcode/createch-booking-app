@@ -16,11 +16,11 @@ class JawaCityFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    
+
     public function definition()
     {
         $cities = [
-            9 => [ 
+            9 => [
                 'bandung', 'bekasi', 'bogor', 'cimahi', 'cirebon', 'depok',
                 'sukabumi', 'tasikmalaya', 'banjar', 'garut', 'indramayu',
                 'karawang', 'kuningan', 'majalengka', 'purwakarta', 'subang',
@@ -36,14 +36,19 @@ class JawaCityFactory extends Factory
                 'surabaya', 'malang', 'sidoarjo', 'jombang', 'mojokerto', 'kediri',
                 'blitar', 'probolinggo', 'pasuruan', 'madiun', 'lamongan', 'tulungagung',
                 'ngawi', 'ponorogo', 'tuban', 'bojonegoro', 'magetan', 'trenggalek',
-                'pacitan', 'situbondo', 'bondowoso', 'jember', 'banyuwangi', 'lumajang', 
+                'pacitan', 'situbondo', 'bondowoso', 'jember', 'banyuwangi', 'lumajang',
                 'pamekasan', 'sumenep', 'kota batu'
             ]
-    
+
         ];
 
         $provinceId = $this->faker->randomElement(array_keys($cities));
-        $city = $this->faker->randomElement($cities[$provinceId]);
+        $provinceCities = $cities[$provinceId];
+        $city = $this->faker->randomElement($provinceCities);
+
+        // Remove the selected city from the available cities in the same province
+        $index = array_search($city, $provinceCities);
+        if ($index !== false) unset($provinceCities[$index]);
 
         return [
             'name' => $city,

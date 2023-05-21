@@ -114,7 +114,7 @@ class CompanyController extends Controller
         ]);
     }
 
-    public function showBranch($slug, $branchId)
+    public function showBranchProducts($slug, $branchId)
     {
         $branch = Branch::findOrFail($branchId);
         $company = Company::where('slug', $slug)->first();
@@ -182,12 +182,15 @@ class CompanyController extends Controller
         $provinces = Province::all();
         $cities = City::all();
         $branch = Branch::findOrFail($branchId);
+        $company = Company::where('slug', $slug)->first();
+        $admins = $company->users()->where('role_id', 3)->get();
 
         return view('dashboard.company.branches.edit', [
             'slug' => $slug,
             'branch' => $branch,
             'provinces' => $provinces,
             'cities' => $cities,
+            'admins' => $admins
         ]);
     }
 
