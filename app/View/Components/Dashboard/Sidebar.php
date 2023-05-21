@@ -55,12 +55,6 @@ class Sidebar extends Component
                 "role" => "admin"
             ],
             [
-                "name" => "Order Detail",
-                "route" => "/$slug/dashboard/order-detail",
-                "icon" => "bx-dock-top",
-                "role" => "customer"
-            ],
-            [
                 "name" => "Home",
                 "route" => "/$slug",
                 "icon" => "bxs-dashboard",

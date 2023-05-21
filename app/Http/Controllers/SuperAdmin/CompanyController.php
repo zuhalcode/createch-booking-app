@@ -129,9 +129,7 @@ class CompanyController extends Controller
             'password' => 'required',
             'company' => 'required|not_in:Choose...',
             'role' => 'required|not_in:Choose...',
-        ],);
-
-        session()->flash('error', 'Please select a company.');
+        ]);
 
         $user = User::findOrFail($userId);
 

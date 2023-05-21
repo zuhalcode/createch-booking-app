@@ -74,10 +74,8 @@
 
                                         <div class="col mb-3">
                                             <label class="form-label">Admin</label>
-                                            <select class="form-select text-capitalize" name="city" id="city">
-                                                <option selected>
-                                                    Choose...
-                                                </option>
+                                            <select class="form-select text-capitalize" name="admin" id="city">
+                                                <option selected>Choose...</option>
                                                 @foreach ($admins as $admin)
                                                     <option value={{ $admin->id }}>
                                                         {{ $admin->name }}
@@ -117,7 +115,10 @@
                                         <button type="submit" class="btn btn-primary me-2">
                                             Update Branch
                                         </button>
-                                        <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                                        <a href={{ url("/$slug/dashboard/branches") }}
+                                            class="btn btn-outline-secondary">
+                                            Cancel
+                                        </a>
                                     </div>
                                 </form>
                             </div>

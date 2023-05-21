@@ -71,13 +71,28 @@
                                         </div>
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label class="form-label">Address</label>
-                                        <input class="form-control" type="text" name="address" placeholder="Surabaya"
-                                            autocomplete="off" value="{{ old('address') }}" />
-                                        @error('address')
-                                            <small class="text-danger">{{ $message }}</small>
-                                        @enderror
+                                    <div class="row">
+                                        <div class="col mb-3">
+                                            <label class="form-label">Address</label>
+                                            <input class="form-control" type="text" name="address"
+                                                placeholder="Surabaya" autocomplete="off"
+                                                value="{{ old('address') }}" />
+                                            @error('address')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+
+                                        <div class="col mb-3">
+                                            <label class="form-label">Admin</label>
+                                            <select class="form-select" name="admin" id="city">
+                                                <option selected>Choose...</option>
+                                                @foreach ($admins as $admin)
+                                                    <option value={{ $admin->id }}>
+                                                        {{ ucfirst($admin->name) }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
 
                                     <div class="row">

@@ -13,16 +13,18 @@
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <!-- Contextual Classes -->
                         <div class="card">
-                            <h5 class="card-header">Riwayat Order</h5>
+                            <h5 class="card-header">Order Management</h5>
                             <div class="table-responsive text-nowrap">
                                 <table class="table">
                                     <thead>
                                         <tr>
                                             <th>Invoce ID</th>
                                             <th>Invoce Date</th>
-                                            <th>User name</th>
+                                            <th>Branch</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
                                             <th>Price</th>
-                                            <th>Expires</th>
+                                            <th>Expired At</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
@@ -31,9 +33,11 @@
                                             <tr class="table-dark">
                                                 <td>{{ $order->id }}</td>
                                                 <td>{{ $order->created_at->format('d-m-Y') }}</td>
+                                                <td>{{ $order->branch->name }}</td>
                                                 <td>{{ $order->user->name }}</td>
+                                                <td>{{ $order->user->email }}</td>
                                                 <td>{{ Str::shortened_price($order->total_price) }}</td>
-                                                <td>12 Juni 2023</td>
+                                                <td>{{ $order->expired_at }}</td>
                                                 <td>
                                                     <span
                                                         class="badge bg-label-success me-1">{{ $order->status }}</span>

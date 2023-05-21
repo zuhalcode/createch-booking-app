@@ -21,6 +21,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Name</th>
+                                            <th>Admin</th>
                                             <th>Phone</th>
                                             <th>Address</th>
                                             <th>Instagram</th>
@@ -36,6 +37,7 @@
                                             <tr class="table-dark cursor-pointer">
                                                 <td>{{ $count }}</td>
                                                 <td>{{ $branch->name }}</td>
+                                                <td>{{ $branch->users()->first()->name ?? 'NULL' }}</td>
                                                 <td>{{ $branch->phone }}</td>
                                                 <td>{{ $branch->address }}</td>
 

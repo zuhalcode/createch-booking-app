@@ -55,7 +55,8 @@ Route::prefix('/{slug}')->group(fn () => [
 
     // Handling for Dashboard
     Route::prefix('/dashboard')->middleware(['auth', 'checkCompanyRegistration'])->group(fn () => [
-        Route::get('/order-detail', [OrderController::class, 'indexOrderDetail']),
+
+
 
         // Handling Dashboard for Admin
         Route::group([], fn () => [
@@ -78,6 +79,10 @@ Route::prefix('/{slug}')->group(fn () => [
                 Route::get('/branches/{branchId}/products', 'showBranchProducts'),
                 Route::get('/branches/{branchId}/edit', 'editBranch'),
                 Route::put('/branches/{branchId}', 'updateBranch'),
+
+                // Handle Orders
+                Route::get('/orders', 'indexOrder'),
+
             ]),
 
             Route::resource('/products', AdminProductController::class),

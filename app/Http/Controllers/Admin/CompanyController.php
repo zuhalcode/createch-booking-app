@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\City;
+use App\Models\User;
 use App\Models\Cover;
+use App\Models\Order;
 use App\Models\Branch;
 use App\Models\Company;
 use App\Models\Province;
+use App\Models\SocialMedia;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\SocialMedia;
+use Illuminate\Support\Facades\Auth;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class CompanyController extends Controller
@@ -131,11 +134,14 @@ class CompanyController extends Controller
     {
         $provinces = Province::all();
         $cities = City::all();
+        $company = Company::where('slug', $slug)->first();
+        $admins = $company->users()->where('role_id', 3)->get();
 
         return view('dashboard.company.branches.create', [
             'slug' => $slug,
             'provinces' => $provinces,
             'cities' => $cities,
+            'admins' => $admins,
         ]);
     }
 
@@ -146,6 +152,7 @@ class CompanyController extends Controller
             'phone' => 'required',
             'address' => 'required',
             'city' => 'required|not_in:Choose...',
+            'admin' => 'required|not_in:Choose...',
             'socmed.instagram' => 'nullable',
             'socmed.twitter' => 'nullable',
             'socmed.tiktok' => 'nullable',
@@ -163,6 +170,8 @@ class CompanyController extends Controller
             'phone' => $validatedData['phone'],
             'address' => $validatedData['address'],
         ]);
+
+        $branch->users()->attach($validatedData['admin']);
 
         foreach ($validatedData['socmed'] as $platform => $username) {
             if (!is_null($username) && in_array($platform, ['instagram', 'twitter', 'tiktok', 'facebook'])) {
@@ -199,6 +208,7 @@ class CompanyController extends Controller
         $validatedData = $req->validate([
             'name' => 'required|max:255',
             'phone' => 'required',
+            'admin' => 'nullable',
             'address' => 'required',
             'city' => 'required',
             'socmed.*' => 'nullable',
@@ -236,7 +246,35 @@ class CompanyController extends Controller
             }
         }
 
+        // Update pivot table branch_user
+        $user = User::findOrFail($validatedData['admin']);
+
+        // Check if the pivot values are different
+        if ($branch->users()->where('user_id', $user->id)->exists()) {
+            // Pivot values are the same, no need to update
+            return back()->with('success', 'Branch Updated successfully!');
+        }
+
+        // get current branch from user which edit now
+        $currentBranchUser = $branch->users()->first();
+        $currentBranchUser->branches()->detach($branch);
+
+        // update use the requested branch
+        $branch->users()->attach($user);
+
         return redirect("/$slug/dashboard/branches")->with('success', 'Branch updated successfully!');
     }
     // End Handling Branch
+
+    // Handling Orders
+    public function indexOrder($slug)
+    {
+        $user = Auth::user();
+        $orders = Order::where('branch_id', $user->branches->first()->id)->get();
+
+        return view('dashboard.orders', [
+            'slug' => $slug,
+            'orders' => $orders,
+        ]);
+    }
 }
