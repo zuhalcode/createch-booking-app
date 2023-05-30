@@ -19,6 +19,10 @@ jobs:
         run: composer install
       - name: Generate key
         run: php artisan key:generate
+        
+      - name: Create Symbolic Link
+        run: ln -s public public_html/bookdev.petona.id
+        
       - name: Upload via FTP by Actions Github
         uses: airvzxf/ftp-deployment-action@latest
         with:
