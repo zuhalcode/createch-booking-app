@@ -17,7 +17,7 @@ jobs:
 
       - name: update .env
         run: |
-          sed -i 's/DB_DATABASE=laravel/DB_DATABASE=${{ secrets.BOOKLY_DB_DATABASE }}/g' .env
+          sed -i 's/DB_DATABASE=booking-app/DB_DATABASE=${{ secrets.BOOKLY_DB_DATABASE }}/g' .env
           sed -i 's/DB_USERNAME=root/DB_USERNAME=${{ secrets.BOOKLY_DB_USERNAME }}/g' .env
           sed -i 's/DB_PASSWORD=/DB_PASSWORD=${{ secrets.BOOKLY_DB_PASSWORD }}/g' .env
         
