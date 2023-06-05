@@ -13,10 +13,10 @@ jobs:
             php-version: '8.1'
             
       - name: Copy .env
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+      - name: update .env
         run: |
-          if [ ! -f .env ]; then
-            cp .env.example .env
-          fi
           sed -i 's/DB_DATABASE=laravel/DB_DATABASE=${{ secrets.BOOKLY_DB_DATABASE }}/g' .env
           sed -i 's/DB_USERNAME=root/DB_USERNAME=${{ secrets.BOOKLY_DB_USERNAME }}/g' .env
           sed -i 's/DB_PASSWORD=/DB_PASSWORD=${{ secrets.BOOKLY_DB_PASSWORD }}/g' .env
