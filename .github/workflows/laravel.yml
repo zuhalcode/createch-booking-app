@@ -23,9 +23,9 @@ jobs:
           echo "DB_CONNECTION=mysql" >> .env
           echo "DB_HOST=127.0.0.1" >> .env
           echo "DB_PORT=3306" >> .env
-          echo "DB_DATABASE=${{ secrets.BOOKLY_DB_DATABASE }}" >> .env
-          echo "DB_USERNAME=${{ secrets.BOOKLY_DB_USERNAME }}" >> .env
-          echo "DB_PASSWORD=${{ secrets.BOOKLY_DB_PASSWORD }}" >> .env
+          echo "DB_DATABASE=boothlab_bookly" >> .env
+          echo "DB_USERNAME=boothlab_bookly" >> .env
+          echo "DB_PASSWORD=01Kfh82oPBCI" >> .env
           echo "" >> .env
           echo "BROADCAST_DRIVER=log" >> .env
           echo "CACHE_DRIVER=file" >> .env
