@@ -19,9 +19,6 @@ jobs:
         
       - name: Generate key
         run: php artisan key:generate
-      
-      - name: Run Migrations and Seed Database
-        run: php artisan migrate:fresh --seed
         
       - name: Upload via FTP by Actions Github
         uses: airvzxf/ftp-deployment-action@latest
