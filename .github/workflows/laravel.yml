@@ -10,6 +10,12 @@ jobs:
         
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      
+      - name: Update .env
+        run: |
+          sed -i 's/DB_DATABASE=/DB_DATABASE=${{ secrets.BOOKLY_DB_DATABASE }}/g' .env
+          sed -i 's/DB_USERNAME=/DB_USERNAME=${{ secrets.BOOKLY_DB_USERNAME }}/g' .env
+          sed -i 's/DB_PASSWORD=/DB_PASSWORD=${{ secrets.BOOKLY_DB_PASSWORD }}/g' .env
 
           
       - name: Update Dependencies
