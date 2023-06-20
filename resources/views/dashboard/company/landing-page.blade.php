@@ -31,8 +31,10 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <img alt="bg-cover" src={{ $cover->image }} class="d-block rounded w-25 d-none"
-                                        id="uploaded-bg" />
+                                    @if ($cover->image)
+                                        <img alt="bg-cover" src={{ $cover->image }} class="d-block rounded w-25 d-none"
+                                            id="uploaded-bg" />
+                                    @endif
                                 </div>
 
                                 <div class="mb-3">
