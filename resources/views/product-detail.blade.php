@@ -77,23 +77,19 @@
                                             </div>
 
                                             <div class="swiper-slide">
-                                                <img class="bg-img" src="../assets/images/fashion/product/front/7-1.jpg"
-                                                    alt="img" />
+                                                <img class="bg-img" src={{ asset($product->image) }} alt="img" />
                                             </div>
 
                                             <div class="swiper-slide">
-                                                <img class="bg-img" src="../assets/images/fashion/product/front/7-2.jpg"
-                                                    alt="img" />
+                                                <img class="bg-img" src={{ asset($product->image) }} alt="img" />
                                             </div>
 
                                             <div class="swiper-slide">
-                                                <img class="bg-img" src="../assets/images/fashion/product/front/7-3.jpg"
-                                                    alt="img" />
+                                                <img class="bg-img" src={{ asset($product->image) }} alt="img" />
                                             </div>
 
                                             <div class="swiper-slide">
-                                                <img class="bg-img" src="../assets/images/fashion/product/front/7.jpg"
-                                                    alt="img" />
+                                                <img class="bg-img" src={{ asset($product->image) }} alt="img" />
                                             </div>
                                         </div>
                                     </div>
@@ -114,17 +110,34 @@
                                     <span>{{ Str::shortened_price($product->price) }}</span>
                                 </div>
 
+
                                 <div class="option">
                                     <p class="content-color">
                                         {{ $product->description }}
                                     </p>
                                 </div>
+                                @if ($errors->has('date') && $errors->has('slot_id'))
+                                    <div class="option price">
+                                        <span class="text-danger">Both the date and slot fields cannot be empty. Please
+                                            make a selection.</span>
+                                    </div>
+                                @elseif ($errors->has('date'))
+                                    <div class="option price">
+                                        <span class="text-danger">{{ $errors->first('date') }}</span>
+                                    </div>
+                                @elseif ($errors->has('slot_id'))
+                                    <div class="option price">
+                                        <span class="text-danger">{{ $errors->first('slot_id') }}</span>
+                                    </div>
+                                @endif
                             </form>
                         </div>
                         {{-- End Product Detail --}}
 
                         <!-- Section Branch Start -->
                         <section style="margin-top: -3rem">
+
+
                             <div class="option size text-start">
                                 <div class="title-box4">
                                     <h4 class="heading">
@@ -140,8 +153,7 @@
                                         onclick="resetForm()">
                                         <button class="nav-link branch {{ $key === 0 ? 'active' : '' }}"
                                             data-bs-toggle="pill" data-branch={{ $branch->id }}
-                                            data-bs-target="#branch-{{ $key }}" type="button" role="tab"
-                                            aria-selected="{{ $key === 0 ? true : false }}">
+                                            data-bs-target="#branch-{{ $key }}" type="button" role="tab">
                                             {{ $branch->name }}
                                         </button>
                                     </li>
@@ -178,7 +190,7 @@
                                                                 $holidayDate = in_array($date->format('Y-m-d'), $holidays);
                                                             @endphp
                                                             <li class="p-4 bold d-flex flex-column rounded-1 date-slot 
-                                                            {{ $holidayDate ? 'bg-danger text-white' : '' }}"
+                                                            {{ $holidayDate ? 'bg-danger text-white holiday' : '' }}"
                                                                 data-date={{ $date->format('d-m-Y') }}>
                                                                 {{ $date->format('j') }}
                                                                 <span>{{ $date->format('M') }}</span>

@@ -20,7 +20,9 @@
                                         <tr>
                                             <th>Invoce ID</th>
                                             <th>Invoce Date</th>
-                                            <th>Branch</th>
+                                            @if (Auth::user()->role->name === 'super-admin')
+                                                <th>Branch</th>
+                                            @endif
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Price</th>
@@ -33,7 +35,9 @@
                                             <tr class="table-dark">
                                                 <td>{{ $order->id }}</td>
                                                 <td>{{ $order->created_at->format('d-m-Y') }}</td>
-                                                <td>{{ $order->branch->name }}</td>
+                                                @if (Auth::user()->role->name === 'super-admin')
+                                                    <td>{{ $order->branch->name }}</td>
+                                                @endif
                                                 <td>{{ $order->user->name }}</td>
                                                 <td>{{ $order->user->email }}</td>
                                                 <td>{{ Str::shortened_price($order->total_price) }}</td>

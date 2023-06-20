@@ -1,34 +1,36 @@
 $(document).ready(function () {
     // Handling Add new Product in Branch
-    let counter = 1
+    let counter = 1;
     $("#plus-product").on("click", function () {
-        if(counter < 5) {
-            counter++
-            const companyProducts = JSON.parse($("#branch-product-container").attr("data-company-products"));
-    
+        if (counter < 5) {
+            counter++;
+            const companyProducts = JSON.parse(
+                $("#branch-product-container").attr("data-company-products")
+            );
+
             const newSelectElement = $("<select>", {
                 class: "form-select mt-2",
                 name: "products[]",
                 id: `branch-product-selector-${counter}`,
             });
-    
+
             const defaultOption = $("<option>", {
                 selected: true,
                 text: "Choose...",
             });
-    
+
             newSelectElement.append(defaultOption);
-    
+
             companyProducts.forEach(function (product) {
                 const option = $("<option>", {
                     value: product.id,
                     text: product.name,
-                    class: 'text-capitalize'
+                    class: "text-capitalize",
                 });
                 newSelectElement.append(option);
             });
-    
-            $("#branch-product-container").append(newSelectElement)
+
+            $("#branch-product-container").append(newSelectElement);
         }
     });
 
@@ -155,7 +157,7 @@ const showImagePreview = (inputId, targetId) => {
 // Handling show modal edit company
 const showModalEditCompany = (id) => {
     const token = $('meta[name="csrf-token"]').attr("content");
-    let slug = window.location.pathname.split('/')[1];
+    let slug = window.location.pathname.split("/")[1];
 
     $.ajax({
         url: `/api/companies/${id}`,
@@ -178,10 +180,11 @@ const showModalEditCompany = (id) => {
         url: `/api/companies/${id}/admins`,
         method: "GET",
         headers: { "X-CSRF-Token": token },
-        success: (res) => res.admins.map((admin) => {
-            const option = `<option value="${admin.id}">${admin.name}</option>`;
-            $("#user_id").append(option);
-        }),
+        success: (res) =>
+            res.admins.map((admin) => {
+                const option = `<option value="${admin.id}">${admin.name}</option>`;
+                $("#user_id").append(option);
+            }),
         error: (err) => console.log(err),
     });
 
@@ -191,7 +194,7 @@ const showModalEditCompany = (id) => {
 // Handling show modal edit user
 const showModalEditUser = (userId) => {
     const token = $('meta[name="csrf-token"]').attr("content");
-    let slug = window.location.pathname.split('/')[1];
+    let slug = window.location.pathname.split("/")[1];
     $.ajax({
         url: `/api/companies/users/${userId}`,
         method: "GET",
@@ -202,7 +205,10 @@ const showModalEditUser = (userId) => {
             $('#modalEditUser input[name="email"]').val(user.email);
             $('#modalEditUser input[name="phone"]').val(user.phone);
 
-            $("#formEditUser").attr("action",`/${slug}/dashboard/users/${userId}`);
+            $("#formEditUser").attr(
+                "action",
+                `/${slug}/dashboard/users/${userId}`
+            );
         },
         error: (err) => console.log(err),
     });
@@ -213,7 +219,7 @@ const showModalEditUser = (userId) => {
 // Handling show modal edit user
 const showModalEditBranch = (branchId) => {
     const token = $('meta[name="csrf-token"]').attr("content");
-    let slug = window.location.pathname.split('/')[1];
+    let slug = window.location.pathname.split("/")[1];
     $.ajax({
         url: `/api/companies/users/${userId}`,
         method: "GET",
@@ -224,7 +230,10 @@ const showModalEditBranch = (branchId) => {
             $('#modalEditUser input[name="email"]').val(user.email);
             $('#modalEditUser input[name="phone"]').val(user.phone);
 
-            $("#formEditUser").attr("action",`/${slug}/dashboard/branches/${branchId}`);
+            $("#formEditUser").attr(
+                "action",
+                `/${slug}/dashboard/branches/${branchId}`
+            );
         },
         error: (err) => console.log(err),
     });
@@ -235,7 +244,11 @@ const showModalEditBranch = (branchId) => {
 // Handle submit on Book now in product detail
 const handleOnSubmit = (id) => {
     // Get the selected date and slot from the UI
-    const selectedDate = $(".date-slot.active").attr("data-date");
+    let selectedDate = $(".date-slot.active");
+
+    if (selectedDate.hasClass("holiday")) selectedDate = "1900-05-31";
+    else selectedDate = $(".date-slot.active").attr("data-date");
+
     const selectedSlot = $(".time-slot.active").attr("data-slot");
     const selectedBranch = $(".branch.active").attr("data-branch");
     const selectedAddons = [];

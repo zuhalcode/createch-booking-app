@@ -23,8 +23,8 @@
                                 <h2>page not found</h2>
                                 <p class="font-md">The page you are looking for doesn't exist or an other error
                                     occurred. Go back, or head over to choose a new direction.</p>
-                                <a href={{ url("/$slug") }} class="btn-solid mb-line">Back Home Page <i
-                                        class="arrow"></i></a>
+                                {{-- <a href={{ url("/$slug") }} class="btn-solid mb-line">Back Home Page <i
+                                        class="arrow"></i></a> --}}
                             </div>
                         </div>
                     </div>

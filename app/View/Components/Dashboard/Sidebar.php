@@ -21,7 +21,7 @@ class Sidebar extends Component
                 "name" => "Dashboard",
                 "route" => "/$slug/dashboard",
                 "icon" => "bx-line-chart",
-                "role" => "admin"
+                "role" => "admin-company"
             ],
             [
                 "name" => "Companies Management", "route" => "", "icon" => "bx-home-circle", "role" => "super-admin",
@@ -32,7 +32,7 @@ class Sidebar extends Component
             ],
 
             [
-                "name" => "Company Management", "route" => "", "icon" => "bx-home-circle", "role" => "admin",
+                "name" => "Company Management", "route" => "", "icon" => "bx-home-circle", "role" => "admin-company",
                 "submenu" => [
                     ["name" => "Company Detail", "route" => "/$slug/dashboard/company"],
                     ["name" => "Landing Page Management", "route" => "/$slug/dashboard/landing-page"],
@@ -41,7 +41,7 @@ class Sidebar extends Component
                 ]
             ],
             [
-                "name" => "Product Management", "route" => "", "icon" => "bx-store-alt", "role" => "admin",
+                "name" => "Product Management", "route" => "", "icon" => "bx-store-alt", "role" => "admin-company",
                 "submenu" => [
                     ["name" => "List Product", "route" => "/$slug/dashboard/products"],
                     ["name" => "Create Product", "route" => "/$slug/dashboard/products/create"],
@@ -52,7 +52,7 @@ class Sidebar extends Component
                 "name" => "Order Management",
                 "route" => "/$slug/dashboard/orders",
                 "icon" => "bxs-receipt",
-                "role" => "admin"
+                "role" => "admin-branch"
             ],
             [
                 "name" => "Home",

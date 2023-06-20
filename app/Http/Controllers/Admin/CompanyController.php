@@ -270,7 +270,10 @@ class CompanyController extends Controller
     public function indexOrder($slug)
     {
         $user = Auth::user();
-        $orders = Order::where('branch_id', $user->branches->first()->id)->get();
+        if ($user->role->name === 'super-admin') {
+            $currentCompany = Company::where('slug', $slug)->first();
+            $orders = Order::whereHas('branch', fn ($query) => $query->where('company_id', $currentCompany->id))->get();
+        } else $orders = Order::where('branch_id', $user->branches->first()->id)->get();
 
         return view('dashboard.orders', [
             'slug' => $slug,

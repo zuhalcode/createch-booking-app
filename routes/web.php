@@ -56,8 +56,6 @@ Route::prefix('/{slug}')->group(fn () => [
     // Handling for Dashboard
     Route::prefix('/dashboard')->middleware(['auth', 'checkCompanyRegistration'])->group(fn () => [
 
-
-
         // Handling Dashboard for Admin
         Route::group([], fn () => [
             Route::controller(AdminCompanyController::class)->group(fn () => [

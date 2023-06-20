@@ -31,8 +31,8 @@ class CustomerController extends Controller
     public function index($slug)
     {
         $company = Company::where('slug', $slug)->first();
-        $products = Product::where('company_id', $company->id)->get();
         $cover = Cover::where('company_id', $company->id)->first();
+        $products = Product::where('company_id', $company->id)->get();
 
         return view('welcome', [
             'company' => $company,
@@ -114,10 +114,14 @@ class CustomerController extends Controller
     {
         $validatedData = $req->validate([
             'product_id' => 'required|exists:products,id',
-            'date' => 'required|date',
+            'date' => 'required|date|not_in:1900-05-31',
             'slot_id' => 'required|exists:slots,id',
             'branch_id' => 'required|exists:branches,id',
             'addons.*' => 'nullable'
+        ], [
+            'date.not_in' => 'Holidays are not available for selection. Please choose another date.',
+            'date.required' => 'No date chosen. Please select a date to proceed.',
+            'slot_id.required' => 'No time slot chosen. Please select a time slot to proceed.',
         ]);
 
         $product = Product::findOrFail($validatedData['product_id']);
@@ -134,6 +138,7 @@ class CustomerController extends Controller
             'product' => $product,
             'addons' => $selectedAddons,
             'slot' => $slot,
+            'date' => $validatedData['date'],
             'total_price' => $totalPrice,
         ]);
     }
@@ -142,6 +147,7 @@ class CustomerController extends Controller
     {
         $validatedData = $req->validate([
             'product_id' => 'required|exists:products,id',
+            'date' => 'required|date',
             'branch_id' => 'required|exists:branches,id',
             'slot_id' => 'required|exists:slots,id',
             'addons.*' => 'nullable|exists:addons,id'
@@ -157,12 +163,12 @@ class CustomerController extends Controller
 
         $order = Order::create([
             'user_id' => auth()->user()->id,
-            'branch_id' => 1,
+            'branch_id' => $validatedData['branch_id'],
             'product_id' => $validatedData['product_id'],
             'slot_id' => $validatedData['slot_id'],
+            'date' => $validatedData['date'],
             'total_price' => $totalPrice,
             'expired_at' => now()->addHours(24),
-
         ]);
 
         $selectedAddons = Addon::whereIn('id', $validatedData['addons'] ?? [])->get();
@@ -193,6 +199,7 @@ class CustomerController extends Controller
         $order = Order::where('user_id', Auth::user()->id)->find($id);
         $company = Company::where('slug', $slug)->first();
 
+        // Handle if expired
         if (now() >= $order->expired_at) {
             $order->update(['status' => 'expired']);
 
@@ -201,12 +208,20 @@ class CustomerController extends Controller
                 'order' => $order,
                 'slug' => $slug,
             ]);
+        } elseif ($order->midtrans_token) {
+            return view('invoice-detail', [
+                'company' => $company,
+                'order' => $order,
+                'slug' => $slug,
+            ]);
         }
+
+
 
         // Set transaction data
         $params = [
             'transaction_details' => [
-                'order_id' => rand(1, 99999),
+                'order_id' => $order->id,
                 'gross_amount' => $order->total_price,
             ],
             'customer_details' => [

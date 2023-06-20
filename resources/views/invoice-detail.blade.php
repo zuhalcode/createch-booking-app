@@ -88,7 +88,7 @@
                                                         </span>
                                                     </span>
                                                     <span class="size gap-2 d-flex">
-                                                        Date : <span>23 Jan 2023</span>
+                                                        Date: <span>{{ $order->date }}</span>
                                                     </span>
                                                     <span class="size gap-2 d-flex">
                                                         Time Slot :

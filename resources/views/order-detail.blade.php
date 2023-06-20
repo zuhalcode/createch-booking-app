@@ -60,7 +60,10 @@
                                                             </span>
                                                         </span>
                                                         <span class="size gap-2 d-flex">
-                                                            Date : <span>23 Jan 2023</span>
+                                                            @php
+                                                                $date = \Carbon\Carbon::createFromFormat('d-m-Y', $date);
+                                                            @endphp
+                                                            Date : <span>{{ $date->format('d F Y') }}</span>
                                                         </span>
                                                         <span class="size gap-2 d-flex">
                                                             Time Slot :
@@ -149,6 +152,7 @@
                                                     <form action={{ url("/$slug/orders") }} id="checkout-form"
                                                         method="POST" style="cursor: pointer">
                                                         @csrf
+                                                        <input type="hidden" name="date" value={{ $date }}>
                                                         <input type="hidden" name="total_price"
                                                             value={{ $total_price }}>
                                                         <input type="hidden" name="product_id"

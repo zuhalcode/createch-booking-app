@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('branch_id')->constrained();
             $table->foreignId('product_id')->constrained();
             $table->foreignId('slot_id')->constrained();
+            $table->date('date');
             $table->integer('total_price');
             $table->string('midtrans_token', 255)->nullable();
             $table->enum('status', ['pending', 'processed', 'completed', 'canceled', 'expired']);

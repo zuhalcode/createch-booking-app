@@ -39,7 +39,7 @@
                 <div class="row g-3 g-xl-4 tab-wrap">
                     <div class="col-lg-4 col-xl-3 sticky">
                         <button class="setting-menu btn-solid btn-sm d-lg-none">
-                            Setting Menu <i class="arrow"></i>
+                            Menu <i class="arrow"></i>
                         </button>
                         <div class="side-bar">
                             <span class="back-side d-lg-none"><i data-feather="x"></i></span>
