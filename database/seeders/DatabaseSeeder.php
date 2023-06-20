@@ -54,13 +54,13 @@ class DatabaseSeeder extends Seeder
         SumateraCityFactory::new()->count(58)->create();
 
         Company::factory()->count(3)->create();
-        Product::factory()->count(50)->create();
-        Branch::factory()->count(10)->create();
-        Holiday::factory()->count(30)->create();
-        Cover::factory()->count(3)->create();
-        Slot::factory()->count(100)->create();
-        AddOn::factory()->count(100)->create();
+        // Product::factory()->count(50)->create();
+        // Branch::factory()->count(10)->create();
+        // Holiday::factory()->count(30)->create();
+        // Cover::factory()->count(3)->create();
+        // Slot::factory()->count(100)->create();
+        // AddOn::factory()->count(100)->create();
 
-        $this->call(PivotTableSeeder::class);
+        // $this->call(PivotTableSeeder::class);
     }
 }

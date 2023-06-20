@@ -31,17 +31,15 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    @if ($cover->image)
-                                        <img alt="bg-cover" src={{ $cover->image }} class="d-block rounded w-25 d-none"
-                                            id="uploaded-bg" />
-                                    @endif
+                                    <img alt="bg-cover" src="{{ $cover->image ?? '/img/default.jpg' }}"
+                                        class="d-block rounded w-25 d-none" id="uploaded-bg" />
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="heading" class="form-label">Heading 1</label>
                                     <input class="form-control" type="text" name="first_heading_text"
                                         placeholder="Heading 1" autocomplete="off"
-                                        value={{ $cover->first_heading_text }} />
+                                        value="{{ $cover->first_heading_text ?? 'Default text' }}" />
                                     @error('first_heading_text')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
@@ -51,7 +49,7 @@
                                     <label for="heading" class="form-label">Heading 2</label>
                                     <input class="form-control" type="text" name="second_heading_text"
                                         placeholder="Heading 2" autocomplete="off"
-                                        value={{ $cover->second_heading_text }} />
+                                        value="{{ $cover->second_heading_text ?? 'Default text' }}" />
                                     @error('second_heading_text')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
@@ -59,7 +57,7 @@
 
                                 <div class="mb-3">
                                     <label for="about" class="form-label">Short Desc</label>
-                                    <textarea class="form-control" type="text" name="short_desc" placeholder="Short Desc" autocomplete="off">{{ $cover->short_desc }}</textarea>
+                                    <textarea class="form-control" type="text" name="short_desc" placeholder="Short Desc" autocomplete="off">{{ $cover->short_desc ?? '' }}</textarea>
                                     @error('short_desc')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
@@ -73,8 +71,6 @@
                                 </div>
                             </form>
                         </div>
-
-
                     </div>
                 </div>
                 {{-- End Content --}}
